@@ -1,7 +1,7 @@
 branch: claude/yewplay-fase-7-acabamento
-sha: 3bb6e59eadd0f7941aa521acc179911e8a7910a1
-outcome: cancelled
-run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/41861929567
+sha: e54fea8cddadb2fdfa17921132e59eed5f2d6d88
+outcome: success
+run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/41862739325
 
 == errors ==
 
@@ -19,60 +19,47 @@ w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:142:24: 'fun
 w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:142:24: 'fun <T : Any, U : NamedDomainObjectCollection<T>> U.getting(configuration: T.() -> Unit): NamedDomainObjectCollectionDelegateProvider<T>' is deprecated. Use 'val element = getByName(name) { }' instead. See the Gradle 9.6 upgrading guide.
 w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:142:24: 'fun <T> ExistingDomainObjectDelegate<out T>.getValue(receiver: Any?, property: KProperty<*>): T' is deprecated. Use the named() API instead. See the Gradle 9.6 upgrading guide.
 w: Koin compiler plugin: Kotlin 2.4.21 is newer than the newest verified version (2.4.20) — proceeding with the 2.4.20 adapter. If compilation fails, check for a koin-compiler-plugin update. Verified versions: 2.3.20, 2.4.0, 2.4.10, 2.4.20.
+w: [ksp] /home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/database/feed/dao/FeedDAO.kt:178: The DAO function return type (kotlin.collections.List<java.time.OffsetDateTime?>) with the nullable type argument is meaningless because for now Room will never put a null value in a result.
+w: [ksp] /home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/database/feed/dao/FeedDAO.kt:181: The DAO function return type (kotlin.collections.List<java.time.OffsetDateTime?>) with the nullable type argument is meaningless because for now Room will never put a null value in a result.
+warning: The following options were not recognized by any processor: '[room.internal.schemaInput, room.internal.schemaOutput, kapt.kotlin.generated]'
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/App.kt:210:21 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'Thread.UncaughtExceptionHandler?'.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/error/ErrorActivity.kt:119:17 'fun onBackPressed(): Unit' is deprecated. This method has been deprecated in favor of using the
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/error/ErrorInfo.kt:184:30 'class ExoPlaybackException : PlaybackException' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/error/ErrorInfo.kt:202:43 'class ExoPlaybackException : PlaybackException' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/error/ErrorInfo.kt:205:43 'class ExoPlaybackException : PlaybackException' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/error/ErrorPanelHelper.kt:75:26 'fun startActivityForResult(p0: Intent, p1: Int): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:112:9 'fun setHasOptionsMenu(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:221:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:222:15 'fun onCreateOptionsMenu(p0: Menu, p1: MenuInflater): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:236:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:264:22 'fun onOptionsItemSelected(p0: MenuItem): Boolean' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:294:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:295:15 'fun onDestroyOptionsMenu(): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:708:38 'fun bundleOf(vararg pairs: Pair<String, Any?>): Bundle' is deprecated. This method does not provide type safety at compile time. Use the platform `Bundle` class directly instead.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/service/FeedLoadManager.kt:243:33 Unnecessary non-null assertion (!!) on a non-null receiver of type 'Info'.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/SubscriptionFragment.kt:79:9 'fun setHasOptionsMenu(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/SubscriptionFragment.kt:116:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/SubscriptionFragment.kt:117:15 'fun onCreateOptionsMenu(p0: Menu, p1: MenuInflater): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/dialog/FeedGroupDialog.kt:122:26 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/dialog/FeedGroupDialog.kt:124:27 'fun onBackPressed(): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/dialog/FeedGroupDialog.kt:501:36 'static field SHOW_IMPLICIT: Int' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/dialog/FeedGroupDialog.kt:509:32 'static field HIDE_NOT_ALWAYS: Int' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/dialog/FeedGroupDialog.kt:518:36 'static field SHOW_IMPLICIT: Int' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/dialog/FeedGroupDialog.kt:526:32 'static field HIDE_NOT_ALWAYS: Int' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/dialog/FeedGroupDialog.kt:546:32 'fun bundleOf(vararg pairs: Pair<String, Any?>): Bundle' is deprecated. This method does not provide type safety at compile time. Use the platform `Bundle` class directly instead.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/player/mediabrowser/MediaBrowserPlaybackPreparer.kt:12:8 'class MediaSessionConnector : Any' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/player/mediabrowser/MediaBrowserPlaybackPreparer.kt:102:17 'interface Player : Any' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/settings/export/ImportExportManager.kt:39:35 'val FILE_NAME_SERIALIZED_PREFS: String' is deprecated. Serializing preferences with Java's ObjectOutputStream is vulnerable to injections.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/settings/export/ImportExportManager.kt:93:69 'val FILE_NAME_SERIALIZED_PREFS: String' is deprecated. Serializing preferences with Java's ObjectOutputStream is vulnerable to injections.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/settings/export/ImportExportManager.kt:109:65 'val FILE_NAME_SERIALIZED_PREFS: String' is deprecated. Serializing preferences with Java's ObjectOutputStream is vulnerable to injections.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/settings/export/ImportExportManager.kt:143:63 'val FILE_NAME_SERIALIZED_PREFS: String' is deprecated. Serializing preferences with Java's ObjectOutputStream is vulnerable to injections.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/settings/notifications/NotificationModeConfigFragment.kt:42:9 'fun setHasOptionsMenu(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/settings/notifications/NotificationModeConfigFragment.kt:80:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/settings/notifications/NotificationModeConfigFragment.kt:81:15 'fun onCreateOptionsMenu(p0: Menu, p1: MenuInflater): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/settings/notifications/NotificationModeConfigFragment.kt:85:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/settings/notifications/NotificationModeConfigFragment.kt:92:27 'fun onOptionsItemSelected(p0: MenuItem): Boolean' is deprecated. Deprecated in Java.
 
 == tail ==
-Fetching distribution.
-Downloading https://services.gradle.org/distributions/gradle-9.8.2-bin.zip
-..............10%..............20%...............30%..............40%...............50%..............60%...............70%..............80%...............90%..............100%
-
-Welcome to Gradle 9.8.2!
-
-Here are the highlights of this release:
- - Java 27 support
- - Maven mirror settings reuse
- - Linked problem locations in build output
-
-For more details see https://docs.gradle.org/9.8.2/release-notes.html
-
-Starting a Gradle Daemon (subsequent builds will be faster)
-Calculating task graph as no cached configuration is available for tasks: assembleDebug lintDebug
-Type-safe project accessors is an incubating feature.
-> Task :buildSrc:checkKotlinGradlePluginConfigurationErrors SKIPPED
-> Task :buildSrc:pluginDescriptors
-> Task :buildSrc:processResources NO-SOURCE
-> Task :buildSrc:compileKotlin
-> Task :buildSrc:compileJava NO-SOURCE
-> Task :buildSrc:compileGroovy NO-SOURCE
-> Task :buildSrc:classes UP-TO-DATE
-
-> Task :buildSrc:jar
-:jar: No valid plugin descriptors were found in META-INF/gradle-plugins
-
-> Configure project :app
-w: file:///home/runner/work/Yewplay/Yewplay/app/build.gradle.kts:149:30: 'fun provideDelegate(thisRef: Any?, property: KProperty<*>): ExistingDomainObjectDelegate<Configuration>' is deprecated. Use 'val element = create(name)' instead. See the Gradle 9.6 upgrading guide.
-w: file:///home/runner/work/Yewplay/Yewplay/app/build.gradle.kts:149:30: 'val <T : Any> NamedDomainObjectContainer<T>.creating: NamedDomainObjectContainerCreatingDelegateProvider<T>' is deprecated. Use 'val element = create(name)' instead. See the Gradle 9.6 upgrading guide.
-w: file:///home/runner/work/Yewplay/Yewplay/app/build.gradle.kts:149:30: 'fun <T> ExistingDomainObjectDelegate<out T>.getValue(receiver: Any?, property: KProperty<*>): T' is deprecated. Use the named() API instead. See the Gradle 9.6 upgrading guide.
-
-> Configure project :shared
-w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:18:35: 'fun <U : Task> RegisteringDomainObjectDelegateProviderWithTypeAndAction<out TaskContainer, U>.provideDelegate(receiver: Any?, property: KProperty<*>): ExistingDomainObjectDelegate<TaskProvider<U>>' is deprecated. Use 'val task = tasks.register<Type>(name) { }' instead. See the Gradle 9.6 upgrading guide.
-w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:18:35: 'fun <T : Any, C : PolymorphicDomainObjectContainer<T>, U : T> C.registering(type: KClass<U>, action: U.() -> Unit): RegisteringDomainObjectDelegateProviderWithTypeAndAction<out C, U>' is deprecated. Use 'val element = register<Type>(name) { }' instead. See the Gradle 9.6 upgrading guide.
-w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:18:35: 'fun <T> ExistingDomainObjectDelegate<out T>.getValue(receiver: Any?, property: KProperty<*>): T' is deprecated. Use the named() API instead. See the Gradle 9.6 upgrading guide.
-w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:132:34: 'fun provideDelegate(thisRef: Any?, property: KProperty<*>): ExistingDomainObjectDelegate<KotlinSourceSet>' is deprecated. Use 'val element = getByName(name)' instead. See the Gradle 9.6 upgrading guide.
-w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:132:34: 'fun <T : Any, U : NamedDomainObjectCollection<T>> U.getting(configuration: T.() -> Unit): NamedDomainObjectCollectionDelegateProvider<T>' is deprecated. Use 'val element = getByName(name) { }' instead. See the Gradle 9.6 upgrading guide.
-w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:132:34: 'fun <T> ExistingDomainObjectDelegate<out T>.getValue(receiver: Any?, property: KProperty<*>): T' is deprecated. Use the named() API instead. See the Gradle 9.6 upgrading guide.
-w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:142:24: 'fun provideDelegate(thisRef: Any?, property: KProperty<*>): ExistingDomainObjectDelegate<KotlinSourceSet>' is deprecated. Use 'val element = getByName(name)' instead. See the Gradle 9.6 upgrading guide.
-w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:142:24: 'fun <T : Any, U : NamedDomainObjectCollection<T>> U.getting(configuration: T.() -> Unit): NamedDomainObjectCollectionDelegateProvider<T>' is deprecated. Use 'val element = getByName(name) { }' instead. See the Gradle 9.6 upgrading guide.
-w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:142:24: 'fun <T> ExistingDomainObjectDelegate<out T>.getValue(receiver: Any?, property: KProperty<*>): T' is deprecated. Use the named() API instead. See the Gradle 9.6 upgrading guide.
-Configuration 'debugCompileClasspath' was resolved during configuration time.
-This is a build performance and scalability issue.
-See https://github.com/gradle/gradle/issues/2298
-Run with --info for a stacktrace.
-Configuration 'debugRuntimeClasspath' was resolved during configuration time.
-This is a build performance and scalability issue.
-See https://github.com/gradle/gradle/issues/2298
-Run with --info for a stacktrace.
-
-> Task :app:preBuild UP-TO-DATE
 > Task :app:checkDependenciesOrder
 > Task :shared:convertXmlValueResourcesForAndroidMain NO-SOURCE
 > Task :shared:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
@@ -89,8 +76,7 @@ No dependencies found for variant: androidMain
 
 > Task :shared:packageAndroidMainResources
 > Task :shared:generateAndroidMainEmptyResourceFiles
-> Task :shared:parseAndroidMainLocalResources
-> Task :shared:generateAndroidMainRFile
+> Task :app:prepareLibraryDefinitionsDebug
 > Task :shared:buildConfigGenerator
 > Task :shared:kmpPartiallyResolvedDependenciesChecker
 > Task :shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
@@ -99,37 +85,23 @@ No dependencies found for variant: androidMain
 > Task :shared:generateActualResourceCollectorsForAndroidMain
 > Task :shared:generateComposeResClass
 > Task :shared:generateExpectResourceCollectorsForCommonMain
-> Task :app:prepareLibraryDefinitionsDebug
 > Task :app:generateDebugAssets UP-TO-DATE
 > Task :shared:generateAndroidMainAssets UP-TO-DATE
 > Task :shared:mergeAndroidMainAssets
-> Task :shared:writeAndroidMainAarMetadata
 > Task :app:runKtlint
-> Task :shared:mapAndroidMainSourceSetPaths
-> Task :shared:processAndroidMainManifest
-> Task :shared:mergeAndroidMainJniLibFolders
-> Task :shared:mergeAndroidMainNativeLibs NO-SOURCE
-> Task :shared:copyAndroidMainJniLibsProjectOnly
-> Task :shared:checkAndroidMainAarMetadata
-> Task :shared:compileAndroidMainLibraryResources
-> Task :app:preDebugAndroidTestBuild SKIPPED
-> Task :app:generateDebugAndroidTestResValues
-> Task :shared:prepareLintJarForPublish
-> Task :app:extractProguardFiles
-> Task :app:preDebugUnitTestBuild UP-TO-DATE
-> Task :shared:preAndroidHostTestBuild UP-TO-DATE
 > Task :app:runCheckstyle
+> Task :shared:parseAndroidMainLocalResources
 > Task :app:preDebugBuild
 > Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
-> Task :app:generateDebugResValues
-> Task :app:extractDebugSupportedLocales
-> Task :app:mapDebugSourceSetPaths
-> Task :app:generateDebugLocaleConfig
-> Task :app:generateDebugResources
-> Task :shared:extractAndroidMainAnnotations
 > Task :app:dataBindingMergeDependencyArtifactsDebug
+> Task :app:generateDebugResValues
+> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugResources
+> Task :app:extractDebugSupportedLocales
 > Task :app:processDebugNavigationResources
+> Task :app:generateDebugLocaleConfig
 > Task :app:generateDebugBuildConfig
+> Task :shared:generateAndroidMainRFile
 > Task :app:javaPreCompileDebug
 > Task :app:mergeDebugAssets
 > Task :app:compressDebugAssets
@@ -137,14 +109,15 @@ No dependencies found for variant: androidMain
 > Task :app:parseDebugLocalResources
 > Task :app:generateDebugRFile
 > Task :app:generateDebugGlobalSynthetics
-> Task :shared:compileAndroidMain
 > Task :app:checkDebugDuplicateClasses
 > Task :app:mergeDebugResources
 > Task :app:dataBindingGenBaseClassesDebug
+> Task :shared:writeAndroidMainAarMetadata
 > Task :app:checkDebugAarMetadata
 > Task :app:compileDebugNavigationResources
 > Task :app:createDebugCompatibleScreenManifests
 > Task :app:extractDeepLinksDebug
+> Task :shared:processAndroidMainManifest
 > Task :app:desugarDebugFileDependencies
 
 > Task :app:processDebugMainManifest
@@ -152,13 +125,138 @@ No dependencies found for variant: androidMain
 	provider#org.acra.attachment.AcraContentProvider@android:authorities was tagged at AndroidManifest.xml:0 to replace other declarations but no other declaration present
 
 > Task :app:processDebugManifest
+> Task :shared:compileAndroidMain
 > Task :app:l8DexDesugarLibDebug
 > Task :app:processDebugManifestForPackage
+> Task :shared:mapAndroidMainSourceSetPaths
+> Task :app:mergeDebugJniLibFolders
 > Task :app:mergeExtDexDebug
+> Task :shared:compileAndroidMainLibraryResources
+> Task :shared:mergeAndroidMainJniLibFolders
 
 > Task :shared:compileAndroidMain
 w: Koin compiler plugin: Kotlin 2.4.21 is newer than the newest verified version (2.4.20) — proceeding with the 2.4.20 adapter. If compilation fails, check for a koin-compiler-plugin update. Verified versions: 2.3.20, 2.4.0, 2.4.10, 2.4.20.
 
-> Task :app:mergeDebugJniLibFolders
+> Task :shared:bundleAndroidMainClassesToCompileJar
 > Task :shared:processAndroidMainJavaRes
+> Task :shared:bundleAndroidMainClassesToRuntimeJar
 > Task :app:processDebugResources
+> Task :shared:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :shared:copyAndroidMainJniLibsProjectOnly
+> Task :app:mergeLibDexDebug
+> Task :app:validateSigningDebug
+> Task :app:writeDebugAppMetadata
+> Task :app:writeDebugSigningConfigVersions
+> Task :shared:checkAndroidMainAarMetadata
+> Task :app:mergeDebugNativeLibs
+
+> Task :app:stripDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libsqliteJni.so. Run with --info option to learn more.
+
+> Task :shared:mergeAndroidMainJavaResource
+> Task :app:preDebugAndroidTestBuild SKIPPED
+> Task :app:generateDebugAndroidTestResValues
+> Task :shared:createFullJarAndroidMain
+> Task :shared:prepareLintJarForPublish
+> Task :app:extractProguardFiles
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :shared:preAndroidHostTestBuild UP-TO-DATE
+> Task :shared:extractAndroidMainAnnotations
+> Task :shared:syncAndroidMainLibJars
+> Task :shared:bundleAndroidMainLocalLintAar
+> Task :shared:generateAndroidHostTestLintModel
+> Task :app:kspDebugKotlin
+> Task :shared:lintAnalyzeAndroidHostTest
+
+> Task :app:kspDebugKotlin
+w: [ksp] /home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/database/feed/dao/FeedDAO.kt:178: The DAO function return type (kotlin.collections.List<java.time.OffsetDateTime?>) with the nullable type argument is meaningless because for now Room will never put a null value in a result.
+w: [ksp] /home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/database/feed/dao/FeedDAO.kt:181: The DAO function return type (kotlin.collections.List<java.time.OffsetDateTime?>) with the nullable type argument is meaningless because for now Room will never put a null value in a result.
+
+> Task :app:kaptGenerateStubsDebugKotlin
+
+> Task :app:kaptDebugKotlin
+warning: The following options were not recognized by any processor: '[room.internal.schemaInput, room.internal.schemaOutput, kapt.kotlin.generated]'
+
+> Task :app:compileDebugKotlin
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/App.kt:210:21 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'Thread.UncaughtExceptionHandler?'.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/error/ErrorActivity.kt:119:17 'fun onBackPressed(): Unit' is deprecated. This method has been deprecated in favor of using the
+      {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.
+      The OnBackPressedDispatcher controls how back button events are dispatched
+      to one or more {@link OnBackPressedCallback} objects.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/error/ErrorInfo.kt:184:30 'class ExoPlaybackException : PlaybackException' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/error/ErrorInfo.kt:202:43 'class ExoPlaybackException : PlaybackException' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/error/ErrorInfo.kt:205:43 'class ExoPlaybackException : PlaybackException' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/error/ErrorPanelHelper.kt:75:26 'fun startActivityForResult(p0: Intent, p1: Int): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:112:9 'fun setHasOptionsMenu(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:221:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:222:15 'fun onCreateOptionsMenu(p0: Menu, p1: MenuInflater): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:236:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:264:22 'fun onOptionsItemSelected(p0: MenuItem): Boolean' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:294:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:295:15 'fun onDestroyOptionsMenu(): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:708:38 'fun bundleOf(vararg pairs: Pair<String, Any?>): Bundle' is deprecated. This method does not provide type safety at compile time. Use the platform `Bundle` class directly instead.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/service/FeedLoadManager.kt:243:33 Unnecessary non-null assertion (!!) on a non-null receiver of type 'Info'.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/SubscriptionFragment.kt:79:9 'fun setHasOptionsMenu(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/SubscriptionFragment.kt:116:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/SubscriptionFragment.kt:117:15 'fun onCreateOptionsMenu(p0: Menu, p1: MenuInflater): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/dialog/FeedGroupDialog.kt:122:26 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/dialog/FeedGroupDialog.kt:124:27 'fun onBackPressed(): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/dialog/FeedGroupDialog.kt:501:36 'static field SHOW_IMPLICIT: Int' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/dialog/FeedGroupDialog.kt:509:32 'static field HIDE_NOT_ALWAYS: Int' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/dialog/FeedGroupDialog.kt:518:36 'static field SHOW_IMPLICIT: Int' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/dialog/FeedGroupDialog.kt:526:32 'static field HIDE_NOT_ALWAYS: Int' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/dialog/FeedGroupDialog.kt:546:32 'fun bundleOf(vararg pairs: Pair<String, Any?>): Bundle' is deprecated. This method does not provide type safety at compile time. Use the platform `Bundle` class directly instead.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/player/mediabrowser/MediaBrowserPlaybackPreparer.kt:12:8 'class MediaSessionConnector : Any' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/player/mediabrowser/MediaBrowserPlaybackPreparer.kt:102:17 'interface Player : Any' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/settings/export/ImportExportManager.kt:39:35 'val FILE_NAME_SERIALIZED_PREFS: String' is deprecated. Serializing preferences with Java's ObjectOutputStream is vulnerable to injections.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/settings/export/ImportExportManager.kt:93:69 'val FILE_NAME_SERIALIZED_PREFS: String' is deprecated. Serializing preferences with Java's ObjectOutputStream is vulnerable to injections.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/settings/export/ImportExportManager.kt:109:65 'val FILE_NAME_SERIALIZED_PREFS: String' is deprecated. Serializing preferences with Java's ObjectOutputStream is vulnerable to injections.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/settings/export/ImportExportManager.kt:143:63 'val FILE_NAME_SERIALIZED_PREFS: String' is deprecated. Serializing preferences with Java's ObjectOutputStream is vulnerable to injections.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/settings/notifications/NotificationModeConfigFragment.kt:42:9 'fun setHasOptionsMenu(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/settings/notifications/NotificationModeConfigFragment.kt:80:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/settings/notifications/NotificationModeConfigFragment.kt:81:15 'fun onCreateOptionsMenu(p0: Menu, p1: MenuInflater): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/settings/notifications/NotificationModeConfigFragment.kt:85:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/settings/notifications/NotificationModeConfigFragment.kt:92:27 'fun onOptionsItemSelected(p0: MenuItem): Boolean' is deprecated. Deprecated in Java.
+
+> Task :app:compileDebugJavaWithJavac
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :app:copyRoomSchemas NO-SOURCE
+> Task :app:processDebugJavaRes
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:generateDebugAndroidTestLintModel
+> Task :app:generateDebugLintReportModel
+> Task :app:generateDebugUnitTestLintModel
+> Task :app:mergeDebugJavaResource
+
+> Task :app:lintAnalyzeDebug
+com.evernote.android.state.lint.registry.StateIssueRegistry in /home/runner/.gradle/caches/9.8.2/transforms/a2e2e3f2f19f4bd5ef9a00c14b39d0bf/transformed/android-state-1.4.1/jars/lint.jar does not specify a vendor; see IssueRegistry#vendor
+
+> Task :app:dexBuilderDebug
+> Task :app:mergeProjectDexDebug
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect
+> Task :app:assembleDebug
+> Task :app:lintAnalyzeDebugAndroidTest
+> Task :app:lintAnalyzeDebugUnitTest
+
+> Task :app:lintReportDebug
+Wrote HTML report to file:///home/runner/work/Yewplay/Yewplay/app/build/reports/lint-results-debug.html
+Wrote SARIF report to file:///home/runner/work/Yewplay/Yewplay/app/build/reports/lint-results-debug.sarif
+
+> Task :app:lintDebug
+
+[Incubating] Problems report is available at: file:///home/runner/work/Yewplay/Yewplay/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 26m 1s
+100 actionable tasks: 100 executed
+Configuration cache entry stored.
