@@ -1,7 +1,7 @@
 branch: claude/yewplay-fase-7-acabamento
-sha: bb7787466a77fae28d857a8ef23bb7479dddee05
+sha: 77aa5da816be607947ef2707b61fd121fbad1238
 outcome: cancelled
-run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/41907400515
+run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/41907911366
 
 == errors ==
 
@@ -23,6 +23,8 @@ w: ⚠️ Unused Kotlin Source Sets
 w: ⚠️ Unused Kotlin Source Sets
 
 == tail ==
+
+Welcome to Gradle 9.8.2!
 
 Here are the highlights of this release:
  - Java 27 support
@@ -96,130 +98,3 @@ Run with --info for a stacktrace.
 > Task :app:checkDependenciesOrder
 > Task :core:model:processResources NO-SOURCE
 > Task :core:data:processResources NO-SOURCE
-> Task :app:prepareLibraryDefinitionsDebug
-> Task :shared:convertXmlValueResourcesForAndroidMain NO-SOURCE
-> Task :shared:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
-> Task :shared:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
-> Task :shared:convertXmlValueResourcesForCommonMain
-> Task :shared:copyNonXmlValueResourcesForCommonMain
-> Task :shared:prepareComposeResourcesTaskForCommonMain
-> Task :shared:copyAndroidMainComposeResourcesToAndroidAssets
-> Task :shared:androidPreBuild UP-TO-DATE
-> Task :shared:preAndroidMainBuild UP-TO-DATE
-
-> Task :shared:prepareLibraryDefinitionsAndroidMain
-No dependencies found for variant: androidMain
-
-> Task :shared:packageAndroidMainResources
-> Task :core:designsystem:androidPreBuild UP-TO-DATE
-> Task :core:designsystem:preAndroidMainBuild UP-TO-DATE
-> Task :core:designsystem:generateAndroidMainEmptyResourceFiles
-> Task :feature:library:androidPreBuild UP-TO-DATE
-> Task :feature:library:preAndroidMainBuild UP-TO-DATE
-> Task :feature:library:generateAndroidMainEmptyResourceFiles
-> Task :feature:subscriptions:androidPreBuild UP-TO-DATE
-> Task :feature:subscriptions:preAndroidMainBuild UP-TO-DATE
-> Task :feature:subscriptions:generateAndroidMainEmptyResourceFiles
-> Task :shared:generateAndroidMainEmptyResourceFiles
-> Task :shared:parseAndroidMainLocalResources
-> Task :shared:generateAndroidMainRFile
-> Task :shared:buildConfigGenerator
-> Task :shared:kmpPartiallyResolvedDependenciesChecker
-> Task :shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
-> Task :shared:generateResourceAccessorsForAndroidMain NO-SOURCE
-> Task :app:runKtlint
-> Task :shared:generateComposeResClass
-> Task :shared:generateExpectResourceCollectorsForCommonMain
-> Task :core:designsystem:kmpPartiallyResolvedDependenciesChecker
-> Task :core:designsystem:checkKotlinGradlePluginConfigurationErrors SKIPPED
-> Task :core:designsystem:convertXmlValueResourcesForAndroidMain NO-SOURCE
-> Task :core:designsystem:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
-> Task :core:designsystem:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
-> Task :core:designsystem:generateResourceAccessorsForAndroidMain SKIPPED
-> Task :core:designsystem:convertXmlValueResourcesForCommonMain NO-SOURCE
-> Task :core:designsystem:copyNonXmlValueResourcesForCommonMain NO-SOURCE
-> Task :core:designsystem:prepareComposeResourcesTaskForCommonMain NO-SOURCE
-> Task :core:designsystem:generateResourceAccessorsForCommonMain SKIPPED
-> Task :core:designsystem:generateActualResourceCollectorsForAndroidMain SKIPPED
-> Task :core:designsystem:generateComposeResClass SKIPPED
-> Task :core:designsystem:generateExpectResourceCollectorsForCommonMain SKIPPED
-> Task :feature:library:kmpPartiallyResolvedDependenciesChecker
-> Task :feature:library:checkKotlinGradlePluginConfigurationErrors SKIPPED
-> Task :feature:library:convertXmlValueResourcesForAndroidMain NO-SOURCE
-> Task :feature:library:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
-> Task :feature:library:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
-> Task :feature:library:generateResourceAccessorsForAndroidMain SKIPPED
-> Task :feature:library:convertXmlValueResourcesForCommonMain NO-SOURCE
-> Task :feature:library:copyNonXmlValueResourcesForCommonMain NO-SOURCE
-> Task :feature:library:prepareComposeResourcesTaskForCommonMain NO-SOURCE
-> Task :feature:library:generateResourceAccessorsForCommonMain SKIPPED
-> Task :feature:library:generateActualResourceCollectorsForAndroidMain SKIPPED
-> Task :feature:library:generateComposeResClass SKIPPED
-> Task :feature:library:generateExpectResourceCollectorsForCommonMain SKIPPED
-> Task :feature:subscriptions:kmpPartiallyResolvedDependenciesChecker
-> Task :feature:subscriptions:checkKotlinGradlePluginConfigurationErrors SKIPPED
-> Task :feature:subscriptions:convertXmlValueResourcesForAndroidMain NO-SOURCE
-> Task :feature:subscriptions:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
-> Task :feature:subscriptions:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
-> Task :feature:subscriptions:generateResourceAccessorsForAndroidMain SKIPPED
-> Task :feature:subscriptions:convertXmlValueResourcesForCommonMain NO-SOURCE
-> Task :feature:subscriptions:copyNonXmlValueResourcesForCommonMain NO-SOURCE
-> Task :feature:subscriptions:prepareComposeResourcesTaskForCommonMain NO-SOURCE
-> Task :feature:subscriptions:generateResourceAccessorsForCommonMain SKIPPED
-> Task :feature:subscriptions:generateActualResourceCollectorsForAndroidMain SKIPPED
-> Task :feature:subscriptions:generateComposeResClass SKIPPED
-> Task :feature:subscriptions:generateExpectResourceCollectorsForCommonMain SKIPPED
-> Task :app:generateDebugAssets UP-TO-DATE
-> Task :shared:generateAndroidMainAssets UP-TO-DATE
-> Task :shared:generateResourceAccessorsForCommonMain
-> Task :shared:generateActualResourceCollectorsForAndroidMain
-> Task :shared:mergeAndroidMainAssets
-> Task :shared:writeAndroidMainAarMetadata
-> Task :core:designsystem:writeAndroidMainAarMetadata
-> Task :feature:library:writeAndroidMainAarMetadata
-> Task :feature:subscriptions:writeAndroidMainAarMetadata
-> Task :shared:processAndroidMainManifest
-> Task :core:designsystem:processAndroidMainManifest
-> Task :feature:library:processAndroidMainManifest
-> Task :feature:subscriptions:processAndroidMainManifest
-> Task :shared:mapAndroidMainSourceSetPaths
-> Task :shared:compileAndroidMainLibraryResources
-> Task :shared:mergeAndroidMainJniLibFolders
-> Task :shared:mergeAndroidMainNativeLibs NO-SOURCE
-> Task :shared:copyAndroidMainJniLibsProjectOnly
-> Task :core:designsystem:mergeAndroidMainJniLibFolders
-> Task :core:designsystem:mergeAndroidMainNativeLibs NO-SOURCE
-> Task :core:designsystem:copyAndroidMainJniLibsProjectOnly
-> Task :feature:library:mergeAndroidMainJniLibFolders
-> Task :feature:library:mergeAndroidMainNativeLibs NO-SOURCE
-> Task :feature:library:copyAndroidMainJniLibsProjectOnly
-> Task :feature:subscriptions:mergeAndroidMainJniLibFolders
-> Task :feature:subscriptions:mergeAndroidMainNativeLibs NO-SOURCE
-> Task :feature:subscriptions:copyAndroidMainJniLibsProjectOnly
-> Task :core:model:compileKotlin
-> Task :core:model:compileJava NO-SOURCE
-> Task :core:model:classes UP-TO-DATE
-> Task :core:model:jar
-> Task :core:designsystem:checkAndroidMainAarMetadata
-> Task :core:data:compileKotlin
-> Task :core:data:compileJava NO-SOURCE
-> Task :core:data:classes UP-TO-DATE
-> Task :core:data:jar
-> Task :app:runCheckstyle
-> Task :app:preDebugBuild
-> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
-> Task :app:generateDebugResValues
-> Task :app:extractDebugSupportedLocales
-> Task :app:mapDebugSourceSetPaths
-> Task :app:generateDebugResources
-> Task :app:dataBindingMergeDependencyArtifactsDebug
-> Task :app:generateDebugLocaleConfig
-> Task :app:processDebugNavigationResources
-> Task :app:generateDebugBuildConfig
-> Task :app:javaPreCompileDebug
-> Task :app:mergeDebugAssets
-> Task :app:compressDebugAssets
-> Task :app:generateDebugGlobalSynthetics
-> Task :app:packageDebugResources
-> Task :app:parseDebugLocalResources
-> Task :app:generateDebugRFile
