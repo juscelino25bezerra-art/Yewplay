@@ -1,7 +1,7 @@
 branch: claude/yewplay-fase-7-acabamento
-sha: 728bd0e10e4dffbbd4aa20333e911efe2f61b5fc
+sha: 9bc446274850c7b8d25c076e5a9e859e56a91cf0
 outcome: success
-run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/41875215379
+run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/41877008971
 
 == errors ==
 
@@ -48,6 +48,9 @@ w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/settings/notifications/NotificationModeConfigFragment.kt:92:27 'fun onOptionsItemSelected(p0: MenuItem): Boolean' is deprecated. Deprecated in Java.
 
 == tail ==
+> Task :app:preBuild UP-TO-DATE
+> Task :app:checkDependenciesOrder
+> Task :shared:convertXmlValueResourcesForAndroidMain NO-SOURCE
 > Task :shared:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
 > Task :shared:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
 > Task :shared:convertXmlValueResourcesForCommonMain
@@ -63,27 +66,27 @@ No dependencies found for variant: androidMain
 > Task :shared:packageAndroidMainResources
 > Task :shared:generateAndroidMainEmptyResourceFiles
 > Task :shared:parseAndroidMainLocalResources
-> Task :app:prepareLibraryDefinitionsDebug
+> Task :shared:generateAndroidMainRFile
 > Task :shared:buildConfigGenerator
 > Task :shared:kmpPartiallyResolvedDependenciesChecker
 > Task :shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
 > Task :shared:generateResourceAccessorsForAndroidMain NO-SOURCE
-> Task :shared:generateAndroidMainRFile
-> Task :shared:generateComposeResClass
-> Task :shared:generateExpectResourceCollectorsForCommonMain
-> Task :app:generateDebugAssets UP-TO-DATE
-> Task :shared:generateAndroidMainAssets UP-TO-DATE
-> Task :shared:mergeAndroidMainAssets
-> Task :app:runKtlint
 > Task :shared:generateResourceAccessorsForCommonMain
 > Task :shared:generateActualResourceCollectorsForAndroidMain
+> Task :shared:generateComposeResClass
+> Task :shared:generateExpectResourceCollectorsForCommonMain
+> Task :app:runKtlint
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :shared:generateAndroidMainAssets UP-TO-DATE
+> Task :app:prepareLibraryDefinitionsDebug
+> Task :shared:mergeAndroidMainAssets
 > Task :shared:writeAndroidMainAarMetadata
 > Task :shared:mapAndroidMainSourceSetPaths
 > Task :shared:processAndroidMainManifest
+> Task :shared:compileAndroidMainLibraryResources
 > Task :shared:mergeAndroidMainJniLibFolders
 > Task :shared:mergeAndroidMainNativeLibs NO-SOURCE
 > Task :shared:copyAndroidMainJniLibsProjectOnly
-> Task :shared:compileAndroidMainLibraryResources
 > Task :shared:checkAndroidMainAarMetadata
 > Task :app:preDebugAndroidTestBuild SKIPPED
 > Task :app:generateDebugAndroidTestResValues
@@ -98,10 +101,10 @@ No dependencies found for variant: androidMain
 > Task :app:generateDebugResValues
 > Task :app:extractDebugSupportedLocales
 > Task :app:mapDebugSourceSetPaths
-> Task :app:processDebugNavigationResources
 > Task :app:generateDebugResources
-> Task :app:generateDebugLocaleConfig
+> Task :app:processDebugNavigationResources
 > Task :app:dataBindingMergeDependencyArtifactsDebug
+> Task :app:generateDebugLocaleConfig
 > Task :app:generateDebugBuildConfig
 > Task :app:javaPreCompileDebug
 > Task :app:mergeDebugAssets
@@ -143,10 +146,10 @@ Unable to strip the following libraries, packaging them as they are: libandroidx
 w: Koin compiler plugin: Kotlin 2.4.21 is newer than the newest verified version (2.4.20) — proceeding with the 2.4.20 adapter. If compilation fails, check for a koin-compiler-plugin update. Verified versions: 2.3.20, 2.4.0, 2.4.10, 2.4.20.
 
 > Task :shared:processAndroidMainJavaRes
-> Task :shared:bundleAndroidMainClassesToRuntimeJar
 > Task :shared:bundleAndroidMainClassesToCompileJar
-> Task :shared:mergeAndroidMainJavaResource
+> Task :shared:bundleAndroidMainClassesToRuntimeJar
 > Task :shared:createFullJarAndroidMain
+> Task :shared:mergeAndroidMainJavaResource
 > Task :shared:syncAndroidMainLibJars
 > Task :shared:bundleAndroidMainLocalLintAar
 > Task :shared:generateAndroidHostTestLintModel
@@ -221,14 +224,11 @@ Note: Recompile with -Xlint:unchecked for details.
 com.evernote.android.state.lint.registry.StateIssueRegistry in /home/runner/.gradle/caches/9.8.2/transforms/a2e2e3f2f19f4bd5ef9a00c14b39d0bf/transformed/android-state-1.4.1/jars/lint.jar does not specify a vendor; see IssueRegistry#vendor
 
 > Task :app:dexBuilderDebug
-
-> Task :app:lintAnalyzeDebugAndroidTest
-com.evernote.android.state.lint.registry.StateIssueRegistry in /home/runner/.gradle/caches/9.8.2/transforms/a2e2e3f2f19f4bd5ef9a00c14b39d0bf/transformed/android-state-1.4.1/jars/lint.jar does not specify a vendor; see IssueRegistry#vendor
-
 > Task :app:mergeProjectDexDebug
 > Task :app:packageDebug
 > Task :app:createDebugApkListingFileRedirect
 > Task :app:assembleDebug
+> Task :app:lintAnalyzeDebugAndroidTest
 > Task :app:lintAnalyzeDebugUnitTest
 
 > Task :app:lintReportDebug
@@ -245,6 +245,6 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 
 For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD SUCCESSFUL in 3m 39s
+BUILD SUCCESSFUL in 3m 20s
 100 actionable tasks: 100 executed
 Configuration cache entry stored.
