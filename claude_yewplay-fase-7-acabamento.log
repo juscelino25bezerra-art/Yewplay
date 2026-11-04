@@ -1,7 +1,7 @@
 branch: claude/yewplay-fase-7-acabamento
-sha: 2ae330f712f0e8505f6a3d9834cff30e29e2856b
+sha: 8e3929731cccb27a6e967e5c104b14dedceadccc
 outcome: success
-run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/41902542442
+run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/41905307924
 
 == errors ==
 
@@ -20,6 +20,7 @@ w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:142:24: 'fun
 w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:142:24: 'fun <T> ExistingDomainObjectDelegate<out T>.getValue(receiver: Any?, property: KProperty<*>): T' is deprecated. Use the named() API instead. See the Gradle 9.6 upgrading guide.
 w: ⚠️ Unused Kotlin Source Sets
 w: ⚠️ Unused Kotlin Source Sets
+w: ⚠️ Unused Kotlin Source Sets
 w: Koin compiler plugin: Kotlin 2.4.21 is newer than the newest verified version (2.4.20) — proceeding with the 2.4.20 adapter. If compilation fails, check for a koin-compiler-plugin update. Verified versions: 2.3.20, 2.4.0, 2.4.10, 2.4.20.
 w: [ksp] /home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/database/feed/dao/FeedDAO.kt:178: The DAO function return type (kotlin.collections.List<java.time.OffsetDateTime?>) with the nullable type argument is meaningless because for now Room will never put a null value in a result.
 w: [ksp] /home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/database/feed/dao/FeedDAO.kt:181: The DAO function return type (kotlin.collections.List<java.time.OffsetDateTime?>) with the nullable type argument is meaningless because for now Room will never put a null value in a result.
@@ -30,17 +31,17 @@ w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/error/ErrorInfo.kt:202:43 'class ExoPlaybackException : PlaybackException' is deprecated. Deprecated in Java.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/error/ErrorInfo.kt:205:43 'class ExoPlaybackException : PlaybackException' is deprecated. Deprecated in Java.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/error/ErrorPanelHelper.kt:75:26 'fun startActivityForResult(p0: Intent, p1: Int): Unit' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/fragments/LibraryFragment.kt:37:9 'fun setHasOptionsMenu(p0: Boolean): Unit' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/fragments/LibraryFragment.kt:130:15 'fun onCreateOptionsMenu(p0: Menu, p1: MenuInflater): Unit' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/fragments/LibraryFragment.kt:143:22 'fun onOptionsItemSelected(p0: MenuItem): Boolean' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:116:9 'fun setHasOptionsMenu(p0: Boolean): Unit' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:225:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:226:15 'fun onCreateOptionsMenu(p0: Menu, p1: MenuInflater): Unit' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:240:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:268:22 'fun onOptionsItemSelected(p0: MenuItem): Boolean' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:298:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:299:15 'fun onDestroyOptionsMenu(): Unit' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:738:38 'fun bundleOf(vararg pairs: Pair<String, Any?>): Bundle' is deprecated. This method does not provide type safety at compile time. Use the platform `Bundle` class directly instead.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/fragments/LibraryFragment.kt:38:9 'fun setHasOptionsMenu(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/fragments/LibraryFragment.kt:125:15 'fun onCreateOptionsMenu(p0: Menu, p1: MenuInflater): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/fragments/LibraryFragment.kt:138:22 'fun onOptionsItemSelected(p0: MenuItem): Boolean' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:132:9 'fun setHasOptionsMenu(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:242:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:243:15 'fun onCreateOptionsMenu(p0: Menu, p1: MenuInflater): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:257:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:285:22 'fun onOptionsItemSelected(p0: MenuItem): Boolean' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:315:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:316:15 'fun onDestroyOptionsMenu(): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:822:38 'fun bundleOf(vararg pairs: Pair<String, Any?>): Bundle' is deprecated. This method does not provide type safety at compile time. Use the platform `Bundle` class directly instead.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/service/FeedLoadManager.kt:243:33 Unnecessary non-null assertion (!!) on a non-null receiver of type 'Info'.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/SubscriptionFragment.kt:79:9 'fun setHasOptionsMenu(p0: Boolean): Unit' is deprecated. Deprecated in Java.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/SubscriptionFragment.kt:116:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
@@ -65,31 +66,22 @@ w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/settings/notifications/NotificationModeConfigFragment.kt:92:27 'fun onOptionsItemSelected(p0: MenuItem): Boolean' is deprecated. Deprecated in Java.
 
 == tail ==
-> Task :core:designsystem:mergeAndroidMainJniLibFolders
-> Task :core:designsystem:mergeAndroidMainNativeLibs NO-SOURCE
-> Task :core:designsystem:copyAndroidMainJniLibsProjectOnly
-> Task :feature:library:mergeAndroidMainJniLibFolders
-> Task :feature:library:mergeAndroidMainNativeLibs NO-SOURCE
-> Task :feature:library:copyAndroidMainJniLibsProjectOnly
-> Task :app:runCheckstyle
-> Task :app:preDebugBuild
-> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :shared:checkAndroidMainAarMetadata
+> Task :app:generateDebugResValues
 > Task :core:model:compileKotlin
 > Task :core:model:compileJava NO-SOURCE
 > Task :core:model:classes UP-TO-DATE
 > Task :core:model:jar
-> Task :core:designsystem:checkAndroidMainAarMetadata
-> Task :app:generateDebugResValues
 > Task :app:extractDebugSupportedLocales
 > Task :app:mapDebugSourceSetPaths
-> Task :app:dataBindingMergeDependencyArtifactsDebug
 > Task :app:generateDebugLocaleConfig
 > Task :app:generateDebugResources
-> Task :app:processDebugNavigationResources
+> Task :app:dataBindingMergeDependencyArtifactsDebug
 > Task :core:data:compileKotlin
 > Task :core:data:compileJava NO-SOURCE
 > Task :core:data:classes UP-TO-DATE
 > Task :core:data:jar
+> Task :app:processDebugNavigationResources
 > Task :app:generateDebugBuildConfig
 > Task :app:javaPreCompileDebug
 > Task :app:mergeDebugAssets
@@ -97,79 +89,88 @@ w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe
 > Task :app:packageDebugResources
 > Task :app:parseDebugLocalResources
 > Task :app:generateDebugRFile
+> Task :shared:compileAndroidMain
 > Task :app:generateDebugGlobalSynthetics
 > Task :app:checkDebugDuplicateClasses
 > Task :app:mergeDebugResources
-> Task :shared:compileAndroidMain
 > Task :app:dataBindingGenBaseClassesDebug
 > Task :app:checkDebugAarMetadata
 > Task :app:compileDebugNavigationResources
 > Task :app:createDebugCompatibleScreenManifests
 > Task :app:extractDeepLinksDebug
-> Task :app:desugarDebugFileDependencies
 
 > Task :app:processDebugMainManifest
 /home/runner/work/Yewplay/Yewplay/app/src/debug/AndroidManifest.xml Warning:
 	provider#org.acra.attachment.AcraContentProvider@android:authorities was tagged at AndroidManifest.xml:0 to replace other declarations but no other declaration present
 
 > Task :app:processDebugManifest
+> Task :app:processDebugManifestForPackage
+> Task :app:desugarDebugFileDependencies
 > Task :app:l8DexDesugarLibDebug
+> Task :app:processDebugResources
+> Task :app:validateSigningDebug
+> Task :app:writeDebugAppMetadata
+> Task :app:writeDebugSigningConfigVersions
 
 > Task :shared:compileAndroidMain
 w: Koin compiler plugin: Kotlin 2.4.21 is newer than the newest verified version (2.4.20) — proceeding with the 2.4.20 adapter. If compilation fails, check for a koin-compiler-plugin update. Verified versions: 2.3.20, 2.4.0, 2.4.10, 2.4.20.
 
-> Task :app:processDebugManifestForPackage
-> Task :shared:processAndroidMainJavaRes
-> Task :shared:bundleAndroidMainClassesToCompileJar
-> Task :app:mergeDebugJniLibFolders
-> Task :core:designsystem:compileAndroidMain
 > Task :app:mergeExtDexDebug
+> Task :shared:extractAndroidMainAnnotations
+> Task :shared:processAndroidMainJavaRes
+> Task :app:mergeDebugJniLibFolders
 > Task :shared:bundleAndroidMainClassesToRuntimeJar
-> Task :app:processDebugResources
-> Task :core:designsystem:bundleAndroidMainClassesToCompileJar
-> Task :core:designsystem:processAndroidMainJavaRes
-> Task :core:designsystem:bundleAndroidMainClassesToRuntimeJar
-> Task :feature:library:compileAndroidMain
-> Task :feature:library:bundleAndroidMainClassesToCompileJar
+> Task :shared:bundleAndroidMainClassesToCompileJar
 > Task :app:mergeDebugNativeLibs
-> Task :feature:library:processAndroidMainJavaRes
-> Task :feature:library:bundleAndroidMainClassesToRuntimeJar
+> Task :shared:mergeAndroidMainJavaResource
+> Task :core:designsystem:compileAndroidMain
+> Task :core:designsystem:extractAndroidMainAnnotations
+> Task :shared:syncAndroidMainLibJars
+> Task :shared:bundleAndroidMainLocalLintAar
+> Task :feature:library:checkAndroidMainAarMetadata
+> Task :feature:subscriptions:checkAndroidMainAarMetadata
+> Task :app:preDebugAndroidTestBuild SKIPPED
+> Task :app:generateDebugAndroidTestResValues
+> Task :shared:createFullJarAndroidMain
 
 > Task :app:stripDebugDebugSymbols
 Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libsqliteJni.so. Run with --info option to learn more.
 
-> Task :app:validateSigningDebug
-> Task :app:writeDebugAppMetadata
-> Task :app:writeDebugSigningConfigVersions
-> Task :app:mergeLibDexDebug
-> Task :core:designsystem:mergeAndroidMainJavaResource
-> Task :shared:checkAndroidMainAarMetadata
-> Task :core:designsystem:extractAndroidMainAnnotations
-> Task :shared:extractAndroidMainAnnotations
-> Task :shared:mergeAndroidMainJavaResource
-> Task :core:designsystem:syncAndroidMainLibJars
-> Task :core:designsystem:bundleAndroidMainLocalLintAar
-> Task :feature:library:checkAndroidMainAarMetadata
-> Task :feature:library:extractAndroidMainAnnotations
-> Task :feature:library:mergeAndroidMainJavaResource
-> Task :shared:syncAndroidMainLibJars
-> Task :feature:library:syncAndroidMainLibJars
-> Task :feature:library:bundleAndroidMainLocalLintAar
-> Task :shared:bundleAndroidMainLocalLintAar
-> Task :app:preDebugAndroidTestBuild SKIPPED
-> Task :app:generateDebugAndroidTestResValues
-> Task :shared:createFullJarAndroidMain
-> Task :core:designsystem:createFullJarAndroidMain
 > Task :shared:prepareLintJarForPublish
 > Task :core:designsystem:prepareLintJarForPublish
-> Task :feature:library:createFullJarAndroidMain
 > Task :feature:library:prepareLintJarForPublish
+> Task :feature:subscriptions:prepareLintJarForPublish
 > Task :app:preDebugUnitTestBuild UP-TO-DATE
 > Task :shared:preAndroidHostTestBuild UP-TO-DATE
 > Task :app:extractProguardFiles
+> Task :core:designsystem:bundleAndroidMainClassesToCompileJar
+> Task :feature:library:compileAndroidMain
+> Task :feature:library:bundleAndroidMainClassesToCompileJar
 > Task :shared:generateAndroidHostTestLintModel
+> Task :core:designsystem:processAndroidMainJavaRes
+> Task :feature:library:processAndroidMainJavaRes
+> Task :feature:library:bundleAndroidMainClassesToRuntimeJar
+> Task :core:designsystem:bundleAndroidMainClassesToRuntimeJar
+> Task :core:designsystem:mergeAndroidMainJavaResource
+> Task :core:designsystem:syncAndroidMainLibJars
+> Task :core:designsystem:bundleAndroidMainLocalLintAar
+> Task :feature:library:extractAndroidMainAnnotations
+> Task :feature:library:mergeAndroidMainJavaResource
+> Task :feature:library:syncAndroidMainLibJars
+> Task :feature:library:bundleAndroidMainLocalLintAar
+> Task :feature:subscriptions:extractAndroidMainAnnotations
+> Task :core:designsystem:createFullJarAndroidMain
+> Task :feature:library:createFullJarAndroidMain
+> Task :feature:subscriptions:compileAndroidMain
+> Task :feature:subscriptions:bundleAndroidMainClassesToCompileJar
+> Task :feature:subscriptions:processAndroidMainJavaRes
+> Task :feature:subscriptions:bundleAndroidMainClassesToRuntimeJar
+> Task :app:mergeLibDexDebug
+> Task :feature:subscriptions:mergeAndroidMainJavaResource
+> Task :feature:subscriptions:syncAndroidMainLibJars
+> Task :feature:subscriptions:bundleAndroidMainLocalLintAar
+> Task :feature:subscriptions:createFullJarAndroidMain
 > Task :shared:lintAnalyzeAndroidHostTest
-
 > Task :app:kspDebugKotlin
 w: [ksp] /home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/database/feed/dao/FeedDAO.kt:178: The DAO function return type (kotlin.collections.List<java.time.OffsetDateTime?>) with the nullable type argument is meaningless because for now Room will never put a null value in a result.
 w: [ksp] /home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/database/feed/dao/FeedDAO.kt:181: The DAO function return type (kotlin.collections.List<java.time.OffsetDateTime?>) with the nullable type argument is meaningless because for now Room will never put a null value in a result.
@@ -189,17 +190,17 @@ w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/error/ErrorInfo.kt:202:43 'class ExoPlaybackException : PlaybackException' is deprecated. Deprecated in Java.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/error/ErrorInfo.kt:205:43 'class ExoPlaybackException : PlaybackException' is deprecated. Deprecated in Java.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/error/ErrorPanelHelper.kt:75:26 'fun startActivityForResult(p0: Intent, p1: Int): Unit' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/fragments/LibraryFragment.kt:37:9 'fun setHasOptionsMenu(p0: Boolean): Unit' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/fragments/LibraryFragment.kt:130:15 'fun onCreateOptionsMenu(p0: Menu, p1: MenuInflater): Unit' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/fragments/LibraryFragment.kt:143:22 'fun onOptionsItemSelected(p0: MenuItem): Boolean' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:116:9 'fun setHasOptionsMenu(p0: Boolean): Unit' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:225:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:226:15 'fun onCreateOptionsMenu(p0: Menu, p1: MenuInflater): Unit' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:240:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:268:22 'fun onOptionsItemSelected(p0: MenuItem): Boolean' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:298:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:299:15 'fun onDestroyOptionsMenu(): Unit' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:738:38 'fun bundleOf(vararg pairs: Pair<String, Any?>): Bundle' is deprecated. This method does not provide type safety at compile time. Use the platform `Bundle` class directly instead.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/fragments/LibraryFragment.kt:38:9 'fun setHasOptionsMenu(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/fragments/LibraryFragment.kt:125:15 'fun onCreateOptionsMenu(p0: Menu, p1: MenuInflater): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/fragments/LibraryFragment.kt:138:22 'fun onOptionsItemSelected(p0: MenuItem): Boolean' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:132:9 'fun setHasOptionsMenu(p0: Boolean): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:242:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:243:15 'fun onCreateOptionsMenu(p0: Menu, p1: MenuInflater): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:257:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:285:22 'fun onOptionsItemSelected(p0: MenuItem): Boolean' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:315:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:316:15 'fun onDestroyOptionsMenu(): Unit' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:822:38 'fun bundleOf(vararg pairs: Pair<String, Any?>): Bundle' is deprecated. This method does not provide type safety at compile time. Use the platform `Bundle` class directly instead.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/service/FeedLoadManager.kt:243:33 Unnecessary non-null assertion (!!) on a non-null receiver of type 'Info'.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/SubscriptionFragment.kt:79:9 'fun setHasOptionsMenu(p0: Boolean): Unit' is deprecated. Deprecated in Java.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/SubscriptionFragment.kt:116:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
@@ -232,13 +233,13 @@ Note: Recompile with -Xlint:unchecked for details.
 > Task :app:copyRoomSchemas NO-SOURCE
 > Task :app:processDebugJavaRes
 > Task :app:bundleDebugClassesToCompileJar
-> Task :app:generateDebugAndroidTestLintModel
 > Task :app:generateDebugLintReportModel
+> Task :app:generateDebugAndroidTestLintModel
 > Task :app:generateDebugUnitTestLintModel
 > Task :app:mergeDebugJavaResource
 
 > Task :app:lintAnalyzeDebug
-com.evernote.android.state.lint.registry.StateIssueRegistry in /home/runner/.gradle/caches/9.8.2/transforms/d914e504bb293b4058e0a44b6c7f16d7/transformed/android-state-1.4.1/jars/lint.jar does not specify a vendor; see IssueRegistry#vendor
+com.evernote.android.state.lint.registry.StateIssueRegistry in /home/runner/.gradle/caches/9.8.2/transforms/ac2a76c9d06d1a3c97d6cfb19d222a93/transformed/android-state-1.4.1/jars/lint.jar does not specify a vendor; see IssueRegistry#vendor
 
 > Task :app:dexBuilderDebug
 > Task :app:mergeProjectDexDebug
@@ -262,6 +263,6 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 
 For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD SUCCESSFUL in 7m
-138 actionable tasks: 138 executed
+BUILD SUCCESSFUL in 10m 20s
+155 actionable tasks: 155 executed
 Configuration cache entry stored.
