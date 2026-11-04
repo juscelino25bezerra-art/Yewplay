@@ -1,7 +1,7 @@
 branch: claude/yewplay-fase-7-acabamento
-sha: 66d9f3483d260631246ad7c381db48a6da3a6f75
+sha: 005853784059be4484cb24e38b3e27376d8f2e8d
 outcome: success
-run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/41889212351
+run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/41891163316
 
 == errors ==
 
@@ -23,7 +23,7 @@ w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:268:22 'fun onOptionsItemSelected(p0: MenuItem): Boolean' is deprecated. Deprecated in Java.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:298:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:299:15 'fun onDestroyOptionsMenu(): Unit' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:737:38 'fun bundleOf(vararg pairs: Pair<String, Any?>): Bundle' is deprecated. This method does not provide type safety at compile time. Use the platform `Bundle` class directly instead.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:738:38 'fun bundleOf(vararg pairs: Pair<String, Any?>): Bundle' is deprecated. This method does not provide type safety at compile time. Use the platform `Bundle` class directly instead.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/service/FeedLoadManager.kt:243:33 Unnecessary non-null assertion (!!) on a non-null receiver of type 'Info'.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/SubscriptionFragment.kt:79:9 'fun setHasOptionsMenu(p0: Boolean): Unit' is deprecated. Deprecated in Java.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/SubscriptionFragment.kt:116:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
@@ -66,29 +66,29 @@ No dependencies found for variant: androidMain
 
 > Task :shared:packageAndroidMainResources
 > Task :shared:generateAndroidMainEmptyResourceFiles
-> Task :app:prepareLibraryDefinitionsDebug
+> Task :shared:parseAndroidMainLocalResources
+> Task :shared:generateAndroidMainRFile
 > Task :shared:buildConfigGenerator
 > Task :shared:kmpPartiallyResolvedDependenciesChecker
 > Task :shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
 > Task :shared:generateResourceAccessorsForAndroidMain NO-SOURCE
-> Task :shared:generateResourceAccessorsForCommonMain
-> Task :shared:generateActualResourceCollectorsForAndroidMain
+> Task :app:prepareLibraryDefinitionsDebug
 > Task :shared:generateComposeResClass
 > Task :shared:generateExpectResourceCollectorsForCommonMain
 > Task :app:generateDebugAssets UP-TO-DATE
 > Task :shared:generateAndroidMainAssets UP-TO-DATE
 > Task :shared:mergeAndroidMainAssets
-> Task :shared:parseAndroidMainLocalResources
-> Task :shared:generateAndroidMainRFile
+> Task :shared:generateResourceAccessorsForCommonMain
+> Task :shared:generateActualResourceCollectorsForAndroidMain
 > Task :shared:writeAndroidMainAarMetadata
 > Task :shared:processAndroidMainManifest
 > Task :shared:mapAndroidMainSourceSetPaths
 > Task :shared:compileAndroidMainLibraryResources
 > Task :shared:mergeAndroidMainJniLibFolders
-> Task :app:runKtlint
 > Task :shared:mergeAndroidMainNativeLibs NO-SOURCE
 > Task :shared:copyAndroidMainJniLibsProjectOnly
 > Task :shared:checkAndroidMainAarMetadata
+> Task :app:runKtlint
 > Task :app:preDebugAndroidTestBuild SKIPPED
 > Task :app:generateDebugAndroidTestResValues
 > Task :shared:prepareLintJarForPublish
@@ -102,11 +102,11 @@ No dependencies found for variant: androidMain
 > Task :app:generateDebugResValues
 > Task :app:extractDebugSupportedLocales
 > Task :app:mapDebugSourceSetPaths
-> Task :app:processDebugNavigationResources
-> Task :app:generateDebugResources
 > Task :app:generateDebugLocaleConfig
-> Task :app:generateDebugBuildConfig
+> Task :app:generateDebugResources
+> Task :app:processDebugNavigationResources
 > Task :app:dataBindingMergeDependencyArtifactsDebug
+> Task :app:generateDebugBuildConfig
 > Task :app:javaPreCompileDebug
 > Task :app:mergeDebugAssets
 > Task :app:compressDebugAssets
@@ -130,25 +130,25 @@ No dependencies found for variant: androidMain
 
 > Task :app:processDebugManifest
 > Task :app:processDebugManifestForPackage
-> Task :app:mergeExtDexDebug
+> Task :app:processDebugResources
 > Task :app:mergeDebugJniLibFolders
 > Task :app:mergeDebugNativeLibs
 
 > Task :app:stripDebugDebugSymbols
 Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libsqliteJni.so. Run with --info option to learn more.
 
-> Task :app:processDebugResources
+> Task :app:l8DexDesugarLibDebug
+> Task :app:validateSigningDebug
 > Task :app:writeDebugAppMetadata
 > Task :app:writeDebugSigningConfigVersions
-> Task :app:validateSigningDebug
-> Task :app:l8DexDesugarLibDebug
+> Task :app:mergeExtDexDebug
 
 > Task :shared:compileAndroidMain
 w: Koin compiler plugin: Kotlin 2.4.21 is newer than the newest verified version (2.4.20) — proceeding with the 2.4.20 adapter. If compilation fails, check for a koin-compiler-plugin update. Verified versions: 2.3.20, 2.4.0, 2.4.10, 2.4.20.
 
 > Task :shared:processAndroidMainJavaRes
-> Task :shared:bundleAndroidMainClassesToCompileJar
 > Task :shared:bundleAndroidMainClassesToRuntimeJar
+> Task :shared:bundleAndroidMainClassesToCompileJar
 > Task :shared:createFullJarAndroidMain
 > Task :shared:mergeAndroidMainJavaResource
 > Task :shared:syncAndroidMainLibJars
@@ -182,7 +182,7 @@ w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:268:22 'fun onOptionsItemSelected(p0: MenuItem): Boolean' is deprecated. Deprecated in Java.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:298:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:299:15 'fun onDestroyOptionsMenu(): Unit' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:737:38 'fun bundleOf(vararg pairs: Pair<String, Any?>): Bundle' is deprecated. This method does not provide type safety at compile time. Use the platform `Bundle` class directly instead.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/FeedFragment.kt:738:38 'fun bundleOf(vararg pairs: Pair<String, Any?>): Bundle' is deprecated. This method does not provide type safety at compile time. Use the platform `Bundle` class directly instead.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/feed/service/FeedLoadManager.kt:243:33 Unnecessary non-null assertion (!!) on a non-null receiver of type 'Info'.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/SubscriptionFragment.kt:79:9 'fun setHasOptionsMenu(p0: Boolean): Unit' is deprecated. Deprecated in Java.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/subscription/SubscriptionFragment.kt:116:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
@@ -245,6 +245,6 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 
 For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD SUCCESSFUL in 4m 42s
+BUILD SUCCESSFUL in 5m 10s
 100 actionable tasks: 100 executed
 Configuration cache entry stored.
