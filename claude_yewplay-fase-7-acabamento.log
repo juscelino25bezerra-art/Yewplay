@@ -1,7 +1,7 @@
 branch: claude/yewplay-fase-7-acabamento
-sha: 235aef03f74d95b625b542afd9d151a021bfe940
+sha: 3bb6e59eadd0f7941aa521acc179911e8a7910a1
 outcome: cancelled
-run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/41861636466
+run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/41861929567
 
 == errors ==
 
@@ -18,6 +18,7 @@ w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:132:34: 'fun
 w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:142:24: 'fun provideDelegate(thisRef: Any?, property: KProperty<*>): ExistingDomainObjectDelegate<KotlinSourceSet>' is deprecated. Use 'val element = getByName(name)' instead. See the Gradle 9.6 upgrading guide.
 w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:142:24: 'fun <T : Any, U : NamedDomainObjectCollection<T>> U.getting(configuration: T.() -> Unit): NamedDomainObjectCollectionDelegateProvider<T>' is deprecated. Use 'val element = getByName(name) { }' instead. See the Gradle 9.6 upgrading guide.
 w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:142:24: 'fun <T> ExistingDomainObjectDelegate<out T>.getValue(receiver: Any?, property: KProperty<*>): T' is deprecated. Use the named() API instead. See the Gradle 9.6 upgrading guide.
+w: Koin compiler plugin: Kotlin 2.4.21 is newer than the newest verified version (2.4.20) — proceeding with the 2.4.20 adapter. If compilation fails, check for a koin-compiler-plugin update. Verified versions: 2.3.20, 2.4.0, 2.4.10, 2.4.20.
 
 == tail ==
 Fetching distribution.
@@ -70,3 +71,94 @@ Configuration 'debugRuntimeClasspath' was resolved during configuration time.
 This is a build performance and scalability issue.
 See https://github.com/gradle/gradle/issues/2298
 Run with --info for a stacktrace.
+
+> Task :app:preBuild UP-TO-DATE
+> Task :app:checkDependenciesOrder
+> Task :shared:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :shared:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :shared:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :shared:convertXmlValueResourcesForCommonMain
+> Task :shared:copyNonXmlValueResourcesForCommonMain
+> Task :shared:prepareComposeResourcesTaskForCommonMain
+> Task :shared:copyAndroidMainComposeResourcesToAndroidAssets
+> Task :shared:androidPreBuild UP-TO-DATE
+> Task :shared:preAndroidMainBuild UP-TO-DATE
+
+> Task :shared:prepareLibraryDefinitionsAndroidMain
+No dependencies found for variant: androidMain
+
+> Task :shared:packageAndroidMainResources
+> Task :shared:generateAndroidMainEmptyResourceFiles
+> Task :shared:parseAndroidMainLocalResources
+> Task :shared:generateAndroidMainRFile
+> Task :shared:buildConfigGenerator
+> Task :shared:kmpPartiallyResolvedDependenciesChecker
+> Task :shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared:generateResourceAccessorsForAndroidMain NO-SOURCE
+> Task :shared:generateResourceAccessorsForCommonMain
+> Task :shared:generateActualResourceCollectorsForAndroidMain
+> Task :shared:generateComposeResClass
+> Task :shared:generateExpectResourceCollectorsForCommonMain
+> Task :app:prepareLibraryDefinitionsDebug
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :shared:generateAndroidMainAssets UP-TO-DATE
+> Task :shared:mergeAndroidMainAssets
+> Task :shared:writeAndroidMainAarMetadata
+> Task :app:runKtlint
+> Task :shared:mapAndroidMainSourceSetPaths
+> Task :shared:processAndroidMainManifest
+> Task :shared:mergeAndroidMainJniLibFolders
+> Task :shared:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :shared:copyAndroidMainJniLibsProjectOnly
+> Task :shared:checkAndroidMainAarMetadata
+> Task :shared:compileAndroidMainLibraryResources
+> Task :app:preDebugAndroidTestBuild SKIPPED
+> Task :app:generateDebugAndroidTestResValues
+> Task :shared:prepareLintJarForPublish
+> Task :app:extractProguardFiles
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :shared:preAndroidHostTestBuild UP-TO-DATE
+> Task :app:runCheckstyle
+> Task :app:preDebugBuild
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:generateDebugResValues
+> Task :app:extractDebugSupportedLocales
+> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugLocaleConfig
+> Task :app:generateDebugResources
+> Task :shared:extractAndroidMainAnnotations
+> Task :app:dataBindingMergeDependencyArtifactsDebug
+> Task :app:processDebugNavigationResources
+> Task :app:generateDebugBuildConfig
+> Task :app:javaPreCompileDebug
+> Task :app:mergeDebugAssets
+> Task :app:compressDebugAssets
+> Task :app:packageDebugResources
+> Task :app:parseDebugLocalResources
+> Task :app:generateDebugRFile
+> Task :app:generateDebugGlobalSynthetics
+> Task :shared:compileAndroidMain
+> Task :app:checkDebugDuplicateClasses
+> Task :app:mergeDebugResources
+> Task :app:dataBindingGenBaseClassesDebug
+> Task :app:checkDebugAarMetadata
+> Task :app:compileDebugNavigationResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :app:desugarDebugFileDependencies
+
+> Task :app:processDebugMainManifest
+/home/runner/work/Yewplay/Yewplay/app/src/debug/AndroidManifest.xml Warning:
+	provider#org.acra.attachment.AcraContentProvider@android:authorities was tagged at AndroidManifest.xml:0 to replace other declarations but no other declaration present
+
+> Task :app:processDebugManifest
+> Task :app:l8DexDesugarLibDebug
+> Task :app:processDebugManifestForPackage
+> Task :app:mergeExtDexDebug
+
+> Task :shared:compileAndroidMain
+w: Koin compiler plugin: Kotlin 2.4.21 is newer than the newest verified version (2.4.20) — proceeding with the 2.4.20 adapter. If compilation fails, check for a koin-compiler-plugin update. Verified versions: 2.3.20, 2.4.0, 2.4.10, 2.4.20.
+
+> Task :app:mergeDebugJniLibFolders
+> Task :shared:processAndroidMainJavaRes
+> Task :app:processDebugResources
