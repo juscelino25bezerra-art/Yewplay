@@ -1,7 +1,7 @@
 branch: claude/yewplay-busca
-sha: 317a411af84a95556f8ab239a6c5526e25dd6fca
+sha: 78ea927e08a76797374e753c9e0340e201bea413
 outcome: cancelled
-run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/41934116586
+run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/41934246198
 
 == errors ==
 
@@ -101,9 +101,11 @@ No dependencies found for variant: androidMain
 > Task :shared:kmpPartiallyResolvedDependenciesChecker
 > Task :shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
 > Task :shared:generateResourceAccessorsForAndroidMain NO-SOURCE
-> Task :app:runKtlint
+> Task :shared:generateResourceAccessorsForCommonMain
+> Task :shared:generateActualResourceCollectorsForAndroidMain
 > Task :shared:generateComposeResClass
 > Task :shared:generateExpectResourceCollectorsForCommonMain
+> Task :app:runKtlint
 > Task :core:designsystem:kmpPartiallyResolvedDependenciesChecker
 > Task :core:designsystem:checkKotlinGradlePluginConfigurationErrors SKIPPED
 > Task :core:designsystem:convertXmlValueResourcesForAndroidMain NO-SOURCE
@@ -146,8 +148,6 @@ No dependencies found for variant: androidMain
 > Task :app:generateDebugAssets UP-TO-DATE
 > Task :shared:generateAndroidMainAssets UP-TO-DATE
 > Task :shared:mergeAndroidMainAssets
-> Task :shared:generateResourceAccessorsForCommonMain
-> Task :shared:generateActualResourceCollectorsForAndroidMain
 > Task :shared:writeAndroidMainAarMetadata
 > Task :core:designsystem:writeAndroidMainAarMetadata
 > Task :feature:library:writeAndroidMainAarMetadata
@@ -180,3 +180,19 @@ No dependencies found for variant: androidMain
 > Task :core:data:compileJava NO-SOURCE
 > Task :core:data:classes UP-TO-DATE
 > Task :core:data:jar
+> Task :feature:library:checkAndroidMainAarMetadata
+> Task :feature:subscriptions:checkAndroidMainAarMetadata
+> Task :app:preDebugAndroidTestBuild SKIPPED
+> Task :app:generateDebugAndroidTestResValues
+> Task :shared:prepareLintJarForPublish
+> Task :core:designsystem:prepareLintJarForPublish
+> Task :feature:library:prepareLintJarForPublish
+> Task :feature:subscriptions:prepareLintJarForPublish
+> Task :app:extractProguardFiles
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :shared:preAndroidHostTestBuild UP-TO-DATE
+> Task :shared:extractAndroidMainAnnotations
+> Task :app:runCheckstyle
+> Task :app:preDebugBuild
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:generateDebugResValues
