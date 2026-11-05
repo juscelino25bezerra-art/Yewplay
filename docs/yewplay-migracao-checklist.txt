@@ -1,0 +1,120 @@
+YEWPLAY - MIGRAÇÃO DA INTERFACE PARA KOTLIN + COMPOSE
+Checklist (somente interface; o motor do NewPipe fica como está)
+Atualizado em: 05/11/2026 - branch claude/yewplay-dialogos
+
+Legenda: [x] concluído   [ ] falta
+
+======================================================================
+1. TELAS PRINCIPAIS
+======================================================================
+[x] Início
+[x] Busca
+[x] Inscrições (feed)
+[x] Biblioteca
+[x] Canal
+[x] Playlist online
+[x] Playlist local
+[x] Histórico
+[x] Favoritos (playlists salvas)
+[x] Downloads
+[x] Sobre (com gravura e significado do nome)
+[x] Boas-vindas (primeira abertura)
+[x] Configurações - tela principal
+[x] Splash (ícone + nome; fica no tema, exigência do Android)
+
+======================================================================
+2. BASE / DESIGN SYSTEM
+======================================================================
+[x] Arquitetura modular (core:model, core:designsystem, feature:*)
+[x] Tema YewPlay (cores, fontes, claro/escuro)
+[x] Componentes: listas, cards, botões, abas, estados vazios, skeleton
+[x] Gravuras de teixo em Kotlin (ImageVector)
+[x] Ícones Phosphor
+
+======================================================================
+3. DIÁLOGOS
+======================================================================
+[x] Baixar vídeo/áudio (DownloadDialog, LoadingDialog)
+[x] Adicionar à playlist (PlaylistAppendDialog)
+[x] Criar playlist (PlaylistCreationDialog)
+[x] Menu de ações de um vídeo (InfoItemDialog)
+[x] Velocidade e tom (PlaybackParameterDialog)
+[x] Grupos do feed: criar/editar (FeedGroupDialog)
+[x] Grupos do feed: reordenar (FeedGroupReorderDialog)
+[x] Adicionar aba (AddTabDialog)
+[x] Confirmação de importação (ImportConfirmationDialog)
+
+======================================================================
+4. TELAS SECUNDÁRIAS
+======================================================================
+[ ] Gerenciar inscrições (SubscriptionFragment)
+[ ] Importar inscrições (SubscriptionsImportFragment)
+[ ] Notificações por canal
+[ ] Escolher abas da tela inicial (ChooseTabsFragment)
+[ ] Seletor de canal (SelectChannelFragment)
+[ ] Seletor de kiosk (SelectKioskFragment)
+[ ] Seletor de playlist (SelectPlaylistFragment)
+[ ] Seletor de grupo do feed (SelectFeedGroupFragment)
+[ ] Instâncias PeerTube (PeertubeInstanceListFragment)
+[ ] Fila de reprodução (PlayQueueActivity)
+[ ] Respostas de comentários (CommentRepliesFragment)
+[ ] Tela de erro
+[ ] reCAPTCHA (ReCaptchaActivity)
+[ ] Busca dentro das Configurações (PreferenceSearchFragment)
+
+======================================================================
+5. CONFIGURAÇÕES - TELAS INTERNAS
+======================================================================
+[ ] Vídeo e áudio
+[ ] Player (ExoPlayer)
+[ ] Downloads
+[ ] Aparência
+[ ] Conteúdo
+[ ] Notificações
+[ ] Histórico e cache
+[ ] Backup e restauração
+[ ] Atualizações
+[ ] Depuração
+
+======================================================================
+6. PLAYER (por último)
+======================================================================
+[ ] Detalhes do vídeo (VideoDetailFragment): título, canal, botões
+[ ] Aba Descrição
+[ ] Aba Comentários
+[ ] Aba Relacionados
+[ ] Controles em tela cheia (MainPlayerUi / VideoPlayerUi)
+[ ] Player em janela flutuante (PopupPlayerUi)
+[ ] Modo Ouvir / segundo plano (BackgroundPlayerUi)
+[ ] Mini player
+[ ] Barra inferior
+
+======================================================================
+7. ESTRUTURA E LIMPEZA FINAL
+======================================================================
+[ ] MainActivity e layout principal em Compose (navegação)
+[ ] Remover bases antigas de lista (BaseListFragment, adapters, ~30 holders)
+[ ] Remover StreamItemAdapter/AudioTrackAdapter (só sobrou a parte de dados)
+    e o layout stream_quality_item
+[ ] Remover views customizadas sem uso (pasta views/)
+[ ] Apagar layouts XML órfãos (hoje: 97 em res/layout)
+[ ] Converter para Kotlin o Java restante da interface
+    (BaseFragment, SettingsActivity, etc.)
+
+======================================================================
+FICA DE FORA (MOTOR)
+======================================================================
+- Extração de conteúdo (NewPipe Extractor)
+- Banco de dados
+- Serviço do player e ExoPlayer
+- Gerenciador de downloads (us/shandian/giga: get, io, postprocessing)
+- Utilitários de rede e texto
+
+======================================================================
+RESUMO
+======================================================================
+Concluído: telas principais + base/design system + diálogos
+Falta:     14 telas secundárias, 10 telas de configuração,
+           player (9 partes) e limpeza final (5 itens)
+Ordem sugerida: Telas secundárias > Configurações internas
+                > Player > Estrutura e limpeza

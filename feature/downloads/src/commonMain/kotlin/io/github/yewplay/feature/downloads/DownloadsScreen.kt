@@ -23,8 +23,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -43,12 +45,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import io.github.yewplay.core.designsystem.YpEngraving
 import io.github.yewplay.core.designsystem.YpMessageState
 import io.github.yewplay.core.designsystem.YpScreenMargin
 import io.github.yewplay.core.designsystem.YpTextTabs
+import net.newpipe.app.yewplay.engraving.YpEngravings
 
 /** What a download is: drives the placeholder icon and the type filter. */
 enum class DownloadKind { VIDEO, AUDIO, OTHER }
@@ -102,7 +107,8 @@ data class DownloadsStrings(
     val resumeAll: String,
     val itemCount: (Int) -> String,
     val empty: String,
-    val emptyDetail: String
+    val emptyDetail: String,
+    val howToDownload: String
 )
 
 /** Icons of the screen, from the app's drawables. */
@@ -113,7 +119,8 @@ data class DownloadsIcons(
     val play: Painter,
     val video: Painter,
     val audio: Painter,
-    val other: Painter
+    val other: Painter,
+    val download: Painter
 )
 
 /** What the screen asks the app to do. */
@@ -124,7 +131,8 @@ data class DownloadsActions(
     val onResumeAll: () -> Unit,
     val onItemClick: (DownloadItem) -> Unit,
     val onItemToggle: (DownloadItem) -> Unit,
-    val onItemMenu: (DownloadItem) -> Unit
+    val onItemMenu: (DownloadItem) -> Unit,
+    val onHowToDownload: () -> Unit
 )
 
 /**
@@ -142,9 +150,14 @@ fun DownloadsScreen(
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
         TopBar(menu, strings, icons, actions)
+        val empty = !state.isLoading && state.pending.isEmpty() && state.finished.isEmpty()
+        if (empty && state.selectedTab == 0) {
+            NothingDownloaded(strings, icons, actions)
+            return@Column
+        }
         Storage(state)
         YpTextTabs(labels = strings.tabs, selectedIndex = state.selectedTab, onSelect = actions.onTabSelect)
-        if (!state.isLoading && state.pending.isEmpty() && state.finished.isEmpty()) {
+        if (empty) {
             YpMessageState(title = strings.empty, detail = strings.emptyDetail)
             return@Column
         }
@@ -437,6 +450,56 @@ private fun DownloadRow(item: DownloadItem, icons: DownloadsIcons, actions: Down
             )
         } else {
             BarIcon(icon = icons.more, description = null, onClick = { actions.onItemMenu(item) })
+        }
+    }
+}
+
+/** Nothing downloaded yet (proposal, p. 9): the standing yew sprig and how to download. */
+@Composable
+private fun NothingDownloaded(strings: DownloadsStrings, icons: DownloadsIcons, actions: DownloadsActions) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 32.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        YpEngraving(
+            modifier = Modifier
+                .padding(top = 40.dp, bottom = 28.dp)
+                .height(200.dp)
+                .aspectRatio(YpEngravings.downloads.aspectRatio),
+            art = YpEngravings.downloads
+        )
+        Text(
+            text = strings.empty,
+            style = MaterialTheme.typography.titleLarge,
+            textAlign = TextAlign.Center
+        )
+        Text(
+            modifier = Modifier.padding(top = 8.dp, bottom = 20.dp),
+            text = strings.emptyDetail,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Center
+        )
+        Row(
+            modifier = Modifier
+                .height(44.dp)
+                .clip(RoundedCornerShape(12.dp))
+                .background(MaterialTheme.colorScheme.surfaceContainerHighest)
+                .clickable(onClick = actions.onHowToDownload)
+                .padding(horizontal = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Icon(
+                modifier = Modifier.size(19.dp),
+                painter = icons.download,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurface
+            )
+            Text(text = strings.howToDownload, style = MaterialTheme.typography.labelLarge)
         }
     }
 }

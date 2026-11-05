@@ -55,7 +55,7 @@
             android:title="@string/settings_category_backup_restore_title" />
     </PreferenceCategory>
 
-    <!-- kept at the top level: MainSettingsFragment removes these from the screen when unused -->
+    <!-- the settings home is drawn by YpMainSettingsFragment; this file lists its screens for the search -->
     <PreferenceScreen
         android:fragment="org.schabi.newpipe.settings.UpdateSettingsFragment"
         android:icon="@drawable/ic_cloud_download"

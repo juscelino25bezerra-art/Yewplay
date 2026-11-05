@@ -199,7 +199,8 @@ class YpDownloadsFragment : Fragment() {
                                 resources.getQuantityString(R.plurals.yp_downloads_items, count, count)
                             },
                             empty = stringResource(R.string.yp_downloads_empty),
-                            emptyDetail = stringResource(R.string.yp_downloads_empty_detail)
+                            emptyDetail = stringResource(R.string.yp_downloads_empty_detail),
+                            howToDownload = stringResource(R.string.yp_downloads_how)
                         ),
                         icons = DownloadsIcons(
                             back = painterResource(R.drawable.ic_arrow_back),
@@ -208,7 +209,8 @@ class YpDownloadsFragment : Fragment() {
                             play = painterResource(R.drawable.ic_play_arrow),
                             video = painterResource(R.drawable.ic_movie),
                             audio = painterResource(R.drawable.ic_headset),
-                            other = painterResource(R.drawable.ic_subtitles)
+                            other = painterResource(R.drawable.ic_subtitles),
+                            download = painterResource(R.drawable.ic_file_download)
                         ),
                         actions = DownloadsActions(
                             onBack = { requireActivity().onBackPressedDispatcher.onBackPressed() },
@@ -226,7 +228,14 @@ class YpDownloadsFragment : Fragment() {
                             },
                             onItemClick = ::onItemClick,
                             onItemToggle = ::onItemToggle,
-                            onItemMenu = ::showItemMenu
+                            onItemMenu = ::showItemMenu,
+                            onHowToDownload = {
+                                AlertDialog.Builder(requireContext())
+                                    .setTitle(R.string.yp_downloads_how)
+                                    .setMessage(R.string.yp_downloads_how_text)
+                                    .setPositiveButton(R.string.ok, null)
+                                    .show()
+                            }
                         )
                     )
                 }

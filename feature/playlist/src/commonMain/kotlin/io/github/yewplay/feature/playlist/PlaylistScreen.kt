@@ -31,7 +31,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.State
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -94,7 +93,9 @@ data class PlaylistUiState(
     val isEmpty: Boolean = false,
     val error: YpError? = null,
     /** False when the playlist is a tab of the home page, which has its own bar. */
-    val showBack: Boolean = true
+    val showBack: Boolean = true,
+    /** Numbers before the items (playlists); off for lists like the history. */
+    val numbered: Boolean = true
 )
 
 /** Texts of the screen, from the app's strings. */
@@ -348,9 +349,10 @@ private fun Entries(
                                     onDrag = { change, amount ->
                                         change.consume()
                                         dragOffset += amount.y
-                                        dragOffset = moveIfNeeded(
+                                        dragOffset = moveDragged(
                                             listState,
-                                            entries,
+                                            ENTRY_KEY,
+                                            entries.value.map { it.key },
                                             entry.key,
                                             dragOffset,
                                             actions.onMove
@@ -365,7 +367,7 @@ private fun Entries(
                             onClick = { actions.onItemClick(index) },
                             onLongClick = { actions.onItemMenu(index) },
                             moreIcon = icons.more,
-                            number = index + 1
+                            number = if (state.numbered) index + 1 else null
                         )
                     }
                 }
@@ -378,32 +380,35 @@ private fun Entries(
 }
 
 /**
- * Swaps the dragged entry with the one under its center, if any.
+ * Swaps the dragged item with the one under its center, if any.
  *
- * @return the drag offset, corrected for the new position of the entry
+ * @param prefix the prefix of the keys of the draggable items in the list
+ * @param keys the keys of the items, in their current order, without the prefix
+ * @return the drag offset, corrected for the new position of the item
  */
-private fun moveIfNeeded(
+internal fun moveDragged(
     listState: LazyListState,
-    entries: State<List<PlaylistEntry>>,
+    prefix: String,
+    keys: List<String>,
     key: String,
     offset: Float,
     onMove: (Int, Int) -> Unit
 ): Float {
     val visible = listState.layoutInfo.visibleItemsInfo
-    val dragged = visible.firstOrNull { it.key == ENTRY_KEY + key } ?: return offset
+    val dragged = visible.firstOrNull { it.key == prefix + key } ?: return offset
     val center = dragged.offset + offset + dragged.size / 2f
     val target = visible.firstOrNull {
         val itemKey = it.key as? String ?: return@firstOrNull false
-        itemKey.startsWith(ENTRY_KEY) && itemKey != ENTRY_KEY + key &&
+        itemKey.startsWith(prefix) && itemKey != prefix + key &&
             center > it.offset && center < it.offset + it.size
     } ?: return offset
-    val from = entries.value.indexOfFirst { it.key == key }
-    val to = entries.value.indexOfFirst { ENTRY_KEY + it.key == target.key }
+    val from = keys.indexOf(key)
+    val to = keys.indexOf((target.key as String).removePrefix(prefix))
     if (from < 0 || to < 0) {
         return offset
     }
     onMove(from, to)
-    // after the move the entry is laid out where the target was
+    // after the move the item is laid out where the target was
     return offset - (target.offset - dragged.offset)
 }
 

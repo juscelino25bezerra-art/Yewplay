@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -18,7 +19,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -38,6 +41,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import io.github.yewplay.core.designsystem.YpEngraving
 import io.github.yewplay.core.designsystem.YpErrorLabels
 import io.github.yewplay.core.designsystem.YpErrorState
 import io.github.yewplay.core.designsystem.YpMessageState
@@ -49,6 +53,7 @@ import io.github.yewplay.core.model.YpChannel
 import io.github.yewplay.core.model.YpError
 import io.github.yewplay.core.model.YpGroup
 import io.github.yewplay.core.model.YpStreamItem
+import net.newpipe.app.yewplay.engraving.YpEngravings
 
 /** A video of the feed. */
 data class FeedEntry(val key: String, val item: YpStreamItem)
@@ -76,7 +81,9 @@ data class FeedUiState(
     /** "Not loaded: 2", when some channels could not be updated. */
     val notice: String? = null,
     val isEmpty: Boolean = false,
-    val error: YpError? = null
+    val error: YpError? = null,
+    /** False once it is known that there is no subscription: the "grow here" state. */
+    val hasSubscriptions: Boolean? = null
 )
 
 /** Texts of the screen, from the app's strings. */
@@ -87,11 +94,19 @@ data class FeedStrings(
     val empty: String,
     val emptyDetail: String,
     val refresh: String,
-    val error: YpErrorLabels
+    val error: YpErrorLabels,
+    val noSubscriptionsTitle: String,
+    val noSubscriptionsText: String,
+    val findChannels: String,
+    val importSubscriptions: String
 )
 
 /** Icons of the screen, from the app's drawables. */
-data class FeedIcons(val filter: Painter, val menu: Painter, val itemMenu: Painter)
+data class FeedIcons(
+    val filter: Painter,
+    val menu: Painter,
+    val itemMenu: Painter
+)
 
 /** What the screen asks the app to do. */
 data class FeedActions(
@@ -100,7 +115,9 @@ data class FeedActions(
     val onItemClick: (FeedEntry) -> Unit,
     val onItemMenu: (FeedEntry) -> Unit,
     val onRefresh: () -> Unit,
-    val onErrorAction: () -> Unit
+    val onErrorAction: () -> Unit,
+    val onFindChannels: () -> Unit,
+    val onImportSubscriptions: () -> Unit
 )
 
 /**
@@ -118,6 +135,10 @@ fun FeedScreen(
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
         TopBar(menu, strings, icons, actions)
+        if (state.hasSubscriptions == false) {
+            NoSubscriptions(strings, icons, actions)
+            return@Column
+        }
         PullToRefreshBox(
             modifier = Modifier.fillMaxSize(),
             isRefreshing = state.isRefreshing && !state.isLoading,
@@ -299,5 +320,46 @@ private fun SectionHeader(section: FeedSection) {
                 overflow = TextOverflow.Ellipsis
             )
         }
+    }
+}
+
+/** No subscription yet (proposal, p. 9 and 17): the yew engraving and the two first steps. */
+@Composable
+private fun NoSubscriptions(strings: FeedStrings, icons: FeedIcons, actions: FeedActions) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = YpScreenMargin)
+    ) {
+        YpEngraving(
+            modifier = Modifier
+                .padding(top = 24.dp, bottom = 28.dp)
+                .fillMaxWidth(0.82f)
+                .align(Alignment.CenterHorizontally)
+                .aspectRatio(YpEngravings.subscriptions.aspectRatio),
+            art = YpEngravings.subscriptions
+        )
+        Text(text = strings.noSubscriptionsTitle, style = MaterialTheme.typography.headlineSmall)
+        Text(
+            modifier = Modifier.padding(top = 10.dp, bottom = 24.dp),
+            text = strings.noSubscriptionsText,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        YpPillButton(
+            modifier = Modifier.fillMaxWidth(),
+            label = strings.findChannels,
+            primary = true,
+            onClick = actions.onFindChannels
+        )
+        YpPillButton(
+            modifier = Modifier
+                .padding(top = 8.dp, bottom = 24.dp)
+                .fillMaxWidth(),
+            label = strings.importSubscriptions,
+            primary = false,
+            onClick = actions.onImportSubscriptions
+        )
     }
 }

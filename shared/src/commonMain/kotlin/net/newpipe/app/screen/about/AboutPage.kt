@@ -8,11 +8,13 @@ package net.newpipe.app.screen.about
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -29,9 +31,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.CompositingStrategy
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -43,12 +54,14 @@ import net.newpipe.app.navigation.Destination
 import net.newpipe.app.navigation.Navigator
 import net.newpipe.app.platform.ShareHandler
 import net.newpipe.app.preview.ThemePreviewProvider
+import net.newpipe.app.yewplay.engraving.YpEngravings
 import newpipe.shared.generated.resources.Res
 import newpipe.shared.generated.resources.ic_yewplay_logo
 import newpipe.shared.generated.resources.yp_about_based_on
 import newpipe.shared.generated.resources.yp_about_credits
 import newpipe.shared.generated.resources.yp_about_faq
 import newpipe.shared.generated.resources.yp_about_licenses
+import newpipe.shared.generated.resources.yp_about_meaning
 import newpipe.shared.generated.resources.yp_about_privacy
 import newpipe.shared.generated.resources.yp_about_section_help
 import newpipe.shared.generated.resources.yp_about_section_legal
@@ -168,38 +181,100 @@ fun AboutPageContent(
 
 @Composable
 private fun AboutHeader() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = screenMargin, vertical = 12.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Image(
-            modifier = Modifier.size(64.dp),
-            painter = painterResource(Res.drawable.ic_yewplay_logo),
-            contentDescription = BuildConfig.APP_NAME
+    Box(modifier = Modifier.fillMaxWidth()) {
+        AboutEngraving(
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .fillMaxWidth(0.72f)
+                .aspectRatio(YpEngravings.about.aspectRatio)
         )
-        Spacer(modifier = Modifier.width(16.dp))
-        Column {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = screenMargin, vertical = 12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    modifier = Modifier.size(64.dp),
+                    painter = painterResource(Res.drawable.ic_yewplay_logo),
+                    contentDescription = BuildConfig.APP_NAME
+                )
+                Spacer(modifier = Modifier.width(16.dp))
+                Column {
+                    Text(
+                        text = BuildConfig.APP_NAME,
+                        style = MaterialTheme.typography.headlineSmall
+                    )
+                    Text(
+                        text = stringResource(Res.string.yp_about_version, BuildConfig.VERSION_NAME),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Text(
+                        text = stringResource(
+                            Res.string.yp_about_based_on,
+                            BuildConfig.BASE_APP_NAME,
+                            BuildConfig.BASE_VERSION_NAME
+                        ),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+            }
             Text(
-                text = BuildConfig.APP_NAME,
-                style = MaterialTheme.typography.headlineSmall
-            )
-            Text(
-                text = stringResource(Res.string.yp_about_version, BuildConfig.VERSION_NAME),
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-            Text(
-                text = stringResource(
-                    Res.string.yp_about_based_on,
-                    BuildConfig.BASE_APP_NAME,
-                    BuildConfig.BASE_VERSION_NAME
+                modifier = Modifier.padding(
+                    start = screenMargin,
+                    end = screenMargin,
+                    top = 4.dp,
+                    bottom = 8.dp
                 ),
-                style = MaterialTheme.typography.bodySmall,
+                text = stringResource(Res.string.yp_about_meaning),
+                style = MaterialTheme.typography.bodyMedium.copy(fontStyle = FontStyle.Italic),
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
+    }
+}
+
+/**
+ * The yew branch behind the header (proposal, p. 9): faded, and fading out towards the text on
+ * the left and the bottom. The lines follow the theme (ivory on dark, ink on light).
+ */
+@Composable
+private fun AboutEngraving(modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier
+            .graphicsLayer(alpha = 0.32f, compositingStrategy = CompositingStrategy.Offscreen)
+            .drawWithContent {
+                drawContent()
+                drawRect(
+                    brush = Brush.horizontalGradient(
+                        0f to Color.Transparent,
+                        0.45f to Color.Black
+                    ),
+                    blendMode = BlendMode.DstIn
+                )
+                drawRect(
+                    brush = Brush.verticalGradient(
+                        0.55f to Color.Black,
+                        1f to Color.Transparent
+                    ),
+                    blendMode = BlendMode.DstIn
+                )
+            }
+    ) {
+        Image(
+            modifier = Modifier.fillMaxSize(),
+            painter = rememberVectorPainter(YpEngravings.about.lines),
+            contentDescription = null,
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground)
+        )
+        Image(
+            modifier = Modifier.fillMaxSize(),
+            painter = rememberVectorPainter(YpEngravings.about.fruit),
+            contentDescription = null
+        )
     }
 }
 

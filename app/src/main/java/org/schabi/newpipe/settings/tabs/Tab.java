@@ -22,9 +22,9 @@ import org.schabi.newpipe.fragments.BlankFragment;
 import org.schabi.newpipe.fragments.list.channel.YpChannelFragment;
 import org.schabi.newpipe.fragments.list.kiosk.YpKioskFragment;
 import org.schabi.newpipe.fragments.list.playlist.YpPlaylistFragment;
-import org.schabi.newpipe.local.bookmark.BookmarkFragment;
+import org.schabi.newpipe.local.bookmark.YpBookmarksFragment;
 import org.schabi.newpipe.local.feed.FeedFragment;
-import org.schabi.newpipe.local.history.StatisticsPlaylistFragment;
+import org.schabi.newpipe.local.history.YpHistoryFragment;
 import org.schabi.newpipe.local.playlist.YpLocalPlaylistFragment;
 import org.schabi.newpipe.local.subscription.SubscriptionFragment;
 import org.schabi.newpipe.util.KioskTranslator;
@@ -279,8 +279,8 @@ public abstract class Tab {
         }
 
         @Override
-        public BookmarkFragment getFragment(final Context context) {
-            return new BookmarkFragment();
+        public YpBookmarksFragment getFragment(final Context context) {
+            return new YpBookmarksFragment();
         }
     }
 
@@ -304,8 +304,8 @@ public abstract class Tab {
         }
 
         @Override
-        public StatisticsPlaylistFragment getFragment(final Context context) {
-            return new StatisticsPlaylistFragment();
+        public YpHistoryFragment getFragment(final Context context) {
+            return new YpHistoryFragment();
         }
     }
 

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 
 import androidx.annotation.IdRes;
@@ -78,6 +79,9 @@ public class SettingsActivity extends AppCompatActivity implements
 
     private View searchContainer;
     private EditText searchEditText;
+    private View toolbarView;
+    private View fragmentHolder;
+    private int holderMarginTop = -1;
 
     // State
     @State
@@ -99,6 +103,18 @@ public class SettingsActivity extends AppCompatActivity implements
         initSearch(settingsLayoutBinding, restored);
 
         setSupportActionBar(settingsLayoutBinding.settingsToolbarLayout.toolbar);
+        toolbarView = settingsLayoutBinding.settingsToolbarLayout.getRoot();
+        fragmentHolder = settingsLayoutBinding.settingsFragmentHolder;
+        // YewPlay: the settings home draws its own bar (back, search and a large title)
+        getSupportFragmentManager().addOnBackStackChangedListener(this::updateToolbar);
+        getSupportFragmentManager().registerFragmentLifecycleCallbacks(
+                new FragmentManager.FragmentLifecycleCallbacks() {
+                    @Override
+                    public void onFragmentResumed(@NonNull final FragmentManager fm,
+                                                  @NonNull final Fragment f) {
+                        updateToolbar();
+                    }
+                }, false);
 
         if (restored) {
             // Restore state
@@ -110,7 +126,7 @@ public class SettingsActivity extends AppCompatActivity implements
             }
         } else {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.settings_fragment_holder, new MainSettingsFragment())
+                    .replace(R.id.settings_fragment_holder, new YpMainSettingsFragment())
                     .commit();
         }
 
@@ -176,6 +192,39 @@ public class SettingsActivity extends AppCompatActivity implements
         return getSupportFragmentManager()
                 .getFragmentFactory()
                 .instantiate(this.getClassLoader(), className);
+    }
+
+    /**
+     * YewPlay: opens one of the preference screens from the Compose settings home.
+     *
+     * @param className the class name of the preference fragment
+     */
+    public void openSettingsFragment(@NonNull final String className) {
+        showSettingsFragment(instantiateFragment(className));
+    }
+
+    /**
+     * YewPlay: hides the activity toolbar (and the space kept for it) while the settings home is
+     * shown, since it has its own bar; the toolbar comes back for the other screens and search.
+     */
+    private void updateToolbar() {
+        if (toolbarView == null || searchContainer == null
+                || !(fragmentHolder.getLayoutParams() instanceof ViewGroup.MarginLayoutParams)) {
+            return;
+        }
+        final Fragment current = getSupportFragmentManager().findFragmentById(FRAGMENT_HOLDER_ID);
+        final boolean ownBar = current instanceof YpMainSettingsFragment && !isSearchActive();
+        final ViewGroup.MarginLayoutParams params =
+                (ViewGroup.MarginLayoutParams) fragmentHolder.getLayoutParams();
+        if (holderMarginTop < 0) {
+            holderMarginTop = params.topMargin;
+        }
+        final int marginTop = ownBar ? 0 : holderMarginTop;
+        toolbarView.setVisibility(ownBar ? View.GONE : View.VISIBLE);
+        if (params.topMargin != marginTop) {
+            params.topMargin = marginTop;
+            fragmentHolder.setLayoutParams(params);
+        }
     }
 
     private void showSettingsFragment(final Fragment fragment) {
@@ -328,6 +377,7 @@ public class SettingsActivity extends AppCompatActivity implements
         }
 
         resetSearchText();
+        updateToolbar();
     }
 
     private void hideSearchFragment() {

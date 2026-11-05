@@ -14,6 +14,7 @@
     <string name="tab_about">About \u0026 FAQ</string>
     <string name="tab_licenses">Licenses</string>
     <string name="app_version_based_on">Version %1$s · Based on %2$s %3$s</string>
+    <string name="yp_about_meaning">Yew is the yew tree, which lives for centuries and grows from its own roots. YewPlay grows from NewPipe.</string>
     <string name="yp_about_summary">Libre and ad-free. The code is open under the GPLv3 license and the app needs no account and collects none of your data.</string>
     <string name="yp_about_credits">YewPlay is built on NewPipe. Thanks to the team and every contributor of the original project.</string>
     <string name="app_description">Libre lightweight streaming on Android.</string>

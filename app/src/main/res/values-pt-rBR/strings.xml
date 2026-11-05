@@ -917,13 +917,35 @@
     <string name="yp_downloads_kind_video">Vídeo</string>
     <string name="yp_downloads_kind_audio">Áudio</string>
     <string name="yp_downloads_kind_subtitle">Legenda</string>
-    <string name="yp_downloads_empty">Nenhum download ainda</string>
-    <string name="yp_downloads_empty_detail">Os vídeos e áudios que você baixar aparecem aqui, prontos para ver sem internet.</string>
+    <string name="yp_downloads_empty">Nada baixado ainda</string>
+    <string name="yp_downloads_empty_detail">Toque em Baixar em qualquer vídeo para assistir ou ouvir sem internet.</string>
     <plurals name="yp_downloads_items">
         <item quantity="one">%d item</item>
         <item quantity="other">%d itens</item>
     </plurals>
     <string name="yp_downloads_dequeue">Tirar da fila</string>
+    <plurals name="yp_history_watch_count">
+        <item quantity="one">Assistido %d vez</item>
+        <item quantity="other">Assistido %d vezes</item>
+    </plurals>
+    <string name="yp_subs_empty_title">Seus canais crescem aqui</string>
+    <string name="yp_subs_empty_text">Inscreva-se em canais para receber os vídeos novos neste feed. Não precisa de conta.</string>
+    <string name="yp_subs_find">Encontrar canais</string>
+    <string name="yp_subs_import">Importar inscrições</string>
+    <string name="yp_subs_import_previous">Arquivo exportado do NewPipe</string>
+    <string name="yp_downloads_how">Como baixar</string>
+    <string name="yp_downloads_how_text">Abra um vídeo e toque em Baixar. Escolha vídeo ou áudio, a qualidade e o formato, e toque em OK. O download aparece aqui e continua mesmo com o app fechado.</string>
+    <string name="yp_welcome_title">Assista, ouça e baixe. Sem conta, sem anúncios.</string>
+    <string name="yp_welcome_text">Software livre, feito a partir do NewPipe. Seus dados ficam só no seu aparelho.</string>
+    <string name="yp_welcome_start">Começar</string>
+    <string name="yp_welcome_import">Importar inscrições do NewPipe</string>
+    <string name="yp_settings_search">Buscar nas configurações</string>
+    <string name="yp_feed_group_new">Novo grupo</string>
+    <string name="yp_feed_group_edit">Editar grupo</string>
+    <string name="yp_feed_group_icon">Escolha um ícone</string>
+    <string name="yp_download_no_sound">sem som</string>
+    <string name="yp_download_audio_track">Faixa de áudio</string>
+    <string name="yp_download_quality">Qualidade</string>
     <string name="yp_local_playlist">Playlist local</string>
     <string name="yp_storage_used">%s usados pelo app</string>
     <string name="yp_storage_free">%s livres</string>
