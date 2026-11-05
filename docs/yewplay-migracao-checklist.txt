@@ -1,6 +1,6 @@
 YEWPLAY - MIGRAÇÃO DA INTERFACE PARA KOTLIN + COMPOSE
 Checklist (somente interface; o motor do NewPipe fica como está)
-Atualizado em: 05/11/2026 - branch claude/yewplay-gravuras
+Atualizado em: 05/11/2026 - branch claude/yewplay-dialogos
 
 Legenda: [x] concluído   [ ] falta
 
@@ -34,15 +34,15 @@ Legenda: [x] concluído   [ ] falta
 ======================================================================
 3. DIÁLOGOS
 ======================================================================
-[ ] Baixar vídeo/áudio (DownloadDialog, LoadingDialog)
-[ ] Adicionar à playlist (PlaylistAppendDialog)
-[ ] Criar playlist (PlaylistCreationDialog)
-[ ] Menu de ações de um vídeo (InfoItemDialog)
-[ ] Velocidade e tom (PlaybackParameterDialog)
-[ ] Grupos do feed: criar/editar (FeedGroupDialog)
-[ ] Grupos do feed: reordenar (FeedGroupReorderDialog)
-[ ] Adicionar aba (AddTabDialog)
-[ ] Confirmação de importação (ImportConfirmationDialog)
+[x] Baixar vídeo/áudio (DownloadDialog, LoadingDialog)
+[x] Adicionar à playlist (PlaylistAppendDialog)
+[x] Criar playlist (PlaylistCreationDialog)
+[x] Menu de ações de um vídeo (InfoItemDialog)
+[x] Velocidade e tom (PlaybackParameterDialog)
+[x] Grupos do feed: criar/editar (FeedGroupDialog)
+[x] Grupos do feed: reordenar (FeedGroupReorderDialog)
+[x] Adicionar aba (AddTabDialog)
+[x] Confirmação de importação (ImportConfirmationDialog)
 
 ======================================================================
 4. TELAS SECUNDÁRIAS
@@ -94,6 +94,8 @@ Legenda: [x] concluído   [ ] falta
 ======================================================================
 [ ] MainActivity e layout principal em Compose (navegação)
 [ ] Remover bases antigas de lista (BaseListFragment, adapters, ~30 holders)
+[ ] Remover StreamItemAdapter/AudioTrackAdapter (só sobrou a parte de dados)
+    e o layout stream_quality_item
 [ ] Remover views customizadas sem uso (pasta views/)
 [ ] Apagar layouts XML órfãos (hoje: 97 em res/layout)
 [ ] Converter para Kotlin o Java restante da interface
@@ -111,8 +113,8 @@ FICA DE FORA (MOTOR)
 ======================================================================
 RESUMO
 ======================================================================
-Concluído: telas principais + base/design system
-Falta:     9 diálogos, 14 telas secundárias, 10 telas de configuração,
+Concluído: telas principais + base/design system + diálogos
+Falta:     14 telas secundárias, 10 telas de configuração,
            player (9 partes) e limpeza final (5 itens)
-Ordem sugerida: Diálogos > Telas secundárias > Configurações internas
+Ordem sugerida: Telas secundárias > Configurações internas
                 > Player > Estrutura e limpeza
