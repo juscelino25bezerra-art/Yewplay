@@ -759,7 +759,7 @@ class DownloadDialog() : DialogFragment() {
 
     private fun nameForFile(): String {
         val name = fileName.trim()
-        return FilenameUtils.createFilename(ctx, name.ifEmpty { currentInfo!!.name })
+        return FilenameUtils.createFilename(requireContext(), name.ifEmpty { currentInfo!!.name })
     }
 
     private fun launchDirectoryPicker(launcher: ActivityResultLauncher<Intent>) {
@@ -847,7 +847,7 @@ class DownloadDialog() : DialogFragment() {
             }
             NoFileManagerSafeGuard.launchSafe(
                 requestDownloadSaveAsLauncher,
-                StoredFileHelper.getNewPicker(context, filenameTmp, mimeTmp, initialPath),
+                StoredFileHelper.getNewPicker(context, filenameTmp, mimeTmp ?: StoredFileHelper.DEFAULT_MIME, initialPath),
                 TAG,
                 context
             )
@@ -886,7 +886,7 @@ class DownloadDialog() : DialogFragment() {
         try {
             storage = when {
                 // using SAF on older Android versions
-                mainStorage == null -> StoredFileHelper(context, null, targetFile, "")
+                mainStorage == null -> StoredFileHelper(context, null, targetFile!!, "")
 
                 // the file does not exist, but it is probably used in a pending download
                 targetFile == null -> StoredFileHelper(mainStorage.uri, filename, mime, mainStorage.tag)

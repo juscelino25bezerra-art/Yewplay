@@ -17,7 +17,7 @@ import org.schabi.newpipe.NewPipeDatabase
 import org.schabi.newpipe.database.stream.model.StreamEntity
 import org.schabi.newpipe.local.playlist.LocalPlaylistManager
 import org.schabi.newpipe.player.Player
-import org.schabi.newpipe.util.SavedState
+import org.schabi.newpipe.util.SavedState as NewPipeSavedState
 import org.schabi.newpipe.util.StateSaver
 
 /**
@@ -29,7 +29,7 @@ abstract class PlaylistDialog : DialogFragment(), StateSaver.WriteRead {
 
     var streamEntities: List<StreamEntity>? = null
 
-    private var savedState: SavedState? = null
+    private var savedState: NewPipeSavedState? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
