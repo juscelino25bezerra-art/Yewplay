@@ -1,7 +1,7 @@
 branch: claude/yewplay-player-abas
-sha: 88757334998753d2de05622c197325bf7047a177
+sha: 9d5df900731a16c7d228ae42d921637da4ac58e6
 outcome: success
-run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/42063239064
+run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/42066550977
 
 == errors ==
 
@@ -68,32 +68,32 @@ Unable to strip the following libraries, packaging them as they are: libandroidx
 > Task :app:validateSigningDebug
 > Task :app:writeDebugAppMetadata
 > Task :app:writeDebugSigningConfigVersions
-> Task :app:l8DexDesugarLibDebug
 > Task :app:mergeExtDexDebug
+> Task :app:l8DexDesugarLibDebug
 
 > Task :shared:compileAndroidMain
 w: Koin compiler plugin: Kotlin 2.4.21 is newer than the newest verified version (2.4.20) — proceeding with the 2.4.20 adapter. If compilation fails, check for a koin-compiler-plugin update. Verified versions: 2.3.20, 2.4.0, 2.4.10, 2.4.20.
 
 > Task :shared:processAndroidMainJavaRes
-> Task :shared:bundleAndroidMainClassesToCompileJar
 > Task :shared:bundleAndroidMainClassesToRuntimeJar
+> Task :shared:bundleAndroidMainClassesToCompileJar
+> Task :shared:createFullJarAndroidMain
 > Task :shared:mergeAndroidMainJavaResource
-> Task :core:designsystem:extractAndroidMainAnnotations
 > Task :shared:syncAndroidMainLibJars
 > Task :shared:bundleAndroidMainLocalLintAar
-> Task :shared:createFullJarAndroidMain
+> Task :core:designsystem:extractAndroidMainAnnotations
 > Task :shared:generateAndroidHostTestLintModel
 > Task :core:designsystem:compileAndroidMain
 > Task :core:designsystem:processAndroidMainJavaRes
 > Task :core:designsystem:bundleAndroidMainClassesToCompileJar
 > Task :core:designsystem:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:downloads:compileAndroidMain
-> Task :feature:downloads:bundleAndroidMainClassesToCompileJar
 
 > Task :feature:channel:compileAndroidMain
 w: file:///home/runner/work/Yewplay/Yewplay/feature/channel/src/commonMain/kotlin/io/github/yewplay/feature/channel/ChannelScreen.kt:403:42 Unnecessary safe call on a non-null receiver of type 'ChannelHeader'.
 w: file:///home/runner/work/Yewplay/Yewplay/feature/channel/src/commonMain/kotlin/io/github/yewplay/feature/channel/ChannelScreen.kt:431:38 Unnecessary safe call on a non-null receiver of type 'ChannelHeader'.
 
+> Task :feature:downloads:bundleAndroidMainClassesToCompileJar
 > Task :feature:channel:bundleAndroidMainClassesToCompileJar
 > Task :feature:home:compileAndroidMain
 > Task :feature:home:bundleAndroidMainClassesToCompileJar
@@ -117,12 +117,12 @@ w: file:///home/runner/work/Yewplay/Yewplay/feature/channel/src/commonMain/kotli
 > Task :feature:home:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:library:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:playlist:bundleAndroidMainClassesToRuntimeJar
+> Task :feature:search:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:subscriptions:compileAndroidMain
 > Task :feature:subscriptions:bundleAndroidMainClassesToCompileJar
 > Task :feature:subscriptions:processAndroidMainJavaRes
-> Task :feature:search:bundleAndroidMainClassesToRuntimeJar
-> Task :feature:subscriptions:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:settings:bundleAndroidMainClassesToRuntimeJar
+> Task :feature:subscriptions:bundleAndroidMainClassesToRuntimeJar
 > Task :core:designsystem:mergeAndroidMainJavaResource
 > Task :core:designsystem:syncAndroidMainLibJars
 > Task :core:designsystem:bundleAndroidMainLocalLintAar
@@ -226,8 +226,8 @@ Note: Recompile with -Xlint:unchecked for details.
 > Task :app:copyRoomSchemas NO-SOURCE
 > Task :app:processDebugJavaRes
 > Task :app:bundleDebugClassesToCompileJar
-> Task :app:generateDebugLintReportModel
 > Task :app:generateDebugAndroidTestLintModel
+> Task :app:generateDebugLintReportModel
 > Task :app:generateDebugUnitTestLintModel
 > Task :app:mergeDebugJavaResource
 
@@ -236,10 +236,10 @@ com.evernote.android.state.lint.registry.StateIssueRegistry in /home/runner/.gra
 
 > Task :app:dexBuilderDebug
 > Task :app:mergeProjectDexDebug
-> Task :app:lintAnalyzeDebugAndroidTest
 > Task :app:packageDebug
 > Task :app:createDebugApkListingFileRedirect
 > Task :app:assembleDebug
+> Task :app:lintAnalyzeDebugAndroidTest
 > Task :app:lintAnalyzeDebugUnitTest
 
 > Task :app:lintReportDebug
@@ -256,6 +256,6 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 
 For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD SUCCESSFUL in 6m 23s
+BUILD SUCCESSFUL in 4m 49s
 257 actionable tasks: 257 executed
 Configuration cache entry stored.
