@@ -943,6 +943,9 @@
     <string name="yp_feed_group_new">Novo grupo</string>
     <string name="yp_feed_group_edit">Editar grupo</string>
     <string name="yp_feed_group_icon">Escolha um ícone</string>
+    <string name="yp_download_no_sound">sem som</string>
+    <string name="yp_download_audio_track">Faixa de áudio</string>
+    <string name="yp_download_quality">Qualidade</string>
     <string name="yp_local_playlist">Playlist local</string>
     <string name="yp_storage_used">%s usados pelo app</string>
     <string name="yp_storage_free">%s livres</string>
