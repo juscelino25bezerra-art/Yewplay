@@ -1,7 +1,7 @@
 branch: claude/yewplay-player-abas
-sha: ca2fbe128349b518ca357da4b9d8bb4f752fe897
+sha: 88757334998753d2de05622c197325bf7047a177
 outcome: success
-run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/42059440503
+run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/42063239064
 
 == errors ==
 
@@ -59,15 +59,15 @@ w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/us/shandian/giga/ui/fragment/YpDownloadsFragment.kt:877:49 'static field ACTION_MEDIA_SCANNER_SCAN_FILE: String' is deprecated. Deprecated in Java.
 
 == tail ==
-> Task :feature:home:prepareLintJarForPublish
-> Task :feature:library:prepareLintJarForPublish
-> Task :feature:playlist:prepareLintJarForPublish
-> Task :feature:search:prepareLintJarForPublish
-> Task :feature:settings:prepareLintJarForPublish
-> Task :feature:subscriptions:prepareLintJarForPublish
-> Task :app:extractProguardFiles
-> Task :app:preDebugUnitTestBuild UP-TO-DATE
-> Task :shared:preAndroidHostTestBuild UP-TO-DATE
+> Task :app:mergeDebugJniLibFolders
+> Task :app:mergeDebugNativeLibs
+
+> Task :app:stripDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libsqliteJni.so. Run with --info option to learn more.
+
+> Task :app:validateSigningDebug
+> Task :app:writeDebugAppMetadata
+> Task :app:writeDebugSigningConfigVersions
 > Task :app:l8DexDesugarLibDebug
 > Task :app:mergeExtDexDebug
 
@@ -75,13 +75,13 @@ w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/us/shandian/giga/u
 w: Koin compiler plugin: Kotlin 2.4.21 is newer than the newest verified version (2.4.20) — proceeding with the 2.4.20 adapter. If compilation fails, check for a koin-compiler-plugin update. Verified versions: 2.3.20, 2.4.0, 2.4.10, 2.4.20.
 
 > Task :shared:processAndroidMainJavaRes
-> Task :shared:bundleAndroidMainClassesToRuntimeJar
 > Task :shared:bundleAndroidMainClassesToCompileJar
-> Task :shared:createFullJarAndroidMain
+> Task :shared:bundleAndroidMainClassesToRuntimeJar
 > Task :shared:mergeAndroidMainJavaResource
+> Task :core:designsystem:extractAndroidMainAnnotations
 > Task :shared:syncAndroidMainLibJars
 > Task :shared:bundleAndroidMainLocalLintAar
-> Task :core:designsystem:extractAndroidMainAnnotations
+> Task :shared:createFullJarAndroidMain
 > Task :shared:generateAndroidHostTestLintModel
 > Task :core:designsystem:compileAndroidMain
 > Task :core:designsystem:processAndroidMainJavaRes
@@ -101,28 +101,28 @@ w: file:///home/runner/work/Yewplay/Yewplay/feature/channel/src/commonMain/kotli
 > Task :feature:library:bundleAndroidMainClassesToCompileJar
 > Task :feature:settings:compileAndroidMain
 > Task :feature:settings:bundleAndroidMainClassesToCompileJar
-> Task :feature:search:compileAndroidMain
-> Task :feature:search:bundleAndroidMainClassesToCompileJar
+> Task :feature:playlist:compileAndroidMain
+> Task :feature:playlist:bundleAndroidMainClassesToCompileJar
 > Task :feature:channel:processAndroidMainJavaRes
 > Task :feature:downloads:processAndroidMainJavaRes
 > Task :feature:home:processAndroidMainJavaRes
 > Task :feature:library:processAndroidMainJavaRes
-> Task :feature:search:processAndroidMainJavaRes
+> Task :feature:playlist:processAndroidMainJavaRes
 > Task :feature:settings:processAndroidMainJavaRes
 > Task :feature:channel:bundleAndroidMainClassesToRuntimeJar
-> Task :feature:playlist:compileAndroidMain
-> Task :feature:playlist:bundleAndroidMainClassesToCompileJar
-> Task :feature:playlist:processAndroidMainJavaRes
+> Task :feature:search:compileAndroidMain
+> Task :feature:search:bundleAndroidMainClassesToCompileJar
+> Task :feature:search:processAndroidMainJavaRes
 > Task :feature:downloads:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:home:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:library:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:playlist:bundleAndroidMainClassesToRuntimeJar
-> Task :feature:search:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:subscriptions:compileAndroidMain
 > Task :feature:subscriptions:bundleAndroidMainClassesToCompileJar
 > Task :feature:subscriptions:processAndroidMainJavaRes
-> Task :feature:settings:bundleAndroidMainClassesToRuntimeJar
+> Task :feature:search:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:subscriptions:bundleAndroidMainClassesToRuntimeJar
+> Task :feature:settings:bundleAndroidMainClassesToRuntimeJar
 > Task :core:designsystem:mergeAndroidMainJavaResource
 > Task :core:designsystem:syncAndroidMainLibJars
 > Task :core:designsystem:bundleAndroidMainLocalLintAar
@@ -236,10 +236,10 @@ com.evernote.android.state.lint.registry.StateIssueRegistry in /home/runner/.gra
 
 > Task :app:dexBuilderDebug
 > Task :app:mergeProjectDexDebug
+> Task :app:lintAnalyzeDebugAndroidTest
 > Task :app:packageDebug
 > Task :app:createDebugApkListingFileRedirect
 > Task :app:assembleDebug
-> Task :app:lintAnalyzeDebugAndroidTest
 > Task :app:lintAnalyzeDebugUnitTest
 
 > Task :app:lintReportDebug
@@ -256,6 +256,6 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 
 For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD SUCCESSFUL in 6m 28s
+BUILD SUCCESSFUL in 6m 23s
 257 actionable tasks: 257 executed
 Configuration cache entry stored.
