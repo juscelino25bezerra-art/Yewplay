@@ -164,9 +164,9 @@ class PlaybackParameterDialog : DialogFragment() {
                 StepChips(
                     title = stringResource(R.string.playback_step),
                     selected = step,
-                    onSelect = ::setStep
+                    onSelect = ::changeStep
                 )
-                SwitchRow(stringResource(R.string.unhook_checkbox), unhooked, ::setUnhooked)
+                SwitchRow(stringResource(R.string.unhook_checkbox), unhooked, ::changeUnhooked)
                 SwitchRow(stringResource(R.string.skip_silence_checkbox), skipSilence) {
                     skipSilence = it
                     updateCallback()
@@ -229,7 +229,7 @@ class PlaybackParameterDialog : DialogFragment() {
         pitch = validPitch(value)
     }
 
-    private fun setUnhooked(value: Boolean) {
+    private fun changeUnhooked(value: Boolean) {
         unhooked = value
         PreferenceManager.getDefaultSharedPreferences(requireContext()).edit {
             putBoolean(getString(R.string.playback_unhook_key), value)
@@ -265,7 +265,7 @@ class PlaybackParameterDialog : DialogFragment() {
         }
     }
 
-    private fun setStep(value: Double) {
+    private fun changeStep(value: Double) {
         step = value
         PreferenceManager.getDefaultSharedPreferences(requireContext()).edit {
             putFloat(getString(R.string.adjustment_step_key), value.toFloat())
