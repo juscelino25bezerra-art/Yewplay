@@ -219,8 +219,7 @@ class VideoAudioSettingsFragment : YpPreferenceFragment() {
         )
     }
 
-    private fun resolutions(@ArrayRes base: Int, @ArrayRes higher: Int, showHigher: Boolean): List<String> =
-        ListHelper.getSortedResolutionList(resources, base, higher, showHigher)
+    private fun resolutions(@ArrayRes base: Int, @ArrayRes higher: Int, showHigher: Boolean): List<String> = ListHelper.getSortedResolutionList(resources, base, higher, showHigher)
 
     private fun seconds(millis: String): Int = (millis.toIntOrNull() ?: 0) / DateUtils.SECOND_IN_MILLIS.toInt()
 
