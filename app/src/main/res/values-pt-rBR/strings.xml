@@ -950,6 +950,9 @@
     <string name="yp_tabs_add">Adicionar aba</string>
     <string name="yp_tabs_move_up">Mover para cima</string>
     <string name="yp_tabs_move_down">Mover para baixo</string>
+    <string name="yp_subs_channels">Canais</string>
+    <string name="yp_more_options">Mais opções</string>
+    <string name="yp_subs_reorder_groups">Reordenar grupos</string>
     <string name="yp_local_playlist">Playlist local</string>
     <string name="yp_storage_used">%s usados pelo app</string>
     <string name="yp_storage_free">%s livres</string>

@@ -841,6 +841,7 @@ public class MainActivity extends AppCompatActivity {
                 || fragment instanceof YpLocalPlaylistFragment
                 || fragment instanceof YpHistoryFragment
                 || fragment instanceof YpBookmarksFragment
+                || fragment instanceof SubscriptionFragment
                 || fragment instanceof YpWelcomeFragment;
         // the welcome screen is shown full screen, without the bottom bar
         bottomBarHidden = fragment instanceof YpWelcomeFragment;

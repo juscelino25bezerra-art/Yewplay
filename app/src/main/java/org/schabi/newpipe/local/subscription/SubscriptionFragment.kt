@@ -1,107 +1,65 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 package org.schabi.newpipe.local.subscription
 
-import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.SubMenu
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.MimeTypeMap
 import android.widget.Toast
-import androidx.annotation.StringRes
-import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
-import com.evernote.android.state.State
-import com.xwray.groupie.Group
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.Section
-import com.xwray.groupie.viewbinding.GroupieViewHolder
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import io.github.yewplay.core.designsystem.YpAvatar
+import io.github.yewplay.core.designsystem.YpSheet
+import io.github.yewplay.core.designsystem.YpSheetHeader
+import io.github.yewplay.core.designsystem.YpSheetItem
+import io.github.yewplay.core.designsystem.YpTheme
+import io.github.yewplay.core.model.YpChannelItem
+import io.github.yewplay.feature.subscriptions.ManageGroup
+import io.github.yewplay.feature.subscriptions.ManageSubscriptionsActions
+import io.github.yewplay.feature.subscriptions.ManageSubscriptionsIcons
+import io.github.yewplay.feature.subscriptions.ManageSubscriptionsScreen
+import io.github.yewplay.feature.subscriptions.ManageSubscriptionsState
+import io.github.yewplay.feature.subscriptions.ManageSubscriptionsStrings
 import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.reactive.asFlow
+import org.schabi.newpipe.BaseFragment
 import org.schabi.newpipe.R
-import org.schabi.newpipe.database.feed.model.FeedGroupEntity.Companion.GROUP_ALL_ID
-import org.schabi.newpipe.databinding.DialogTitleBinding
-import org.schabi.newpipe.databinding.FeedItemCarouselBinding
-import org.schabi.newpipe.databinding.FragmentSubscriptionBinding
-import org.schabi.newpipe.error.ErrorInfo
-import org.schabi.newpipe.error.UserAction
-import org.schabi.newpipe.extractor.ServiceList
-import org.schabi.newpipe.extractor.channel.ChannelInfoItem
-import org.schabi.newpipe.fragments.BaseStateFragment
-import org.schabi.newpipe.ktx.animate
-import org.schabi.newpipe.local.subscription.SubscriptionViewModel.SubscriptionState
+import org.schabi.newpipe.database.feed.model.FeedGroupEntity
+import org.schabi.newpipe.database.subscription.SubscriptionEntity
+import org.schabi.newpipe.local.feed.FeedDatabaseManager
 import org.schabi.newpipe.local.subscription.dialog.FeedGroupDialog
 import org.schabi.newpipe.local.subscription.dialog.FeedGroupReorderDialog
-import org.schabi.newpipe.local.subscription.item.ChannelItem
-import org.schabi.newpipe.local.subscription.item.FeedGroupAddNewGridItem
-import org.schabi.newpipe.local.subscription.item.FeedGroupAddNewItem
-import org.schabi.newpipe.local.subscription.item.FeedGroupCardGridItem
-import org.schabi.newpipe.local.subscription.item.FeedGroupCardItem
-import org.schabi.newpipe.local.subscription.item.FeedGroupCarouselItem
-import org.schabi.newpipe.local.subscription.item.GroupsHeader
-import org.schabi.newpipe.local.subscription.item.Header
-import org.schabi.newpipe.local.subscription.item.ImportSubscriptionsHintPlaceholderItem
+import org.schabi.newpipe.local.yewplay.YpDialogs
+import org.schabi.newpipe.local.yewplay.YpSubscriptionImport
+import org.schabi.newpipe.local.yewplay.YpThemePrefs
 import org.schabi.newpipe.util.NavigationHelper
-import org.schabi.newpipe.util.OnClickGesture
-import org.schabi.newpipe.util.ServiceHelper
-import org.schabi.newpipe.util.ThemeHelper.getGridSpanCountChannels
 import org.schabi.newpipe.util.external_communication.ShareUtils
 
-class SubscriptionFragment : BaseStateFragment<SubscriptionState>() {
-    private var _binding: FragmentSubscriptionBinding? = null
-    private val binding get() = _binding!!
-
-    private lateinit var viewModel: SubscriptionViewModel
+/**
+ * YewPlay: the subscriptions, in Compose: the groups of channels (new, all, each group) and
+ * every subscribed channel. Import and export are in the menu; long press a channel for share,
+ * open in browser and unsubscribe, or a group to edit it.
+ */
+class SubscriptionFragment : BaseFragment() {
     private lateinit var subscriptionManager: SubscriptionManager
     private lateinit var importExportHelper: SubscriptionsImportExportHelper
-    private val disposables: CompositeDisposable = CompositeDisposable()
+    private val disposables = CompositeDisposable()
 
-    private val groupAdapter = GroupAdapter<GroupieViewHolder<FeedItemCarouselBinding>>()
-    private lateinit var carouselAdapter: GroupAdapter<GroupieViewHolder<FeedItemCarouselBinding>>
-    private lateinit var feedGroupsCarousel: FeedGroupCarouselItem
-    private lateinit var feedGroupsSortMenuItem: GroupsHeader
-    private val subscriptionsSection = Section()
-
-    @State
-    @JvmField
-    var itemsListState: Parcelable? = null
-
-    @State
-    @JvmField
-    var feedGroupsCarouselState: Parcelable? = null
-
-    init {
-        setHasOptionsMenu(true)
-    }
-
-    // /////////////////////////////////////////////////////////////////////////
-    // Fragment LifeCycle
-    // /////////////////////////////////////////////////////////////////////////
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         subscriptionManager = SubscriptionManager(requireContext())
+        // registers for the result of the file pickers, so it must be created here
         importExportHelper = SubscriptionsImportExportHelper(this)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_subscription, container, false)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        itemsListState = binding.itemsList.layoutManager?.onSaveInstanceState()
-        feedGroupsCarouselState = feedGroupsCarousel.onSaveInstanceState()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onDestroy() {
@@ -109,309 +67,125 @@ class SubscriptionFragment : BaseStateFragment<SubscriptionState>() {
         disposables.dispose()
     }
 
-    // ////////////////////////////////////////////////////////////////////////
-    // Menu
-    // ////////////////////////////////////////////////////////////////////////
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-
-        activity.supportActionBar?.setDisplayShowTitleEnabled(true)
-        activity.supportActionBar?.setTitle(R.string.tab_subscriptions)
-
-        buildImportExportMenu(menu)
-    }
-
-    private fun buildImportExportMenu(menu: Menu) {
-        // -- Import --
-        val importSubMenu = menu.addSubMenu(R.string.import_from)
-
-        addMenuItemToSubmenu(importSubMenu, R.string.previous_export) { importExportHelper.onImportPreviousSelected() }
-            .setIcon(R.drawable.ic_backup)
-
-        for (service in ServiceList.all()) {
-            val subscriptionExtractor = service.subscriptionExtractor ?: continue
-
-            val supportedSources = subscriptionExtractor.supportedSources
-            if (supportedSources.isEmpty()) continue
-
-            addMenuItemToSubmenu(importSubMenu, service.serviceInfo.name) {
-                onImportFromServiceSelected(service.serviceId)
-            }
-                .setIcon(ServiceHelper.getIcon(service.serviceId))
-        }
-
-        // -- Export --
-        val exportSubMenu = menu.addSubMenu(R.string.export_to)
-
-        addMenuItemToSubmenu(exportSubMenu, R.string.file) { importExportHelper.onExportSelected() }
-            .setIcon(R.drawable.ic_save)
-    }
-
-    private fun addMenuItemToSubmenu(
-        subMenu: SubMenu,
-        @StringRes title: Int,
-        onClick: Runnable
-    ): MenuItem {
-        return setClickListenerToMenuItem(subMenu.add(title), onClick)
-    }
-
-    private fun addMenuItemToSubmenu(
-        subMenu: SubMenu,
-        title: String,
-        onClick: Runnable
-    ): MenuItem {
-        return setClickListenerToMenuItem(subMenu.add(title), onClick)
-    }
-
-    private fun setClickListenerToMenuItem(
-        menuItem: MenuItem,
-        onClick: Runnable
-    ): MenuItem {
-        menuItem.setOnMenuItemClickListener {
-            onClick.run()
-            true
-        }
-        return menuItem
-    }
-
-    private fun onImportFromServiceSelected(serviceId: Int) {
-        val fragmentManager = fm
-        NavigationHelper.openSubscriptionsImportFragment(fragmentManager, serviceId)
-    }
-
-    private fun openReorderDialog() {
-        FeedGroupReorderDialog().show(parentFragmentManager, null)
-    }
-
-    // ////////////////////////////////////////////////////////////////////////
-    // Fragment Views
-    // ////////////////////////////////////////////////////////////////////////
-
-    override fun initViews(rootView: View, savedInstanceState: Bundle?) {
-        super.initViews(rootView, savedInstanceState)
-        _binding = FragmentSubscriptionBinding.bind(rootView)
-
-        groupAdapter.spanCount = if (SubscriptionViewModel.shouldUseGridForSubscription(requireContext())) getGridSpanCountChannels(context) else 1
-        binding.itemsList.layoutManager = GridLayoutManager(requireContext(), groupAdapter.spanCount).apply {
-            spanSizeLookup = groupAdapter.spanSizeLookup
-        }
-        binding.itemsList.adapter = groupAdapter
-        binding.itemsList.itemAnimator = null
-
-        viewModel = ViewModelProvider(this)[SubscriptionViewModel::class.java]
-        viewModel.stateLiveData.observe(viewLifecycleOwner) { it?.let(this::handleResult) }
-        viewModel.feedGroupsLiveData.observe(viewLifecycleOwner) {
-            it?.let { (groups, listViewMode) ->
-                handleFeedGroups(groups, listViewMode)
-            }
-        }
-
-        setupInitialLayout()
-    }
-
-    private fun setupInitialLayout() {
-        Section().apply {
-            carouselAdapter = GroupAdapter<GroupieViewHolder<FeedItemCarouselBinding>>()
-
-            carouselAdapter.setOnItemClickListener { item, _ ->
-                when (item) {
-                    is FeedGroupCardItem ->
-                        NavigationHelper.openFeedFragment(fm, item.groupId, item.name)
-
-                    is FeedGroupCardGridItem ->
-                        NavigationHelper.openFeedFragment(fm, item.groupId, item.name)
-
-                    is FeedGroupAddNewItem ->
-                        FeedGroupDialog.newInstance().show(fm, null)
-
-                    is FeedGroupAddNewGridItem ->
-                        FeedGroupDialog.newInstance().show(fm, null)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        val context = requireContext()
+        val themeKey = YpThemePrefs.themeKey(context)
+        val nightThemeKey = YpThemePrefs.nightThemeKey(context)
+        val channelsFlow = subscriptionManager.subscriptions().subscribeOn(Schedulers.io()).asFlow()
+        val groupsFlow = FeedDatabaseManager(context).groups().subscribeOn(Schedulers.io()).asFlow()
+        // as a tab of the home there is nothing to go back to
+        val showBack = parentFragment == null
+        return ComposeView(context).apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+            setContent {
+                val entities by channelsFlow.collectAsState(initial = null)
+                val groupEntities by groupsFlow.collectAsState(initial = emptyList())
+                val channels = remember(entities) { entities?.map { it.toUi() } }
+                YpTheme(themeKey, nightThemeKey) {
+                    ManageSubscriptionsScreen(
+                        state = ManageSubscriptionsState(
+                            channels = channels,
+                            groups = groupEntities.map { group ->
+                                ManageGroup(group.uid, group.name, painterResource(group.icon.getDrawableRes()))
+                            },
+                            showBack = showBack
+                        ),
+                        strings = ManageSubscriptionsStrings(
+                            title = stringResource(R.string.tab_subscriptions),
+                            groups = stringResource(R.string.feed_groups_header_title),
+                            newGroup = stringResource(R.string.feed_create_new_group_button_title),
+                            all = stringResource(R.string.all),
+                            channels = stringResource(R.string.yp_subs_channels),
+                            empty = stringResource(R.string.import_subscriptions_hint),
+                            back = stringResource(androidx.appcompat.R.string.abc_action_bar_up_description),
+                            more = stringResource(R.string.yp_more_options),
+                            reorder = stringResource(R.string.yp_subs_reorder_groups)
+                        ),
+                        icons = ManageSubscriptionsIcons(
+                            back = painterResource(R.drawable.ic_arrow_back),
+                            more = painterResource(R.drawable.ic_more_vert),
+                            add = painterResource(R.drawable.ic_add),
+                            all = painterResource(FeedGroupIcon.WHATS_NEW.getDrawableRes()),
+                            reorder = painterResource(R.drawable.ic_sort)
+                        ),
+                        actions = ManageSubscriptionsActions(
+                            onBack = { requireActivity().onBackPressedDispatcher.onBackPressed() },
+                            onMore = {
+                                YpSubscriptionImport.showChooser(this@SubscriptionFragment, importExportHelper, fm, true)
+                            },
+                            onOpenAll = { NavigationHelper.openFeedFragment(fm, FeedGroupEntity.GROUP_ALL_ID, null) },
+                            onOpenGroup = { NavigationHelper.openFeedFragment(fm, it.id, it.name) },
+                            onEditGroup = { FeedGroupDialog.newInstance(it.id).show(fm, null) },
+                            onNewGroup = { FeedGroupDialog.newInstance().show(fm, null) },
+                            onReorderGroups = { FeedGroupReorderDialog().show(parentFragmentManager, null) },
+                            onOpenChannel = { NavigationHelper.openChannelFragment(fm, it.serviceId, it.url, it.name) },
+                            onChannelMenu = { channel ->
+                                entities?.firstOrNull { it.serviceId == channel.serviceId && it.url == channel.url }
+                                    ?.let(::showChannelMenu)
+                            }
+                        )
+                    )
                 }
             }
-            carouselAdapter.setOnItemLongClickListener { item, _ ->
-                if ((item is FeedGroupCardItem && item.groupId == GROUP_ALL_ID) ||
-                    (item is FeedGroupCardGridItem && item.groupId == GROUP_ALL_ID)
-                ) {
-                    return@setOnItemLongClickListener false
-                }
-
-                when (item) {
-                    is FeedGroupCardItem ->
-                        FeedGroupDialog.newInstance(item.groupId).show(fm, null)
-
-                    is FeedGroupCardGridItem ->
-                        FeedGroupDialog.newInstance(item.groupId).show(fm, null)
-                }
-                return@setOnItemLongClickListener true
-            }
-
-            feedGroupsCarousel = FeedGroupCarouselItem(
-                carouselAdapter = carouselAdapter,
-                listViewMode = viewModel.getListViewMode()
-            )
-
-            feedGroupsSortMenuItem = GroupsHeader(
-                title = getString(R.string.feed_groups_header_title),
-                onSortClicked = ::openReorderDialog,
-                onToggleListViewModeClicked = ::toggleListViewMode,
-                listViewMode = viewModel.getListViewMode()
-            )
-
-            add(Section(feedGroupsSortMenuItem, listOf(feedGroupsCarousel)))
-            groupAdapter.clear()
-            groupAdapter.add(this)
         }
-
-        subscriptionsSection.setPlaceholder(ImportSubscriptionsHintPlaceholderItem())
-        subscriptionsSection.setHideWhenEmpty(true)
-
-        groupAdapter.add(
-            Section(
-                Header(getString(R.string.tab_subscriptions)),
-                listOf(subscriptionsSection)
-            )
-        )
     }
 
-    private fun toggleListViewMode() {
-        viewModel.setListViewMode(!viewModel.getListViewMode())
-    }
+    private fun SubscriptionEntity.toUi() = YpChannelItem(
+        serviceId = serviceId,
+        url = url.orEmpty(),
+        name = name.orEmpty(),
+        avatarUrl = avatarUrl,
+        description = null,
+        details = null
+    )
 
-    private fun showLongTapDialog(selectedItem: ChannelInfoItem) {
-        val commands = arrayOf(
-            getString(R.string.share),
-            getString(R.string.open_in_browser),
-            getString(R.string.unsubscribe)
-        )
-
-        val actions = DialogInterface.OnClickListener { _, i ->
-            when (i) {
-                0 -> ShareUtils.shareText(
-                    requireContext(),
-                    selectedItem.name,
-                    selectedItem.url,
-                    selectedItem.thumbnails
+    /** Share, open in the browser or unsubscribe a channel. */
+    private fun showChannelMenu(channel: SubscriptionEntity) {
+        val context = requireContext()
+        val item = channel.toChannelInfoItem()
+        YpDialogs.sheet(context) { dismiss ->
+            YpSheet {
+                YpSheetHeader(
+                    title = item.name,
+                    subtitle = null,
+                    leading = { YpAvatar(url = channel.avatarUrl, size = 44) }
                 )
-
-                1 -> ShareUtils.openUrlInBrowser(requireContext(), selectedItem.url)
-
-                2 -> deleteChannel(selectedItem)
-            }
-        }
-
-        val dialogTitleBinding = DialogTitleBinding.inflate(LayoutInflater.from(requireContext()))
-        dialogTitleBinding.root.isSelected = true
-        dialogTitleBinding.itemTitleView.text = selectedItem.name
-        dialogTitleBinding.itemAdditionalDetails.visibility = View.GONE
-
-        AlertDialog.Builder(requireContext())
-            .setCustomTitle(dialogTitleBinding.root)
-            .setItems(commands, actions)
-            .show()
-    }
-
-    private fun deleteChannel(selectedItem: ChannelInfoItem) {
-        disposables.add(
-            subscriptionManager.deleteSubscription(selectedItem.serviceId, selectedItem.url).subscribe {
-                Toast.makeText(requireContext(), getString(R.string.channel_unsubscribed), Toast.LENGTH_SHORT).show()
-            }
-        )
-    }
-
-    override fun doInitialLoadLogic() = Unit
-    override fun startLoading(forceLoad: Boolean) = Unit
-
-    private val listenerChannelItem = object : OnClickGesture<ChannelInfoItem> {
-        override fun selected(selectedItem: ChannelInfoItem) = NavigationHelper.openChannelFragment(
-            fm,
-            selectedItem.serviceId,
-            selectedItem.url,
-            selectedItem.name
-        )
-
-        override fun held(selectedItem: ChannelInfoItem) = showLongTapDialog(selectedItem)
-    }
-
-    override fun handleResult(result: SubscriptionState) {
-        super.handleResult(result)
-
-        when (result) {
-            is SubscriptionState.LoadedState -> {
-                result.subscriptions.forEach {
-                    if (it is ChannelItem) {
-                        it.gesturesListener = listenerChannelItem
-                        it.itemVersion = if (SubscriptionViewModel.shouldUseGridForSubscription(requireContext())) {
-                            ChannelItem.ItemVersion.GRID
-                        } else {
-                            ChannelItem.ItemVersion.MINI
-                        }
+                YpSheetItem(
+                    label = stringResource(R.string.share),
+                    icon = painterResource(R.drawable.ic_share),
+                    onClick = {
+                        dismiss()
+                        ShareUtils.shareText(context, item.name, item.url, item.thumbnails)
                     }
-                }
-
-                subscriptionsSection.update(result.subscriptions)
-                subscriptionsSection.setHideWhenEmpty(false)
-
-                if (itemsListState != null) {
-                    binding.itemsList.layoutManager?.onRestoreInstanceState(itemsListState)
-                    itemsListState = null
-                }
+                )
+                YpSheetItem(
+                    label = stringResource(R.string.open_in_browser),
+                    icon = painterResource(R.drawable.yp_ic_arrow_square_out),
+                    onClick = {
+                        dismiss()
+                        ShareUtils.openUrlInBrowser(context, item.url)
+                    }
+                )
+                YpSheetItem(
+                    label = stringResource(R.string.unsubscribe),
+                    icon = painterResource(R.drawable.ic_delete),
+                    destructive = true,
+                    onClick = {
+                        dismiss()
+                        unsubscribe(item.serviceId, item.url)
+                    }
+                )
             }
-
-            is SubscriptionState.ErrorState -> {
-                result.error?.let {
-                    showError(ErrorInfo(result.error, UserAction.SOMETHING_ELSE, "Subscriptions"))
-                }
-            }
-        }
+        }.show()
     }
 
-    private fun handleFeedGroups(groups: List<Group>, listViewMode: Boolean) {
-        if (feedGroupsCarouselState != null) {
-            feedGroupsCarousel.onRestoreInstanceState(feedGroupsCarouselState)
-            feedGroupsCarouselState = null
-        }
-
-        binding.itemsList.post {
-            if (context == null) {
-                // since this part was posted to the next UI cycle, the fragment might have been
-                // removed in the meantime
-                return@post
+    private fun unsubscribe(serviceId: Int, url: String) {
+        val context = requireContext().applicationContext
+        disposables.add(
+            subscriptionManager.deleteSubscription(serviceId, url).subscribe {
+                Toast.makeText(context, R.string.channel_unsubscribed, Toast.LENGTH_SHORT).show()
             }
-
-            feedGroupsCarousel.listViewMode = listViewMode
-            feedGroupsSortMenuItem.showSortButton = groups.size > 1
-            feedGroupsSortMenuItem.listViewMode = listViewMode
-            feedGroupsCarousel.notifyChanged(FeedGroupCarouselItem.PAYLOAD_UPDATE_LIST_VIEW_MODE)
-            feedGroupsSortMenuItem.notifyChanged(GroupsHeader.PAYLOAD_UPDATE_ICONS)
-
-            // update items here to prevent flickering
-            carouselAdapter.apply {
-                clear()
-                if (listViewMode) {
-                    add(FeedGroupAddNewItem())
-                    add(FeedGroupCardItem(GROUP_ALL_ID, getString(R.string.all), FeedGroupIcon.WHATS_NEW))
-                } else {
-                    add(FeedGroupAddNewGridItem())
-                    add(FeedGroupCardGridItem(GROUP_ALL_ID, getString(R.string.all), FeedGroupIcon.WHATS_NEW))
-                }
-                addAll(groups)
-            }
-        }
-    }
-
-    // /////////////////////////////////////////////////////////////////////////
-    // Contract
-    // /////////////////////////////////////////////////////////////////////////
-
-    override fun showLoading() {
-        super.showLoading()
-        binding.itemsList.animate(false, 100)
-    }
-
-    override fun hideLoading() {
-        super.hideLoading()
-        binding.itemsList.animate(true, 200)
+        )
     }
 
     companion object {
