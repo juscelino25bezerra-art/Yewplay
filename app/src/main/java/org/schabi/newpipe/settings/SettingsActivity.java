@@ -19,8 +19,6 @@ import androidx.core.view.SoftwareKeyboardControllerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 
 import com.evernote.android.state.State;
 import com.jakewharton.rxbinding4.widget.RxTextView;
@@ -29,11 +27,11 @@ import com.livefront.bridge.Bridge;
 import org.schabi.newpipe.MainActivity;
 import org.schabi.newpipe.R;
 import org.schabi.newpipe.databinding.SettingsLayoutBinding;
+import org.schabi.newpipe.settings.compose.YpPreferenceFragment;
 import org.schabi.newpipe.settings.preferencesearch.PreferenceParser;
 import org.schabi.newpipe.settings.preferencesearch.PreferenceSearchConfiguration;
 import org.schabi.newpipe.settings.preferencesearch.PreferenceSearchFragment;
 import org.schabi.newpipe.settings.preferencesearch.PreferenceSearchItem;
-import org.schabi.newpipe.settings.preferencesearch.PreferenceSearchResultHighlighter;
 import org.schabi.newpipe.settings.preferencesearch.PreferenceSearchResultListener;
 import org.schabi.newpipe.settings.preferencesearch.PreferenceSearcher;
 import org.schabi.newpipe.util.DeviceUtils;
@@ -64,7 +62,6 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class SettingsActivity extends AppCompatActivity implements
-        PreferenceFragmentCompat.OnPreferenceStartFragmentCallback,
         PreferenceSearchResultListener {
     private static final String TAG = "SettingsActivity";
     private static final boolean DEBUG = MainActivity.DEBUG;
@@ -179,13 +176,6 @@ public class SettingsActivity extends AppCompatActivity implements
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onPreferenceStartFragment(@NonNull final PreferenceFragmentCompat caller,
-                                             final Preference preference) {
-        showSettingsFragment(instantiateFragment(preference.getFragment()));
-        return true;
     }
 
     private Fragment instantiateFragment(@NonNull final String className) {
@@ -435,9 +425,9 @@ public class SettingsActivity extends AppCompatActivity implements
         }
 
         // Run the highlighting
-        if (currentFragment instanceof PreferenceFragmentCompat) {
-            PreferenceSearchResultHighlighter
-                    .highlight(result, (PreferenceFragmentCompat) currentFragment);
+        if (currentFragment instanceof YpPreferenceFragment) {
+            // YewPlay: the settings screens in Compose scroll to the entry and mark it
+            ((YpPreferenceFragment) currentFragment).highlight(result.getKey());
         }
     }
 

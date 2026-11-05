@@ -954,6 +954,7 @@
     <string name="yp_more_options">Mais opções</string>
     <string name="yp_subs_reorder_groups">Reordenar grupos</string>
     <string name="yp_import_open_page">Abrir a página</string>
+    <string name="yp_notification_compact_slot">Mostrar na notificação compacta</string>
     <string name="yp_local_playlist">Playlist local</string>
     <string name="yp_storage_used">%s usados pelo app</string>
     <string name="yp_storage_free">%s livres</string>
