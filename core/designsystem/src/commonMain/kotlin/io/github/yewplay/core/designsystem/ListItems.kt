@@ -34,6 +34,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -60,20 +61,32 @@ fun YpVideoRow(
     onClick: () -> Unit,
     onLongClick: () -> Unit,
     modifier: Modifier = Modifier,
-    moreIcon: Painter? = null
+    moreIcon: Painter? = null,
+    /** Position in a playlist, shown before the thumbnail. */
+    number: Int? = null
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
             .combinedClickable(onClick = onClick, onLongClick = onLongClick)
             .padding(
-                start = YpScreenMargin,
+                start = if (number != null) 8.dp else YpScreenMargin,
                 end = if (moreIcon != null) 4.dp else YpScreenMargin,
                 top = 8.dp,
                 bottom = 8.dp
             ),
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalAlignment = if (number != null) Alignment.CenterVertically else Alignment.Top
     ) {
+        if (number != null) {
+            Text(
+                modifier = Modifier.width(20.dp),
+                text = number.toString(),
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center
+            )
+        }
         YpThumbnail(
             url = item.thumbnailUrl,
             durationText = item.durationText,

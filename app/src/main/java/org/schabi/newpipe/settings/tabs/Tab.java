@@ -22,11 +22,11 @@ import org.schabi.newpipe.fragments.BlankFragment;
 import org.schabi.newpipe.fragments.list.channel.YpChannelFragment;
 import org.schabi.newpipe.fragments.list.kiosk.DefaultKioskFragment;
 import org.schabi.newpipe.fragments.list.kiosk.KioskFragment;
-import org.schabi.newpipe.fragments.list.playlist.PlaylistFragment;
+import org.schabi.newpipe.fragments.list.playlist.YpPlaylistFragment;
 import org.schabi.newpipe.local.bookmark.BookmarkFragment;
 import org.schabi.newpipe.local.feed.FeedFragment;
 import org.schabi.newpipe.local.history.StatisticsPlaylistFragment;
-import org.schabi.newpipe.local.playlist.LocalPlaylistFragment;
+import org.schabi.newpipe.local.playlist.YpLocalPlaylistFragment;
 import org.schabi.newpipe.local.subscription.SubscriptionFragment;
 import org.schabi.newpipe.util.KioskTranslator;
 import org.schabi.newpipe.util.ServiceHelper;
@@ -579,10 +579,10 @@ public abstract class Tab {
         @Override
         public Fragment getFragment(final Context context) {
             if (playlistType == LocalItemType.PLAYLIST_LOCAL_ITEM) {
-                return LocalPlaylistFragment.getInstance(playlistId, playlistName);
+                return YpLocalPlaylistFragment.getInstance(playlistId, playlistName);
 
             } else { // playlistType == LocalItemType.PLAYLIST_REMOTE_ITEM
-                return PlaylistFragment.getInstance(playlistServiceId, playlistUrl, playlistName);
+                return YpPlaylistFragment.getInstance(playlistServiceId, playlistUrl, playlistName);
             }
         }
 

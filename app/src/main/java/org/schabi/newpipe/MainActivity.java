@@ -79,12 +79,13 @@ import org.schabi.newpipe.fragments.MainFragment;
 import org.schabi.newpipe.fragments.detail.VideoDetailFragment;
 import org.schabi.newpipe.fragments.list.channel.YpChannelFragment;
 import org.schabi.newpipe.fragments.list.comments.CommentRepliesFragment;
+import org.schabi.newpipe.fragments.list.playlist.YpPlaylistFragment;
 import org.schabi.newpipe.fragments.list.search.YpSearchFragment;
 import org.schabi.newpipe.local.bookmark.BookmarkFragment;
 import org.schabi.newpipe.local.feed.FeedFragment;
 import org.schabi.newpipe.local.feed.notifications.NotificationWorker;
 import org.schabi.newpipe.local.history.StatisticsPlaylistFragment;
-import org.schabi.newpipe.local.playlist.LocalPlaylistFragment;
+import org.schabi.newpipe.local.playlist.YpLocalPlaylistFragment;
 import org.schabi.newpipe.local.subscription.SubscriptionFragment;
 import org.schabi.newpipe.player.Player;
 import org.schabi.newpipe.player.event.OnKeyDownListener;
@@ -826,7 +827,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private void updateToolbarForFragment(@Nullable final Fragment fragment) {
         final boolean ownTopBar = fragment instanceof YpSearchFragment
-                || fragment instanceof YpChannelFragment;
+                || fragment instanceof YpChannelFragment
+                || fragment instanceof YpPlaylistFragment
+                || fragment instanceof YpLocalPlaylistFragment;
         final View toolbar = toolbarLayoutBinding.getRoot();
         final View holder = mainBinding.fragmentHolder;
         if (!(holder.getLayoutParams() instanceof ViewGroup.MarginLayoutParams)) {
@@ -955,7 +958,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (fragment instanceof LibraryFragment
                 || fragment instanceof StatisticsPlaylistFragment
                 || fragment instanceof BookmarkFragment
-                || fragment instanceof LocalPlaylistFragment) {
+                || fragment instanceof YpLocalPlaylistFragment) {
             itemId = R.id.yp_nav_library;
         } else {
             return; // channels, playlists, etc. keep the destination they were opened from

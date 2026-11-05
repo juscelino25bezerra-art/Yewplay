@@ -51,12 +51,12 @@ import org.schabi.newpipe.fragments.detail.VideoDetailFragment;
 import org.schabi.newpipe.fragments.list.channel.YpChannelFragment;
 import org.schabi.newpipe.fragments.list.comments.CommentRepliesFragment;
 import org.schabi.newpipe.fragments.list.kiosk.KioskFragment;
-import org.schabi.newpipe.fragments.list.playlist.PlaylistFragment;
+import org.schabi.newpipe.fragments.list.playlist.YpPlaylistFragment;
 import org.schabi.newpipe.fragments.list.search.YpSearchFragment;
 import org.schabi.newpipe.local.bookmark.BookmarkFragment;
 import org.schabi.newpipe.local.feed.FeedFragment;
 import org.schabi.newpipe.local.history.StatisticsPlaylistFragment;
-import org.schabi.newpipe.local.playlist.LocalPlaylistFragment;
+import org.schabi.newpipe.local.playlist.YpLocalPlaylistFragment;
 import org.schabi.newpipe.local.subscription.SubscriptionFragment;
 import org.schabi.newpipe.local.subscription.SubscriptionsImportFragment;
 import org.schabi.newpipe.player.PlayQueueActivity;
@@ -556,7 +556,7 @@ public final class NavigationHelper {
                                             final int serviceId, final String url,
                                             @NonNull final String name) {
         defaultTransaction(fragmentManager)
-                .replace(R.id.fragment_holder, PlaylistFragment.getInstance(serviceId, url, name))
+                .replace(R.id.fragment_holder, YpPlaylistFragment.getInstance(serviceId, url, name))
                 .addToBackStack(null)
                 .commit();
     }
@@ -610,7 +610,7 @@ public final class NavigationHelper {
     public static void openLocalPlaylistFragment(final FragmentManager fragmentManager,
                                                  final long playlistId, final String name) {
         defaultTransaction(fragmentManager)
-                .replace(R.id.fragment_holder, LocalPlaylistFragment.getInstance(playlistId,
+                .replace(R.id.fragment_holder, YpLocalPlaylistFragment.getInstance(playlistId,
                         name == null ? "" : name))
                 .addToBackStack(null)
                 .commit();

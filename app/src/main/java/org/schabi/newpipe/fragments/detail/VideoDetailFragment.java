@@ -97,7 +97,7 @@ import org.schabi.newpipe.fragments.list.videos.RelatedItemsFragment;
 import org.schabi.newpipe.ktx.AnimationType;
 import org.schabi.newpipe.local.dialog.PlaylistDialog;
 import org.schabi.newpipe.local.history.HistoryRecordManager;
-import org.schabi.newpipe.local.playlist.LocalPlaylistFragment;
+import org.schabi.newpipe.local.playlist.YpLocalPlaylistFragment;
 import org.schabi.newpipe.player.Player;
 import org.schabi.newpipe.player.PlayerIntentType;
 import org.schabi.newpipe.player.PlayerService;
@@ -510,8 +510,8 @@ public final class VideoDetailFragment
                         findFragmentById(R.id.fragment_holder);
 
                 // commit previous pending changes to database
-                if (fragment instanceof LocalPlaylistFragment) {
-                    ((LocalPlaylistFragment) fragment).saveImmediate();
+                if (fragment instanceof YpLocalPlaylistFragment) {
+                    ((YpLocalPlaylistFragment) fragment).saveImmediate();
                 } else if (fragment instanceof MainFragment) {
                     ((MainFragment) fragment).commitPlaylistTabs();
                 }
