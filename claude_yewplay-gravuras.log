@@ -1,0 +1,226 @@
+branch: claude/yewplay-gravuras
+sha: 2c95620280fac021e4ce8f960c033ebdd468517b
+outcome: cancelled
+run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/42010552509
+
+== errors ==
+error: string too large to encode using UTF-8 written instead as 'STRING_TOO_LARGE'.
+error: string too large to encode using UTF-8 written instead as 'STRING_TOO_LARGE'.
+error: string too large to encode using UTF-8 written instead as 'STRING_TOO_LARGE'.
+
+== warnings ==
+w: ⚠️ Unused Kotlin Source Sets
+w: ⚠️ Unused Kotlin Source Sets
+w: ⚠️ Unused Kotlin Source Sets
+w: ⚠️ Unused Kotlin Source Sets
+w: ⚠️ Unused Kotlin Source Sets
+w: ⚠️ Unused Kotlin Source Sets
+w: ⚠️ Unused Kotlin Source Sets
+w: ⚠️ Unused Kotlin Source Sets
+w: Koin compiler plugin: Kotlin 2.4.21 is newer than the newest verified version (2.4.20) — proceeding with the 2.4.20 adapter. If compilation fails, check for a koin-compiler-plugin update. Verified versions: 2.3.20, 2.4.0, 2.4.10, 2.4.20.
+w: file:///home/runner/work/Yewplay/Yewplay/feature/channel/src/commonMain/kotlin/io/github/yewplay/feature/channel/ChannelScreen.kt:403:42 Unnecessary safe call on a non-null receiver of type 'ChannelHeader'.
+w: file:///home/runner/work/Yewplay/Yewplay/feature/channel/src/commonMain/kotlin/io/github/yewplay/feature/channel/ChannelScreen.kt:431:38 Unnecessary safe call on a non-null receiver of type 'ChannelHeader'.
+w: [ksp] /home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/database/feed/dao/FeedDAO.kt:178: The DAO function return type (kotlin.collections.List<java.time.OffsetDateTime?>) with the nullable type argument is meaningless because for now Room will never put a null value in a result.
+w: [ksp] /home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/database/feed/dao/FeedDAO.kt:181: The DAO function return type (kotlin.collections.List<java.time.OffsetDateTime?>) with the nullable type argument is meaningless because for now Room will never put a null value in a result.
+
+== tail ==
+> Task :core:designsystem:mergeAndroidMainJniLibFolders
+> Task :core:designsystem:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :core:designsystem:copyAndroidMainJniLibsProjectOnly
+> Task :feature:channel:mergeAndroidMainJniLibFolders
+> Task :feature:channel:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :feature:channel:copyAndroidMainJniLibsProjectOnly
+> Task :feature:downloads:mergeAndroidMainJniLibFolders
+> Task :feature:downloads:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :feature:downloads:copyAndroidMainJniLibsProjectOnly
+> Task :feature:home:mergeAndroidMainJniLibFolders
+> Task :feature:home:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :feature:home:copyAndroidMainJniLibsProjectOnly
+> Task :feature:library:mergeAndroidMainJniLibFolders
+> Task :feature:library:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :feature:library:copyAndroidMainJniLibsProjectOnly
+> Task :feature:playlist:mergeAndroidMainJniLibFolders
+> Task :feature:playlist:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :feature:playlist:copyAndroidMainJniLibsProjectOnly
+> Task :feature:search:mergeAndroidMainJniLibFolders
+> Task :feature:search:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :feature:search:copyAndroidMainJniLibsProjectOnly
+> Task :feature:subscriptions:mergeAndroidMainJniLibFolders
+> Task :feature:subscriptions:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :feature:subscriptions:copyAndroidMainJniLibsProjectOnly
+> Task :core:designsystem:checkAndroidMainAarMetadata
+> Task :shared:checkAndroidMainAarMetadata
+> Task :core:model:compileKotlin
+> Task :core:model:compileJava NO-SOURCE
+> Task :core:model:classes UP-TO-DATE
+> Task :core:model:jar
+> Task :core:data:compileKotlin
+> Task :core:data:compileJava NO-SOURCE
+> Task :core:data:classes UP-TO-DATE
+> Task :core:data:jar
+> Task :shared:extractAndroidMainAnnotations
+> Task :feature:channel:checkAndroidMainAarMetadata
+> Task :feature:downloads:checkAndroidMainAarMetadata
+> Task :feature:home:checkAndroidMainAarMetadata
+> Task :feature:library:checkAndroidMainAarMetadata
+> Task :feature:playlist:checkAndroidMainAarMetadata
+> Task :feature:search:checkAndroidMainAarMetadata
+> Task :feature:subscriptions:checkAndroidMainAarMetadata
+> Task :app:preDebugAndroidTestBuild SKIPPED
+> Task :app:generateDebugAndroidTestResValues
+> Task :app:runCheckstyle
+> Task :app:preDebugBuild
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :shared:prepareLintJarForPublish
+> Task :app:generateDebugResValues
+> Task :app:extractDebugSupportedLocales
+> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugLocaleConfig
+> Task :app:generateDebugResources
+> Task :app:dataBindingMergeDependencyArtifactsDebug
+> Task :app:processDebugNavigationResources
+> Task :app:generateDebugBuildConfig
+> Task :app:javaPreCompileDebug
+> Task :app:mergeDebugAssets
+> Task :app:compressDebugAssets
+> Task :app:generateDebugGlobalSynthetics
+> Task :app:packageDebugResources
+> Task :app:parseDebugLocalResources
+> Task :app:generateDebugRFile
+> Task :app:checkDebugDuplicateClasses
+> Task :app:desugarDebugFileDependencies
+> Task :app:mergeDebugResources
+> Task :shared:compileAndroidMain
+> Task :app:dataBindingGenBaseClassesDebug
+> Task :app:checkDebugAarMetadata
+> Task :app:compileDebugNavigationResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+
+> Task :app:processDebugMainManifest
+/home/runner/work/Yewplay/Yewplay/app/src/debug/AndroidManifest.xml Warning:
+	provider#org.acra.attachment.AcraContentProvider@android:authorities was tagged at AndroidManifest.xml:0 to replace other declarations but no other declaration present
+
+> Task :app:processDebugManifest
+> Task :app:processDebugManifestForPackage
+error: string too large to encode using UTF-8 written instead as 'STRING_TOO_LARGE'.
+error: string too large to encode using UTF-8 written instead as 'STRING_TOO_LARGE'.
+error: string too large to encode using UTF-8 written instead as 'STRING_TOO_LARGE'.
+
+> Task :app:processDebugResources
+> Task :app:mergeDebugJniLibFolders
+> Task :app:mergeDebugNativeLibs
+
+> Task :app:stripDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libsqliteJni.so. Run with --info option to learn more.
+
+> Task :app:validateSigningDebug
+> Task :app:writeDebugAppMetadata
+> Task :app:writeDebugSigningConfigVersions
+> Task :core:designsystem:prepareLintJarForPublish
+> Task :feature:channel:prepareLintJarForPublish
+> Task :feature:downloads:prepareLintJarForPublish
+> Task :feature:home:prepareLintJarForPublish
+> Task :feature:library:prepareLintJarForPublish
+> Task :feature:playlist:prepareLintJarForPublish
+> Task :feature:search:prepareLintJarForPublish
+> Task :feature:subscriptions:prepareLintJarForPublish
+> Task :app:extractProguardFiles
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :shared:preAndroidHostTestBuild UP-TO-DATE
+> Task :app:l8DexDesugarLibDebug
+> Task :app:mergeExtDexDebug
+
+> Task :shared:compileAndroidMain
+w: Koin compiler plugin: Kotlin 2.4.21 is newer than the newest verified version (2.4.20) — proceeding with the 2.4.20 adapter. If compilation fails, check for a koin-compiler-plugin update. Verified versions: 2.3.20, 2.4.0, 2.4.10, 2.4.20.
+
+> Task :shared:processAndroidMainJavaRes
+> Task :shared:bundleAndroidMainClassesToCompileJar
+> Task :shared:bundleAndroidMainClassesToRuntimeJar
+> Task :shared:mergeAndroidMainJavaResource
+> Task :core:designsystem:extractAndroidMainAnnotations
+> Task :shared:syncAndroidMainLibJars
+> Task :shared:bundleAndroidMainLocalLintAar
+> Task :shared:createFullJarAndroidMain
+> Task :shared:generateAndroidHostTestLintModel
+> Task :core:designsystem:compileAndroidMain
+> Task :core:designsystem:processAndroidMainJavaRes
+> Task :core:designsystem:bundleAndroidMainClassesToCompileJar
+> Task :core:designsystem:bundleAndroidMainClassesToRuntimeJar
+> Task :feature:downloads:compileAndroidMain
+> Task :feature:downloads:bundleAndroidMainClassesToCompileJar
+
+> Task :feature:channel:compileAndroidMain
+w: file:///home/runner/work/Yewplay/Yewplay/feature/channel/src/commonMain/kotlin/io/github/yewplay/feature/channel/ChannelScreen.kt:403:42 Unnecessary safe call on a non-null receiver of type 'ChannelHeader'.
+w: file:///home/runner/work/Yewplay/Yewplay/feature/channel/src/commonMain/kotlin/io/github/yewplay/feature/channel/ChannelScreen.kt:431:38 Unnecessary safe call on a non-null receiver of type 'ChannelHeader'.
+
+> Task :feature:channel:bundleAndroidMainClassesToCompileJar
+> Task :feature:library:compileAndroidMain
+> Task :feature:library:bundleAndroidMainClassesToCompileJar
+> Task :feature:home:compileAndroidMain
+> Task :feature:home:bundleAndroidMainClassesToCompileJar
+> Task :feature:playlist:compileAndroidMain
+> Task :feature:playlist:bundleAndroidMainClassesToCompileJar
+> Task :feature:channel:processAndroidMainJavaRes
+> Task :feature:downloads:processAndroidMainJavaRes
+> Task :feature:home:processAndroidMainJavaRes
+> Task :feature:library:processAndroidMainJavaRes
+> Task :feature:playlist:processAndroidMainJavaRes
+> Task :feature:search:compileAndroidMain
+> Task :feature:channel:bundleAndroidMainClassesToRuntimeJar
+> Task :feature:search:bundleAndroidMainClassesToCompileJar
+> Task :feature:search:processAndroidMainJavaRes
+> Task :feature:downloads:bundleAndroidMainClassesToRuntimeJar
+> Task :feature:subscriptions:compileAndroidMain
+> Task :feature:subscriptions:bundleAndroidMainClassesToCompileJar
+> Task :feature:subscriptions:processAndroidMainJavaRes
+> Task :feature:home:bundleAndroidMainClassesToRuntimeJar
+> Task :feature:library:bundleAndroidMainClassesToRuntimeJar
+> Task :feature:playlist:bundleAndroidMainClassesToRuntimeJar
+> Task :feature:search:bundleAndroidMainClassesToRuntimeJar
+> Task :feature:subscriptions:bundleAndroidMainClassesToRuntimeJar
+> Task :core:designsystem:mergeAndroidMainJavaResource
+> Task :core:designsystem:syncAndroidMainLibJars
+> Task :core:designsystem:bundleAndroidMainLocalLintAar
+> Task :feature:channel:extractAndroidMainAnnotations
+> Task :feature:channel:mergeAndroidMainJavaResource
+> Task :feature:channel:syncAndroidMainLibJars
+> Task :feature:channel:bundleAndroidMainLocalLintAar
+> Task :feature:downloads:extractAndroidMainAnnotations
+> Task :feature:downloads:mergeAndroidMainJavaResource
+> Task :feature:downloads:syncAndroidMainLibJars
+> Task :feature:downloads:bundleAndroidMainLocalLintAar
+> Task :feature:home:extractAndroidMainAnnotations
+> Task :feature:home:mergeAndroidMainJavaResource
+> Task :feature:home:syncAndroidMainLibJars
+> Task :feature:home:bundleAndroidMainLocalLintAar
+> Task :feature:library:extractAndroidMainAnnotations
+> Task :feature:library:mergeAndroidMainJavaResource
+> Task :feature:library:syncAndroidMainLibJars
+> Task :feature:library:bundleAndroidMainLocalLintAar
+> Task :feature:playlist:extractAndroidMainAnnotations
+> Task :feature:playlist:mergeAndroidMainJavaResource
+> Task :feature:playlist:syncAndroidMainLibJars
+> Task :feature:playlist:bundleAndroidMainLocalLintAar
+> Task :feature:search:extractAndroidMainAnnotations
+> Task :feature:search:mergeAndroidMainJavaResource
+> Task :feature:search:syncAndroidMainLibJars
+> Task :feature:search:bundleAndroidMainLocalLintAar
+> Task :feature:subscriptions:extractAndroidMainAnnotations
+> Task :feature:subscriptions:mergeAndroidMainJavaResource
+> Task :feature:subscriptions:syncAndroidMainLibJars
+> Task :feature:subscriptions:bundleAndroidMainLocalLintAar
+> Task :core:designsystem:createFullJarAndroidMain
+> Task :feature:channel:createFullJarAndroidMain
+> Task :feature:downloads:createFullJarAndroidMain
+> Task :feature:home:createFullJarAndroidMain
+> Task :feature:library:createFullJarAndroidMain
+> Task :feature:playlist:createFullJarAndroidMain
+> Task :feature:search:createFullJarAndroidMain
+> Task :feature:subscriptions:createFullJarAndroidMain
+> Task :app:mergeLibDexDebug
+> Task :shared:lintAnalyzeAndroidHostTest
+
+> Task :app:kspDebugKotlin
+w: [ksp] /home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/database/feed/dao/FeedDAO.kt:178: The DAO function return type (kotlin.collections.List<java.time.OffsetDateTime?>) with the nullable type argument is meaningless because for now Room will never put a null value in a result.
+w: [ksp] /home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/database/feed/dao/FeedDAO.kt:181: The DAO function return type (kotlin.collections.List<java.time.OffsetDateTime?>) with the nullable type argument is meaningless because for now Room will never put a null value in a result.
