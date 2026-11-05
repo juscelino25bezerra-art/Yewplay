@@ -1006,6 +1006,14 @@
     <string name="yp_download_no_sound">no sound</string>
     <string name="yp_download_audio_track">Audio track</string>
     <string name="yp_download_quality">Quality</string>
+    <string name="yp_tabs_hint">Use the arrows to reorder the tabs of the home and ✕ to remove one.</string>
+    <string name="yp_tabs_add">Add tab</string>
+    <string name="yp_tabs_move_up">Move up</string>
+    <string name="yp_tabs_move_down">Move down</string>
+    <string name="yp_subs_channels">Channels</string>
+    <string name="yp_more_options">More options</string>
+    <string name="yp_subs_reorder_groups">Reorder groups</string>
+    <string name="yp_import_open_page">Open the page</string>
     <string name="yp_local_playlist">Local playlist</string>
     <string name="yp_storage_used">%s used by the app</string>
     <string name="yp_storage_free">%s free</string>

@@ -88,6 +88,7 @@ import org.schabi.newpipe.local.feed.notifications.NotificationWorker;
 import org.schabi.newpipe.local.history.YpHistoryFragment;
 import org.schabi.newpipe.local.playlist.YpLocalPlaylistFragment;
 import org.schabi.newpipe.local.subscription.SubscriptionFragment;
+import org.schabi.newpipe.local.subscription.SubscriptionsImportFragment;
 import org.schabi.newpipe.player.Player;
 import org.schabi.newpipe.player.event.OnKeyDownListener;
 import org.schabi.newpipe.player.helper.PlayerHolder;
@@ -841,6 +842,8 @@ public class MainActivity extends AppCompatActivity {
                 || fragment instanceof YpLocalPlaylistFragment
                 || fragment instanceof YpHistoryFragment
                 || fragment instanceof YpBookmarksFragment
+                || fragment instanceof SubscriptionFragment
+                || fragment instanceof SubscriptionsImportFragment
                 || fragment instanceof YpWelcomeFragment;
         // the welcome screen is shown full screen, without the bottom bar
         bottomBarHidden = fragment instanceof YpWelcomeFragment;
