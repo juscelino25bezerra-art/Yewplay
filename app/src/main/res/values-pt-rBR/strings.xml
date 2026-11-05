@@ -946,6 +946,10 @@
     <string name="yp_download_no_sound">sem som</string>
     <string name="yp_download_audio_track">Faixa de áudio</string>
     <string name="yp_download_quality">Qualidade</string>
+    <string name="yp_tabs_hint">Use as setas para reordenar as abas da tela inicial e o ✕ para remover.</string>
+    <string name="yp_tabs_add">Adicionar aba</string>
+    <string name="yp_tabs_move_up">Mover para cima</string>
+    <string name="yp_tabs_move_down">Mover para baixo</string>
     <string name="yp_local_playlist">Playlist local</string>
     <string name="yp_storage_used">%s usados pelo app</string>
     <string name="yp_storage_free">%s livres</string>
