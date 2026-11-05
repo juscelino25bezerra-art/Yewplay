@@ -27,11 +27,4 @@
         app:singleLineTitle="false"
         app:iconSpaceReserved="false" />
 
-    <PreferenceCategory
-        android:layout="@layout/settings_category_header_layout"
-        app:iconSpaceReserved="false">
-
-        <org.schabi.newpipe.settings.custom.NotificationActionsPreference />
-    </PreferenceCategory>
-
 </PreferenceScreen>

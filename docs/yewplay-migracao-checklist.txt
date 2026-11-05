@@ -1,6 +1,6 @@
 YEWPLAY - MIGRAÇÃO DA INTERFACE PARA KOTLIN + COMPOSE
 Checklist (somente interface; o motor do NewPipe fica como está)
-Atualizado em: 05/11/2026 - branch claude/yewplay-telas-secundarias-2
+Atualizado em: 05/11/2026 - branch claude/yewplay-config-internas
 
 Legenda: [x] concluído   [ ] falta
 
@@ -63,16 +63,17 @@ Legenda: [x] concluído   [ ] falta
 ======================================================================
 5. CONFIGURAÇÕES - TELAS INTERNAS
 ======================================================================
-[ ] Vídeo e áudio
-[ ] Player (ExoPlayer)
-[ ] Downloads
-[ ] Aparência
-[ ] Conteúdo
-[ ] Notificações
-[ ] Histórico e cache
-[ ] Backup e restauração
-[ ] Atualizações
-[ ] Depuração
+[x] Base das telas de configuração em Compose (mesmas chaves de antes)
+[x] Vídeo e áudio
+[x] Player (ExoPlayer)
+[x] Downloads
+[x] Aparência
+[x] Conteúdo
+[x] Notificações (e notificação de reprodução)
+[x] Histórico e cache
+[x] Backup e restauração
+[x] Atualizações
+[x] Depuração
 
 ======================================================================
 6. PLAYER (por último)
@@ -96,7 +97,9 @@ Legenda: [x] concluído   [ ] falta
 [ ] Remover StreamItemAdapter/AudioTrackAdapter (só sobrou a parte de dados)
     e o layout stream_quality_item
 [ ] Remover views customizadas sem uso (pasta views/)
-[ ] Apagar layouts XML órfãos (hoje: 97 em res/layout)
+[ ] Apagar layouts XML órfãos
+[ ] Busca nas Configurações lendo as telas em Kotlin (hoje os XML de
+    preferência servem só de índice da busca)
 [ ] Converter para Kotlin o Java restante da interface
     (BaseFragment, SettingsActivity, etc.)
 
@@ -113,7 +116,6 @@ FICA DE FORA (MOTOR)
 RESUMO
 ======================================================================
 Concluído: telas principais + base/design system + diálogos + telas secundárias
-Falta:     10 telas de configuração,
-           player (10 partes) e limpeza final (5 itens)
-Ordem sugerida: Configurações internas
-                > Player > Estrutura e limpeza
+           + configurações
+Falta:     player (10 partes) e limpeza final
+Ordem sugerida: Player > Estrutura e limpeza

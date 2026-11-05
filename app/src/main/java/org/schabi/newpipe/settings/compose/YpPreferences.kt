@@ -127,6 +127,9 @@ sealed interface YpPref {
     data class Info(val text: String) : YpPref {
         override val key: String? = null
     }
+
+    /** Free content, for the few settings that are not one of the kinds above. */
+    data class Custom(override val key: String?, val content: @Composable () -> Unit) : YpPref
 }
 
 /** Helpers to build the entries of a screen from the app's resources. */
@@ -340,6 +343,8 @@ abstract class YpPreferenceFragment : Fragment() {
     private fun Entry(item: YpPref, highlighted: Boolean, @Suppress("UNUSED_PARAMETER") tick: Int) {
         when (item) {
             is YpPref.Category -> YpPreferenceCategory(item.title)
+
+            is YpPref.Custom -> item.content()
 
             is YpPref.Info -> Text(
                 modifier = Modifier.padding(horizontal = YpScreenMargin, vertical = 12.dp),
