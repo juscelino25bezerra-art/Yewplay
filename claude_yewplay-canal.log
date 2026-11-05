@@ -1,14 +1,14 @@
 branch: claude/yewplay-canal
-sha: c2ab81bee95ed862805ad7eca4abb9081d03a21e
+sha: 5e4947489c6a7c389334900f7293e88466c2ab3b
 outcome: failure
-run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/41940302484
+run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/41940948145
 
 == errors ==
 > Task :app:runKtlint FAILED
 * What went wrong:
 Execution failed for task ':app:runKtlint' (registered in build file 'app/build.gradle.kts').
 org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':app:runKtlint' (registered in build file 'app/build.gradle.kts').
-BUILD FAILED in 3m 11s
+BUILD FAILED in 4m 34s
 
 == warnings ==
 w: file:///home/runner/work/Yewplay/Yewplay/app/build.gradle.kts:150:30: 'fun provideDelegate(thisRef: Any?, property: KProperty<*>): ExistingDomainObjectDelegate<Configuration>' is deprecated. Use 'val element = create(name)' instead. See the Gradle 9.6 upgrading guide.
@@ -27,15 +27,12 @@ w: ⚠️ Unused Kotlin Source Sets
 w: ⚠️ Unused Kotlin Source Sets
 w: ⚠️ Unused Kotlin Source Sets
 w: ⚠️ Unused Kotlin Source Sets
+w: ⚠️ Unused Kotlin Source Sets
 w: Koin compiler plugin: Kotlin 2.4.21 is newer than the newest verified version (2.4.20) — proceeding with the 2.4.20 adapter. If compilation fails, check for a koin-compiler-plugin update. Verified versions: 2.3.20, 2.4.0, 2.4.10, 2.4.20.
 
 == tail ==
-No dependencies found for variant: androidMain
-
-> Task :shared:packageAndroidMainResources
-> Task :core:designsystem:androidPreBuild UP-TO-DATE
-> Task :core:designsystem:preAndroidMainBuild UP-TO-DATE
-> Task :core:designsystem:generateAndroidMainEmptyResourceFiles
+> Task :feature:channel:preAndroidMainBuild UP-TO-DATE
+> Task :feature:channel:generateAndroidMainEmptyResourceFiles
 > Task :feature:library:androidPreBuild UP-TO-DATE
 > Task :feature:library:preAndroidMainBuild UP-TO-DATE
 > Task :feature:library:generateAndroidMainEmptyResourceFiles
@@ -52,22 +49,26 @@ No dependencies found for variant: androidMain
 > Task :shared:kmpPartiallyResolvedDependenciesChecker
 > Task :shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
 > Task :shared:generateResourceAccessorsForAndroidMain NO-SOURCE
+
+> Task :app:runKtlint
+/home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/fragments/list/channel/YpChannelViewModel.kt:248:56: First line of body expression fits on same line as function signature (standard:function-signature)
+/home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/fragments/list/channel/YpChannelViewModel.kt:492:59: First line of body expression fits on same line as function signature (standard:function-signature)
+/home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/fragments/list/channel/YpChannelFragment.kt:300:90: First line of body expression fits on same line as function signature (standard:function-signature)
+
 > Task :shared:generateResourceAccessorsForCommonMain
 > Task :shared:generateActualResourceCollectorsForAndroidMain
 > Task :shared:generateComposeResClass
 > Task :shared:generateExpectResourceCollectorsForCommonMain
 
 > Task :app:runKtlint
-/home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/yewplay/YpItems.kt:37:47: First line of body expression fits on same line as function signature (standard:function-signature)
-/home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/yewplay/YpItems.kt:48:91: First line of body expression fits on same line as function signature (standard:function-signature)
-00:20:50.709 [main] WARN com.pinterest.ktlint.cli.internal.KtlintCommandLine -- Lint has found errors than can be autocorrected using 'ktlint --format'
+00:27:32.126 [main] WARN com.pinterest.ktlint.cli.internal.KtlintCommandLine -- Lint has found errors than can be autocorrected using 'ktlint --format'
 
 Summary error count (descending) by rule:
-  standard:function-signature: 2
+  standard:function-signature: 3
 
 > Task :app:runKtlint FAILED
-> Task :app:runCheckstyle
 > Task :core:model:compileKotlin
+> Task :app:runCheckstyle
 > Task :shared:compileAndroidMain
 w: Koin compiler plugin: Kotlin 2.4.21 is newer than the newest verified version (2.4.20) — proceeding with the 2.4.20 adapter. If compilation fails, check for a koin-compiler-plugin update. Verified versions: 2.3.20, 2.4.0, 2.4.10, 2.4.20.
 
@@ -227,6 +228,6 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 
 For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD FAILED in 3m 11s
-28 actionable tasks: 28 executed
+BUILD FAILED in 4m 34s
+29 actionable tasks: 29 executed
 Configuration cache entry stored.
