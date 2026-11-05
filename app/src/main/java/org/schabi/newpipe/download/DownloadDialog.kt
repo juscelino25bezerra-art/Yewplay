@@ -44,6 +44,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -128,25 +129,15 @@ class DownloadDialog() : DialogFragment() {
     @JvmField
     var wrappedAudioTracks: AudioTracksWrapper? = null
 
-    @State
-    @JvmField
-    var selectedAudioTrackIndex = 0
+    private var selectedAudioTrackIndex by mutableIntStateOf(0)
 
-    @State
-    @JvmField
-    var selectedVideoIndex = 0
+    private var selectedVideoIndex by mutableIntStateOf(0)
 
-    @State
-    @JvmField
-    var selectedAudioIndex = 0
+    private var selectedAudioIndex by mutableIntStateOf(0)
 
-    @State
-    @JvmField
-    var selectedSubtitleIndex = 0
+    private var selectedSubtitleIndex by mutableIntStateOf(0)
 
-    @State
-    @JvmField
-    var selectedKindOrdinal = -1
+    private var selectedKindOrdinal by mutableIntStateOf(-1)
 
     @State
     @JvmField
@@ -165,8 +156,8 @@ class DownloadDialog() : DialogFragment() {
     private var filenameTmp: String = ""
     private var mimeTmp: String? = null
 
-    // Compose state: the sheet reads [refresh] so that it redraws when the selection or the
-    // stream sizes change
+    // Compose state: the selection above and [refresh], which changes when the stream sizes
+    // arrive, so that the sheet redraws
     private var refresh by mutableIntStateOf(0)
     private var serviceReady by mutableStateOf(false)
     private var fileName by mutableStateOf("")
@@ -227,6 +218,13 @@ class DownloadDialog() : DialogFragment() {
         val context = requireContext()
         ctx = context
         Bridge.restoreInstanceState(this, savedInstanceState)
+        savedInstanceState?.getIntArray(KEY_SELECTION)?.let {
+            selectedKindOrdinal = it[0]
+            selectedAudioTrackIndex = it[1]
+            selectedVideoIndex = it[2]
+            selectedAudioIndex = it[3]
+            selectedSubtitleIndex = it[4]
+        }
         if (currentInfo == null) {
             dismiss()
             return
@@ -279,14 +277,23 @@ class DownloadDialog() : DialogFragment() {
         super.onSaveInstanceState(outState)
         fileNameState = fileName
         Bridge.saveInstanceState(this, outState)
+        outState.putIntArray(
+            KEY_SELECTION,
+            intArrayOf(
+                selectedKindOrdinal,
+                selectedAudioTrackIndex,
+                selectedVideoIndex,
+                selectedAudioIndex,
+                selectedSubtitleIndex
+            )
+        )
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val context = ctx ?: return super.onCreateDialog(savedInstanceState)
         return YpDialogs.sheet(context) { dismiss ->
             YpSheet {
-                // passed in so that the content redraws when the selection or the sizes change
-                DownloadContent(version = refresh, onCancel = dismiss)
+                DownloadContent(onCancel = dismiss)
             }
         }
     }
@@ -481,8 +488,7 @@ class DownloadDialog() : DialogFragment() {
     // ---- UI ----
 
     @Composable
-    @Suppress("UNUSED_PARAMETER") // only there to redraw the content when it changes
-    private fun DownloadContent(version: Int, onCancel: () -> Unit) {
+    private fun DownloadContent(onCancel: () -> Unit) {
         val context = requireContext()
         val tracks = wrappedAudioTracks
         val selectedQuality = when (selectedKind) {
@@ -541,7 +547,9 @@ class DownloadDialog() : DialogFragment() {
             }
             SectionLabel(stringResource(R.string.yp_download_quality))
             Column(modifier = Modifier.heightIn(max = 300.dp).verticalScroll(rememberScrollState())) {
-                qualityOptions(context).forEachIndexed { index, (quality, format, size) ->
+                // [refresh] changes when the stream sizes arrive
+                val options = remember(refresh, selectedKindOrdinal, selectedAudioTrackIndex) { qualityOptions(context) }
+                options.forEachIndexed { index, (quality, format, size) ->
                     QualityRow(quality, format, size, index == selectedQuality) { selectQuality(index) }
                 }
             }
@@ -1091,5 +1099,6 @@ class DownloadDialog() : DialogFragment() {
         val DEBUG = MainActivity.DEBUG
         const val DEFAULT_THREADS = 3
         const val MAX_THREADS = 32
+        const val KEY_SELECTION = "selection"
     }
 }
