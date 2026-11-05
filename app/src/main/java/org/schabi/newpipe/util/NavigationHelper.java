@@ -53,9 +53,9 @@ import org.schabi.newpipe.fragments.list.comments.CommentRepliesFragment;
 import org.schabi.newpipe.fragments.list.kiosk.YpKioskFragment;
 import org.schabi.newpipe.fragments.list.playlist.YpPlaylistFragment;
 import org.schabi.newpipe.fragments.list.search.YpSearchFragment;
-import org.schabi.newpipe.local.bookmark.BookmarkFragment;
+import org.schabi.newpipe.local.bookmark.YpBookmarksFragment;
 import org.schabi.newpipe.local.feed.FeedFragment;
-import org.schabi.newpipe.local.history.StatisticsPlaylistFragment;
+import org.schabi.newpipe.local.history.YpHistoryFragment;
 import org.schabi.newpipe.local.playlist.YpLocalPlaylistFragment;
 import org.schabi.newpipe.local.subscription.SubscriptionFragment;
 import org.schabi.newpipe.local.subscription.SubscriptionsImportFragment;
@@ -592,7 +592,7 @@ public final class NavigationHelper {
 
     public static void openBookmarksFragment(final FragmentManager fragmentManager) {
         defaultTransaction(fragmentManager)
-                .replace(R.id.fragment_holder, new BookmarkFragment())
+                .replace(R.id.fragment_holder, new YpBookmarksFragment())
                 .addToBackStack(null)
                 .commit();
     }
@@ -623,7 +623,7 @@ public final class NavigationHelper {
 
     public static void openStatisticFragment(final FragmentManager fragmentManager) {
         defaultTransaction(fragmentManager)
-                .replace(R.id.fragment_holder, new StatisticsPlaylistFragment())
+                .replace(R.id.fragment_holder, new YpHistoryFragment())
                 .addToBackStack(null)
                 .commit();
     }

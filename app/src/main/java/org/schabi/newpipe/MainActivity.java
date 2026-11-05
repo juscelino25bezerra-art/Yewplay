@@ -81,10 +81,10 @@ import org.schabi.newpipe.fragments.list.channel.YpChannelFragment;
 import org.schabi.newpipe.fragments.list.comments.CommentRepliesFragment;
 import org.schabi.newpipe.fragments.list.playlist.YpPlaylistFragment;
 import org.schabi.newpipe.fragments.list.search.YpSearchFragment;
-import org.schabi.newpipe.local.bookmark.BookmarkFragment;
+import org.schabi.newpipe.local.bookmark.YpBookmarksFragment;
 import org.schabi.newpipe.local.feed.FeedFragment;
 import org.schabi.newpipe.local.feed.notifications.NotificationWorker;
-import org.schabi.newpipe.local.history.StatisticsPlaylistFragment;
+import org.schabi.newpipe.local.history.YpHistoryFragment;
 import org.schabi.newpipe.local.playlist.YpLocalPlaylistFragment;
 import org.schabi.newpipe.local.subscription.SubscriptionFragment;
 import org.schabi.newpipe.player.Player;
@@ -831,7 +831,9 @@ public class MainActivity extends AppCompatActivity {
                 || fragment instanceof YpSearchFragment
                 || fragment instanceof YpChannelFragment
                 || fragment instanceof YpPlaylistFragment
-                || fragment instanceof YpLocalPlaylistFragment;
+                || fragment instanceof YpLocalPlaylistFragment
+                || fragment instanceof YpHistoryFragment
+                || fragment instanceof YpBookmarksFragment;
         final View toolbar = toolbarLayoutBinding.getRoot();
         final View holder = mainBinding.fragmentHolder;
         if (!(holder.getLayoutParams() instanceof ViewGroup.MarginLayoutParams)) {
@@ -970,8 +972,8 @@ public class MainActivity extends AppCompatActivity {
         } else if (fragment instanceof FeedFragment || fragment instanceof SubscriptionFragment) {
             itemId = R.id.yp_nav_subscriptions;
         } else if (fragment instanceof LibraryFragment
-                || fragment instanceof StatisticsPlaylistFragment
-                || fragment instanceof BookmarkFragment
+                || fragment instanceof YpHistoryFragment
+                || fragment instanceof YpBookmarksFragment
                 || fragment instanceof YpLocalPlaylistFragment) {
             itemId = R.id.yp_nav_library;
         } else {

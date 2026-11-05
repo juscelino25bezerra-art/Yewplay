@@ -924,6 +924,10 @@
         <item quantity="other">%d itens</item>
     </plurals>
     <string name="yp_downloads_dequeue">Tirar da fila</string>
+    <plurals name="yp_history_watch_count">
+        <item quantity="one">Assistido %d vez</item>
+        <item quantity="other">Assistido %d vezes</item>
+    </plurals>
     <string name="yp_local_playlist">Playlist local</string>
     <string name="yp_storage_used">%s usados pelo app</string>
     <string name="yp_storage_free">%s livres</string>

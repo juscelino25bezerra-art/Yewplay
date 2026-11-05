@@ -984,6 +984,10 @@
         <item quantity="other">%d items</item>
     </plurals>
     <string name="yp_downloads_dequeue">Remove from queue</string>
+    <plurals name="yp_history_watch_count">
+        <item quantity="one">Watched %d time</item>
+        <item quantity="other">Watched %d times</item>
+    </plurals>
     <string name="yp_local_playlist">Local playlist</string>
     <string name="yp_storage_used">%s used by the app</string>
     <string name="yp_storage_free">%s free</string>
