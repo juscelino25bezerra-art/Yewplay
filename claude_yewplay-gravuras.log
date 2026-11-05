@@ -1,7 +1,7 @@
 branch: claude/yewplay-gravuras
-sha: da28b0cf2fbc2eb351894f86b3a05c39bcb8597b
+sha: a2c397a6f907e3640247eee946ef8dbcb5056ab3
 outcome: success
-run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/42013977627
+run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/42018732877
 
 == errors ==
 
@@ -59,42 +59,43 @@ w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/us/shandian/giga/ui/fragment/YpDownloadsFragment.kt:877:49 'static field ACTION_MEDIA_SCANNER_SCAN_FILE: String' is deprecated. Deprecated in Java.
 
 == tail ==
-
 > Task :app:stripDebugDebugSymbols
 Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libsqliteJni.so. Run with --info option to learn more.
 
-> Task :app:processDebugResources
+> Task :app:validateSigningDebug
 > Task :app:writeDebugAppMetadata
 > Task :app:writeDebugSigningConfigVersions
-> Task :app:validateSigningDebug
+> Task :app:mergeExtDexDebug
+> Task :app:l8DexDesugarLibDebug
 
 > Task :shared:compileAndroidMain
 w: Koin compiler plugin: Kotlin 2.4.21 is newer than the newest verified version (2.4.20) — proceeding with the 2.4.20 adapter. If compilation fails, check for a koin-compiler-plugin update. Verified versions: 2.3.20, 2.4.0, 2.4.10, 2.4.20.
 
 > Task :shared:processAndroidMainJavaRes
-> Task :shared:bundleAndroidMainClassesToRuntimeJar
 > Task :shared:bundleAndroidMainClassesToCompileJar
-> Task :shared:createFullJarAndroidMain
+> Task :shared:bundleAndroidMainClassesToRuntimeJar
 > Task :core:designsystem:extractAndroidMainAnnotations
 > Task :shared:mergeAndroidMainJavaResource
+> Task :shared:createFullJarAndroidMain
 > Task :shared:syncAndroidMainLibJars
 > Task :shared:bundleAndroidMainLocalLintAar
 > Task :shared:generateAndroidHostTestLintModel
 > Task :core:designsystem:compileAndroidMain
-> Task :core:designsystem:bundleAndroidMainClassesToCompileJar
 > Task :core:designsystem:processAndroidMainJavaRes
-> Task :feature:downloads:compileAndroidMain
-> Task :feature:downloads:bundleAndroidMainClassesToCompileJar
+> Task :core:designsystem:bundleAndroidMainClassesToCompileJar
+> Task :core:designsystem:bundleAndroidMainClassesToRuntimeJar
 
 > Task :feature:channel:compileAndroidMain
 w: file:///home/runner/work/Yewplay/Yewplay/feature/channel/src/commonMain/kotlin/io/github/yewplay/feature/channel/ChannelScreen.kt:403:42 Unnecessary safe call on a non-null receiver of type 'ChannelHeader'.
 w: file:///home/runner/work/Yewplay/Yewplay/feature/channel/src/commonMain/kotlin/io/github/yewplay/feature/channel/ChannelScreen.kt:431:38 Unnecessary safe call on a non-null receiver of type 'ChannelHeader'.
 
+> Task :feature:downloads:compileAndroidMain
 > Task :feature:channel:bundleAndroidMainClassesToCompileJar
-> Task :feature:home:compileAndroidMain
-> Task :feature:home:bundleAndroidMainClassesToCompileJar
+> Task :feature:downloads:bundleAndroidMainClassesToCompileJar
 > Task :feature:library:compileAndroidMain
+> Task :feature:home:compileAndroidMain
 > Task :feature:library:bundleAndroidMainClassesToCompileJar
+> Task :feature:home:bundleAndroidMainClassesToCompileJar
 > Task :feature:settings:compileAndroidMain
 > Task :feature:settings:bundleAndroidMainClassesToCompileJar
 > Task :feature:playlist:compileAndroidMain
@@ -106,7 +107,6 @@ w: file:///home/runner/work/Yewplay/Yewplay/feature/channel/src/commonMain/kotli
 > Task :feature:playlist:processAndroidMainJavaRes
 > Task :feature:settings:processAndroidMainJavaRes
 > Task :feature:channel:bundleAndroidMainClassesToRuntimeJar
-> Task :core:designsystem:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:search:compileAndroidMain
 > Task :feature:search:bundleAndroidMainClassesToCompileJar
 > Task :feature:search:processAndroidMainJavaRes
@@ -152,19 +152,19 @@ w: file:///home/runner/work/Yewplay/Yewplay/feature/channel/src/commonMain/kotli
 > Task :feature:settings:syncAndroidMainLibJars
 > Task :feature:settings:bundleAndroidMainLocalLintAar
 > Task :feature:subscriptions:extractAndroidMainAnnotations
-> Task :app:mergeLibDexDebug
 > Task :feature:subscriptions:mergeAndroidMainJavaResource
+> Task :feature:subscriptions:syncAndroidMainLibJars
+> Task :feature:subscriptions:bundleAndroidMainLocalLintAar
 > Task :core:designsystem:createFullJarAndroidMain
 > Task :feature:channel:createFullJarAndroidMain
 > Task :feature:downloads:createFullJarAndroidMain
 > Task :feature:home:createFullJarAndroidMain
-> Task :feature:subscriptions:syncAndroidMainLibJars
 > Task :feature:library:createFullJarAndroidMain
-> Task :feature:subscriptions:bundleAndroidMainLocalLintAar
 > Task :feature:playlist:createFullJarAndroidMain
 > Task :feature:search:createFullJarAndroidMain
 > Task :feature:settings:createFullJarAndroidMain
 > Task :feature:subscriptions:createFullJarAndroidMain
+> Task :app:mergeLibDexDebug
 > Task :shared:lintAnalyzeAndroidHostTest
 
 > Task :app:kspDebugKotlin
@@ -227,8 +227,8 @@ Note: Recompile with -Xlint:unchecked for details.
 > Task :app:processDebugJavaRes
 > Task :app:bundleDebugClassesToCompileJar
 > Task :app:generateDebugLintReportModel
-> Task :app:generateDebugAndroidTestLintModel
 > Task :app:generateDebugUnitTestLintModel
+> Task :app:generateDebugAndroidTestLintModel
 > Task :app:mergeDebugJavaResource
 
 > Task :app:lintAnalyzeDebug
@@ -256,6 +256,6 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 
 For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD SUCCESSFUL in 5m 40s
+BUILD SUCCESSFUL in 4m 5s
 257 actionable tasks: 257 executed
 Configuration cache entry stored.
