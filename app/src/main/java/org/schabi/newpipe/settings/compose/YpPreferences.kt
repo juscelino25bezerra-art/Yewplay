@@ -58,6 +58,7 @@ import org.schabi.newpipe.R
 import org.schabi.newpipe.local.yewplay.YpDialogs
 import org.schabi.newpipe.local.yewplay.YpThemePrefs
 import org.schabi.newpipe.settings.SettingsActivity
+import org.schabi.newpipe.util.Localization
 import org.schabi.newpipe.util.ThemeHelper
 
 /**
@@ -181,6 +182,44 @@ class YpPrefBuilder(private val context: Context, val prefs: SharedPreferences) 
             dependency = if (dependency != 0) s(dependency) else null,
             enabled = enabled,
             onChange = onChange
+        )
+    }
+
+    /** A choice of durations: the values are seconds, shown as "1 hour", "5 minutes"... */
+    fun durationChoice(
+        @StringRes key: Int,
+        @StringRes title: Int,
+        @ArrayRes entries: Int,
+        @ArrayRes values: Int,
+        @StringRes default: Int,
+        @StringRes summary: Int = 0,
+        @StringRes dependency: Int = 0,
+        enabled: Boolean = true
+    ) {
+        choice(key, title, entries, values, default, summary, dependency, enabled)
+        val item = items.removeAt(items.lastIndex) as YpPref.Choice
+        val names = item.values.mapIndexed { index, value ->
+            val seconds = value.toIntOrNull() ?: 0
+            if (seconds <= 0) item.entries[index] else Localization.localizeDuration(context, seconds)
+        }
+        items += item.copy(entries = names)
+    }
+
+    fun multiChoice(
+        @StringRes key: Int,
+        @StringRes title: Int,
+        @ArrayRes entries: Int,
+        @ArrayRes values: Int,
+        @StringRes summary: Int = 0
+    ) {
+        items += YpPref.MultiChoice(
+            key = s(key),
+            title = s(title),
+            entries = array(entries),
+            values = array(values),
+            // as in the XML screens: everything is chosen by default
+            default = array(values).toSet(),
+            summary = if (summary != 0) s(summary) else null
         )
     }
 
@@ -327,7 +366,8 @@ abstract class YpPreferenceFragment : Fragment() {
                 val chosen = item.entries.getOrNull(item.values.indexOf(value))
                 YpPreferenceRow(
                     title = item.title,
-                    summary = item.summary ?: chosen,
+                    // "%s" in the description is replaced by the chosen entry
+                    summary = item.summary?.let { if (it.contains("%s") && chosen != null) it.replace("%s", chosen) else it } ?: chosen,
                     enabled = item.enabled && isEnabled(item.dependency),
                     highlighted = highlighted,
                     onClick = { showChoice(item, value) }

@@ -106,7 +106,7 @@ class NotificationsSettingsFragment : YpPreferenceFragment() {
             default = false,
             enabled = deviceEnabled
         )
-        choice(
+        durationChoice(
             key = R.string.streams_notifications_interval_key,
             title = R.string.streams_notifications_interval_title,
             entries = R.array.streams_notifications_interval_description,
