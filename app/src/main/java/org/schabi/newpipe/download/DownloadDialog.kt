@@ -424,6 +424,7 @@ class DownloadDialog() : DialogFragment() {
         }
         fileName = when (selectedKind) {
             Kind.VIDEO, Kind.AUDIO -> base
+
             Kind.SUBTITLE -> {
                 val language = wrappedSubtitleStreams.streamsList.getOrNull(selectedSubtitleIndex)?.languageTag
                 getString(R.string.caption_file_name, base, language)
@@ -886,8 +887,10 @@ class DownloadDialog() : DialogFragment() {
             storage = when {
                 // using SAF on older Android versions
                 mainStorage == null -> StoredFileHelper(context, null, targetFile, "")
+
                 // the file does not exist, but it is probably used in a pending download
                 targetFile == null -> StoredFileHelper(mainStorage.uri, filename, mime, mainStorage.tag)
+
                 // the file name is already used, try to use it
                 else -> StoredFileHelper(context, mainStorage.uri, targetFile, mainStorage.tag)
             }
