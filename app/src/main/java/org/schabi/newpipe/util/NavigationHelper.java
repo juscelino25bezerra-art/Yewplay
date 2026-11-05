@@ -352,6 +352,11 @@ public final class NavigationHelper {
     }
 
     public static void gotoMainFragment(final FragmentManager fragmentManager) {
+        // YewPlay: the home is already shown; opening another one here would overlap with the
+        // screen opened right after it (bottom bar) and leave the new home stuck on screen
+        if (fragmentManager.findFragmentById(R.id.fragment_holder) instanceof MainFragment) {
+            return;
+        }
         final boolean popped = fragmentManager.popBackStackImmediate(MAIN_FRAGMENT_TAG, 0);
         if (!popped) {
             openMainFragment(fragmentManager);
