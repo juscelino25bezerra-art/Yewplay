@@ -22,14 +22,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -38,7 +37,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -269,7 +268,10 @@ fun YpTextField(
 ) {
     val focusRequester = remember { FocusRequester() }
     val colors = MaterialTheme.colorScheme
-    TextField(
+    val textStyle = MaterialTheme.typography.bodyLarge
+    // built on BasicTextField (foundation) and not on the material TextField, which the app's
+    // library versions cannot run (it crashes on show)
+    BasicTextField(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = horizontalPadding)
@@ -277,23 +279,29 @@ fun YpTextField(
         value = value,
         onValueChange = onValueChange,
         singleLine = singleLine,
-        textStyle = MaterialTheme.typography.bodyLarge,
-        placeholder = placeholder?.let { { Text(it, style = MaterialTheme.typography.bodyLarge) } },
-        shape = RoundedCornerShape(12.dp),
+        textStyle = textStyle.copy(color = colors.onSurface),
+        cursorBrush = SolidColor(colors.onSurface),
         keyboardOptions = KeyboardOptions(
             keyboardType = keyboardType,
             imeAction = if (onDone != null) ImeAction.Done else ImeAction.Default
         ),
         keyboardActions = KeyboardActions(onDone = { onDone?.invoke() }),
-        colors = TextFieldDefaults.colors(
-            focusedContainerColor = colors.surfaceContainerHighest,
-            unfocusedContainerColor = colors.surfaceContainerHighest,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            cursorColor = colors.onSurface,
-            focusedPlaceholderColor = colors.onSurfaceVariant,
-            unfocusedPlaceholderColor = colors.onSurfaceVariant
-        )
+        decorationBox = { innerTextField ->
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .heightIn(min = 52.dp)
+                    .clip(RoundedCornerShape(12.dp))
+                    .background(colors.surfaceContainerHighest)
+                    .padding(horizontal = 16.dp, vertical = 14.dp),
+                contentAlignment = Alignment.CenterStart
+            ) {
+                if (value.isEmpty() && placeholder != null) {
+                    Text(text = placeholder, style = textStyle, color = colors.onSurfaceVariant)
+                }
+                innerTextField()
+            }
+        }
     )
     if (autoFocus) {
         LaunchedEffect(Unit) { focusRequester.requestFocus() }

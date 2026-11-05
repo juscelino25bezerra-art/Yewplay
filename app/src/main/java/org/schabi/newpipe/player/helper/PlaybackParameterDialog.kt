@@ -17,16 +17,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Slider
-import androidx.compose.material3.SliderDefaults
-import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -46,6 +41,8 @@ import io.github.yewplay.core.designsystem.YpPillButton
 import io.github.yewplay.core.designsystem.YpScreenMargin
 import io.github.yewplay.core.designsystem.YpSheet
 import io.github.yewplay.core.designsystem.YpSheetTitle
+import io.github.yewplay.core.designsystem.YpSlider
+import io.github.yewplay.core.designsystem.YpSwitch
 import org.schabi.newpipe.MainActivity
 import org.schabi.newpipe.R
 import org.schabi.newpipe.local.yewplay.YpDialogs
@@ -357,18 +354,13 @@ class PlaybackParameterDialog : DialogFragment() {
                 }
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     StepButton("−$stepText") { onStep(-1) }
-                    Slider(
+                    YpSlider(
                         modifier = Modifier
                             .weight(1f)
                             .padding(horizontal = 8.dp),
                         value = position.coerceIn(0f, max),
                         valueRange = 0f..max,
-                        onValueChange = onPosition,
-                        colors = SliderDefaults.colors(
-                            thumbColor = colors.onSurface,
-                            activeTrackColor = colors.tertiary,
-                            inactiveTrackColor = colors.surfaceContainerHighest
-                        )
+                        onValueChange = onPosition
                     )
                     StepButton("+$stepText") { onStep(1) }
                 }
@@ -460,17 +452,7 @@ class PlaybackParameterDialog : DialogFragment() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(modifier = Modifier.weight(1f), text = label, style = MaterialTheme.typography.bodyLarge)
-                Switch(
-                    modifier = Modifier.size(width = 52.dp, height = 32.dp),
-                    checked = checked,
-                    onCheckedChange = onChange,
-                    colors = SwitchDefaults.colors(
-                        checkedThumbColor = colors.onPrimary,
-                        checkedTrackColor = colors.primary,
-                        uncheckedThumbColor = colors.onSurfaceVariant,
-                        uncheckedTrackColor = colors.surfaceContainerHighest
-                    )
-                )
+                YpSwitch(checked = checked, onCheckedChange = onChange)
             }
         }
     }

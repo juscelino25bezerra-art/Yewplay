@@ -39,8 +39,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Slider
-import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -66,6 +64,7 @@ import io.github.yewplay.core.designsystem.YpPillButton
 import io.github.yewplay.core.designsystem.YpScreenMargin
 import io.github.yewplay.core.designsystem.YpSheet
 import io.github.yewplay.core.designsystem.YpSheetTitle
+import io.github.yewplay.core.designsystem.YpSlider
 import io.github.yewplay.core.designsystem.YpTextField
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import java.io.File
@@ -547,7 +546,7 @@ class DownloadDialog() : DialogFragment() {
             }
             if (selectedKind != Kind.SUBTITLE) {
                 SectionLabel(stringResource(R.string.msg_threads) + " · " + threads)
-                Slider(
+                YpSlider(
                     modifier = Modifier.padding(horizontal = YpScreenMargin),
                     value = threads.toFloat(),
                     valueRange = 1f..MAX_THREADS.toFloat(),
@@ -557,14 +556,7 @@ class DownloadDialog() : DialogFragment() {
                         PreferenceManager.getDefaultSharedPreferences(context).edit {
                             putInt(getString(R.string.default_download_threads), threads)
                         }
-                    },
-                    colors = SliderDefaults.colors(
-                        thumbColor = MaterialTheme.colorScheme.onSurface,
-                        activeTrackColor = MaterialTheme.colorScheme.tertiary,
-                        inactiveTrackColor = MaterialTheme.colorScheme.surfaceContainerHighest,
-                        activeTickColor = MaterialTheme.colorScheme.tertiary,
-                        inactiveTickColor = MaterialTheme.colorScheme.surfaceContainerHighest
-                    )
+                    }
                 )
             }
             Text(
