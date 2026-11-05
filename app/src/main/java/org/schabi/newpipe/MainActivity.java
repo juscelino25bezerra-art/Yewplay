@@ -76,6 +76,7 @@ import org.schabi.newpipe.extractor.services.peertube.PeertubeInstance;
 import org.schabi.newpipe.fragments.BackPressable;
 import org.schabi.newpipe.fragments.LibraryFragment;
 import org.schabi.newpipe.fragments.MainFragment;
+import org.schabi.newpipe.fragments.YpWelcomeFragment;
 import org.schabi.newpipe.fragments.detail.VideoDetailFragment;
 import org.schabi.newpipe.fragments.list.channel.YpChannelFragment;
 import org.schabi.newpipe.fragments.list.comments.CommentRepliesFragment;
@@ -128,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean syncingBottomNav = false;
     /** YewPlay: top margin of the fragment holder below the toolbar, read once. */
     private int toolbarMarginTop = -1;
+    private boolean bottomBarHidden = false;
 
     private boolean servicesShown = false;
 
@@ -785,6 +787,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
             handleIntent(getIntent());
+        } else if (YpWelcomeFragment.shouldShow(this)) {
+            // YewPlay: the welcome screen on the first start; "Get started" opens the home
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_holder, new YpWelcomeFragment())
+                    .commit();
         } else {
             NavigationHelper.gotoMainFragment(getSupportFragmentManager());
         }
@@ -833,7 +840,18 @@ public class MainActivity extends AppCompatActivity {
                 || fragment instanceof YpPlaylistFragment
                 || fragment instanceof YpLocalPlaylistFragment
                 || fragment instanceof YpHistoryFragment
-                || fragment instanceof YpBookmarksFragment;
+                || fragment instanceof YpBookmarksFragment
+                || fragment instanceof YpWelcomeFragment;
+        // the welcome screen is shown full screen, without the bottom bar
+        bottomBarHidden = fragment instanceof YpWelcomeFragment;
+        mainBinding.ypBottomNav.setVisibility(bottomBarHidden ? View.GONE : View.VISIBLE);
+        final View holderView = mainBinding.fragmentHolder;
+        final int paddingBottom = bottomBarHidden
+                ? 0 : getResources().getDimensionPixelSize(R.dimen.yp_bottom_bar_space);
+        if (holderView.getPaddingBottom() != paddingBottom) {
+            holderView.setPadding(holderView.getPaddingLeft(), holderView.getPaddingTop(),
+                    holderView.getPaddingRight(), paddingBottom);
+        }
         final View toolbar = toolbarLayoutBinding.getRoot();
         final View holder = mainBinding.fragmentHolder;
         if (!(holder.getLayoutParams() instanceof ViewGroup.MarginLayoutParams)) {
@@ -893,7 +911,7 @@ public class MainActivity extends AppCompatActivity {
                     ViewCompat.getRootWindowInsets(mainBinding.getRoot());
             final boolean keyboardOpen = insets != null
                     && insets.isVisible(WindowInsetsCompat.Type.ime());
-            final int visibility = keyboardOpen ? View.GONE : View.VISIBLE;
+            final int visibility = keyboardOpen || bottomBarHidden ? View.GONE : View.VISIBLE;
             if (bottomNav.getVisibility() != visibility) {
                 bottomNav.setVisibility(visibility);
             }

@@ -59,11 +59,14 @@ import org.schabi.newpipe.extractor.stream.StreamType
 import org.schabi.newpipe.info_list.dialog.InfoItemDialog
 import org.schabi.newpipe.local.feed.service.FeedLoadService
 import org.schabi.newpipe.local.subscription.SubscriptionManager
+import org.schabi.newpipe.local.subscription.SubscriptionsImportExportHelper
 import org.schabi.newpipe.local.subscription.dialog.FeedGroupDialog
 import org.schabi.newpipe.local.yewplay.YpItems
+import org.schabi.newpipe.local.yewplay.YpSubscriptionImport
 import org.schabi.newpipe.local.yewplay.YpThemePrefs
 import org.schabi.newpipe.util.Localization
 import org.schabi.newpipe.util.NavigationHelper
+import org.schabi.newpipe.util.ServiceHelper
 import org.schabi.newpipe.util.StreamTypeUtil
 
 /**
@@ -73,6 +76,7 @@ import org.schabi.newpipe.util.StreamTypeUtil
  */
 class FeedFragment : BaseFragment() {
     private lateinit var viewModel: FeedViewModel
+    private lateinit var importHelper: SubscriptionsImportExportHelper
     private val disposables = CompositeDisposable()
     private val uiState = MutableStateFlow(FeedUiState())
 
@@ -96,6 +100,8 @@ class FeedFragment : BaseFragment() {
         uiState.update {
             it.copy(selectedGroupId = groupId.takeIf { id -> id != FeedGroupEntity.GROUP_ALL_ID })
         }
+        // registers for the result of the file picker, so it must be created here
+        importHelper = SubscriptionsImportExportHelper(this)
         val factory = FeedViewModel.getFactory(requireContext(), groupId)
         viewModel = ViewModelProvider(this, factory)[FeedViewModel::class.java]
         viewModel.stateLiveData.observe(this) { state -> state?.let(::handleState) }
@@ -116,13 +122,14 @@ class FeedFragment : BaseFragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 val state by uiState.collectAsState()
-                val subscriptionList by subscriptions.collectAsState(initial = emptyList())
+                val subscriptionList by subscriptions.collectAsState(initial = null)
                 val groupList by groups.collectAsState(initial = emptyList())
                 val recent by recentUploaders.collectAsState()
                 YpTheme(themeKey, nightThemeKey) {
                     FeedScreen(
                         state = state.copy(
-                            channels = channels(subscriptionList, recent),
+                            hasSubscriptions = subscriptionList?.isNotEmpty(),
+                            channels = channels(subscriptionList.orEmpty(), recent),
                             groups = groupList.map { YpGroup(it.uid, it.name) }
                         ),
                         menu = listOf(
@@ -144,12 +151,18 @@ class FeedFragment : BaseFragment() {
                             error = YpErrorLabels(
                                 retry = stringResource(R.string.retry),
                                 openInBrowser = stringResource(R.string.open_in_browser)
-                            )
+                            ),
+                            noSubscriptionsTitle = stringResource(R.string.yp_subs_empty_title),
+                            noSubscriptionsText = stringResource(R.string.yp_subs_empty_text),
+                            findChannels = stringResource(R.string.yp_subs_find),
+                            importSubscriptions = stringResource(R.string.yp_subs_import)
                         ),
                         icons = FeedIcons(
                             filter = painterResource(R.drawable.ic_visibility_on),
                             menu = painterResource(R.drawable.ic_more_vert),
-                            itemMenu = painterResource(R.drawable.ic_more_vert)
+                            itemMenu = painterResource(R.drawable.ic_more_vert),
+                            engravingLines = painterResource(R.drawable.yp_engraving_subs_lines),
+                            engravingFruit = painterResource(R.drawable.yp_engraving_subs_fruit)
                         ),
                         actions = FeedActions(
                             header = SubscriptionsActions(
@@ -172,6 +185,16 @@ class FeedFragment : BaseFragment() {
                             onRefresh = ::refresh,
                             onErrorAction = {
                                 lastError?.let { ErrorUtil.openActivity(requireContext(), it) }
+                            },
+                            onFindChannels = {
+                                NavigationHelper.openSearchFragment(
+                                    fm,
+                                    ServiceHelper.getSelectedServiceId(requireContext()),
+                                    ""
+                                )
+                            },
+                            onImportSubscriptions = {
+                                YpSubscriptionImport.showChooser(this@FeedFragment, importHelper, fm)
                             }
                         )
                     )

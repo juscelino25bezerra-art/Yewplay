@@ -977,8 +977,8 @@
     <string name="yp_downloads_kind_video">Video</string>
     <string name="yp_downloads_kind_audio">Audio</string>
     <string name="yp_downloads_kind_subtitle">Subtitles</string>
-    <string name="yp_downloads_empty">No downloads yet</string>
-    <string name="yp_downloads_empty_detail">Videos and audio you download appear here, ready to play offline.</string>
+    <string name="yp_downloads_empty">Nothing downloaded yet</string>
+    <string name="yp_downloads_empty_detail">Tap Download on any video to watch or listen without internet.</string>
     <plurals name="yp_downloads_items">
         <item quantity="one">%d item</item>
         <item quantity="other">%d items</item>
@@ -988,6 +988,18 @@
         <item quantity="one">Watched %d time</item>
         <item quantity="other">Watched %d times</item>
     </plurals>
+    <string name="yp_subs_empty_title">Your channels grow here</string>
+    <string name="yp_subs_empty_text">Subscribe to channels to get their new videos in this feed. No account needed.</string>
+    <string name="yp_subs_find">Find channels</string>
+    <string name="yp_subs_import">Import subscriptions</string>
+    <string name="yp_subs_import_previous">NewPipe export file</string>
+    <string name="yp_downloads_how">How to download</string>
+    <string name="yp_downloads_how_text">Open a video and tap Download. Choose video or audio, the quality and the format, then tap OK. The download shows up here and keeps going even with the app closed.</string>
+    <string name="yp_welcome_title">Watch, listen and download. No account, no ads.</string>
+    <string name="yp_welcome_text">Free software, built on NewPipe. Your data stays on your device only.</string>
+    <string name="yp_welcome_start">Get started</string>
+    <string name="yp_welcome_import">Import subscriptions from NewPipe</string>
+    <string name="yp_settings_search">Search settings</string>
     <string name="yp_local_playlist">Local playlist</string>
     <string name="yp_storage_used">%s used by the app</string>
     <string name="yp_storage_free">%s free</string>
