@@ -34,6 +34,7 @@ include(":feature:library")
 include(":feature:subscriptions")
 include(":feature:search")
 include(":feature:channel")
+include(":feature:home")
 include(":feature:playlist")
 
 // Use a local copy of NewPipe Extractor by uncommenting the lines below.

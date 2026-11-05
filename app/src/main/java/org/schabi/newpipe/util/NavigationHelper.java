@@ -50,7 +50,7 @@ import org.schabi.newpipe.fragments.MainFragment;
 import org.schabi.newpipe.fragments.detail.VideoDetailFragment;
 import org.schabi.newpipe.fragments.list.channel.YpChannelFragment;
 import org.schabi.newpipe.fragments.list.comments.CommentRepliesFragment;
-import org.schabi.newpipe.fragments.list.kiosk.KioskFragment;
+import org.schabi.newpipe.fragments.list.kiosk.YpKioskFragment;
 import org.schabi.newpipe.fragments.list.playlist.YpPlaylistFragment;
 import org.schabi.newpipe.fragments.list.search.YpSearchFragment;
 import org.schabi.newpipe.local.bookmark.BookmarkFragment;
@@ -602,7 +602,7 @@ public final class NavigationHelper {
     public static void openKioskFragment(final FragmentManager fragmentManager, final int serviceId,
                                          final String kioskId) throws ExtractionException {
         defaultTransaction(fragmentManager)
-                .replace(R.id.fragment_holder, KioskFragment.getInstance(serviceId, kioskId))
+                .replace(R.id.fragment_holder, YpKioskFragment.getInstance(serviceId, kioskId))
                 .addToBackStack(null)
                 .commit();
     }
