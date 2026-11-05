@@ -1,7 +1,7 @@
 branch: claude/yewplay-icone
 sha: 4040166be9a07c109b44d8f98eb81587340cced1
 outcome: success
-run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/41949800701
+run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/41952301047
 
 == errors ==
 
@@ -59,11 +59,12 @@ w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/settings/notifications/NotificationModeConfigFragment.kt:92:27 'fun onOptionsItemSelected(p0: MenuItem): Boolean' is deprecated. Deprecated in Java.
 
 == tail ==
+> Task :app:mapDebugSourceSetPaths
 > Task :app:generateDebugLocaleConfig
-> Task :app:generateDebugResources
 > Task :app:processDebugNavigationResources
-> Task :app:dataBindingMergeDependencyArtifactsDebug
+> Task :app:generateDebugResources
 > Task :app:generateDebugBuildConfig
+> Task :app:dataBindingMergeDependencyArtifactsDebug
 > Task :app:javaPreCompileDebug
 > Task :app:mergeDebugAssets
 > Task :app:compressDebugAssets
@@ -71,9 +72,9 @@ w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe
 > Task :app:packageDebugResources
 > Task :app:parseDebugLocalResources
 > Task :app:generateDebugRFile
-> Task :shared:compileAndroidMain
 > Task :app:checkDebugDuplicateClasses
 > Task :app:desugarDebugFileDependencies
+> Task :shared:compileAndroidMain
 > Task :app:mergeDebugResources
 > Task :app:dataBindingGenBaseClassesDebug
 > Task :app:checkDebugAarMetadata
@@ -127,10 +128,14 @@ w: file:///home/runner/work/Yewplay/Yewplay/feature/channel/src/commonMain/kotli
 > Task :feature:library:processAndroidMainJavaRes
 > Task :feature:channel:bundleAndroidMainClassesToRuntimeJar
 > Task :core:designsystem:bundleAndroidMainClassesToRuntimeJar
+> Task :feature:library:bundleAndroidMainClassesToRuntimeJar
+> Task :feature:subscriptions:compileAndroidMain
+> Task :feature:subscriptions:bundleAndroidMainClassesToCompileJar
+> Task :feature:subscriptions:processAndroidMainJavaRes
+> Task :feature:subscriptions:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:search:compileAndroidMain
 > Task :feature:search:bundleAndroidMainClassesToCompileJar
 > Task :feature:search:processAndroidMainJavaRes
-> Task :feature:library:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:search:bundleAndroidMainClassesToRuntimeJar
 > Task :core:designsystem:mergeAndroidMainJavaResource
 > Task :core:designsystem:syncAndroidMainLibJars
@@ -143,10 +148,6 @@ w: file:///home/runner/work/Yewplay/Yewplay/feature/channel/src/commonMain/kotli
 > Task :feature:library:mergeAndroidMainJavaResource
 > Task :feature:library:syncAndroidMainLibJars
 > Task :feature:library:bundleAndroidMainLocalLintAar
-> Task :feature:subscriptions:compileAndroidMain
-> Task :feature:subscriptions:bundleAndroidMainClassesToCompileJar
-> Task :feature:subscriptions:processAndroidMainJavaRes
-> Task :feature:subscriptions:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:search:extractAndroidMainAnnotations
 > Task :feature:search:mergeAndroidMainJavaResource
 > Task :feature:search:syncAndroidMainLibJars
@@ -162,7 +163,6 @@ w: file:///home/runner/work/Yewplay/Yewplay/feature/channel/src/commonMain/kotli
 > Task :feature:subscriptions:createFullJarAndroidMain
 > Task :app:mergeLibDexDebug
 > Task :shared:lintAnalyzeAndroidHostTest
-
 > Task :app:kspDebugKotlin
 w: [ksp] /home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/database/feed/dao/FeedDAO.kt:178: The DAO function return type (kotlin.collections.List<java.time.OffsetDateTime?>) with the nullable type argument is meaningless because for now Room will never put a null value in a result.
 w: [ksp] /home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/database/feed/dao/FeedDAO.kt:181: The DAO function return type (kotlin.collections.List<java.time.OffsetDateTime?>) with the nullable type argument is meaningless because for now Room will never put a null value in a result.
@@ -226,8 +226,8 @@ Note: Recompile with -Xlint:unchecked for details.
 > Task :app:copyRoomSchemas NO-SOURCE
 > Task :app:processDebugJavaRes
 > Task :app:bundleDebugClassesToCompileJar
-> Task :app:generateDebugLintReportModel
 > Task :app:generateDebugAndroidTestLintModel
+> Task :app:generateDebugLintReportModel
 > Task :app:generateDebugUnitTestLintModel
 > Task :app:mergeDebugJavaResource
 
@@ -256,6 +256,6 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 
 For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD SUCCESSFUL in 6m 12s
+BUILD SUCCESSFUL in 6m 5s
 189 actionable tasks: 189 executed
 Configuration cache entry stored.
