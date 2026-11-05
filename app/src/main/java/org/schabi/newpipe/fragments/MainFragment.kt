@@ -123,13 +123,14 @@ class MainFragment : BaseFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding?.pager?.adapter = null
+        // keep the adapter: the pager restores its tabs from it when the home comes back
         binding = null
     }
 
     override fun onDestroy() {
         super.onDestroy()
         tabsManager.unsetSavedTabsListener()
+        pagerAdapter = null
     }
 
     /* ---------------------------------------------------------------------------------------- */
