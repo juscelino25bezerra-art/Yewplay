@@ -59,9 +59,7 @@ class YpWelcomeFragment : BaseFragment() {
                             import = stringResource(R.string.yp_welcome_import)
                         ),
                         images = WelcomeImages(
-                            logo = painterResource(R.drawable.ic_yewplay_logo),
-                            engravingLines = painterResource(R.drawable.yp_engraving_welcome_lines),
-                            engravingFruit = painterResource(R.drawable.yp_engraving_welcome_fruit)
+                            logo = painterResource(R.drawable.ic_yewplay_logo)
                         ),
                         onStart = ::start,
                         onImport = { importHelper.onImportPreviousSelected() }

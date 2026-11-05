@@ -53,6 +53,7 @@ import io.github.yewplay.core.designsystem.YpEngraving
 import io.github.yewplay.core.designsystem.YpMessageState
 import io.github.yewplay.core.designsystem.YpScreenMargin
 import io.github.yewplay.core.designsystem.YpTextTabs
+import net.newpipe.app.yewplay.engraving.YpEngravings
 
 /** What a download is: drives the placeholder icon and the type filter. */
 enum class DownloadKind { VIDEO, AUDIO, OTHER }
@@ -119,9 +120,7 @@ data class DownloadsIcons(
     val video: Painter,
     val audio: Painter,
     val other: Painter,
-    val download: Painter,
-    val engravingLines: Painter,
-    val engravingFruit: Painter
+    val download: Painter
 )
 
 /** What the screen asks the app to do. */
@@ -469,9 +468,8 @@ private fun NothingDownloaded(strings: DownloadsStrings, icons: DownloadsIcons, 
             modifier = Modifier
                 .padding(top = 40.dp, bottom = 28.dp)
                 .height(200.dp)
-                .aspectRatio(202f / 425f),
-            lines = icons.engravingLines,
-            fruit = icons.engravingFruit
+                .aspectRatio(YpEngravings.downloads.aspectRatio),
+            art = YpEngravings.downloads
         )
         Text(
             text = strings.empty,

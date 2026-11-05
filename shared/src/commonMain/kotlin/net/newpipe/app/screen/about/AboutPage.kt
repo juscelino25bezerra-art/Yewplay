@@ -39,6 +39,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.CompositingStrategy
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
@@ -53,6 +54,7 @@ import net.newpipe.app.navigation.Destination
 import net.newpipe.app.navigation.Navigator
 import net.newpipe.app.platform.ShareHandler
 import net.newpipe.app.preview.ThemePreviewProvider
+import net.newpipe.app.yewplay.engraving.YpEngravings
 import newpipe.shared.generated.resources.Res
 import newpipe.shared.generated.resources.ic_yewplay_logo
 import newpipe.shared.generated.resources.yp_about_based_on
@@ -68,8 +70,6 @@ import newpipe.shared.generated.resources.yp_about_source
 import newpipe.shared.generated.resources.yp_about_summary
 import newpipe.shared.generated.resources.yp_about_support
 import newpipe.shared.generated.resources.yp_about_version
-import newpipe.shared.generated.resources.yp_engraving_about_fruit
-import newpipe.shared.generated.resources.yp_engraving_about_lines
 import newpipe.shared.generated.resources.yp_ic_caret_right
 import newpipe.shared.generated.resources.yp_ic_code
 import newpipe.shared.generated.resources.yp_ic_external
@@ -186,7 +186,7 @@ private fun AboutHeader() {
             modifier = Modifier
                 .align(Alignment.TopEnd)
                 .fillMaxWidth(0.72f)
-                .aspectRatio(530f / 273f)
+                .aspectRatio(YpEngravings.about.aspectRatio)
         )
         Column(modifier = Modifier.fillMaxWidth()) {
             Row(
@@ -266,13 +266,13 @@ private fun AboutEngraving(modifier: Modifier = Modifier) {
     ) {
         Image(
             modifier = Modifier.fillMaxSize(),
-            painter = painterResource(Res.drawable.yp_engraving_about_lines),
+            painter = rememberVectorPainter(YpEngravings.about.lines),
             contentDescription = null,
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onBackground)
         )
         Image(
             modifier = Modifier.fillMaxSize(),
-            painter = painterResource(Res.drawable.yp_engraving_about_fruit),
+            painter = rememberVectorPainter(YpEngravings.about.fruit),
             contentDescription = null
         )
     }

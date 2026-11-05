@@ -210,9 +210,7 @@ class YpDownloadsFragment : Fragment() {
                             video = painterResource(R.drawable.ic_movie),
                             audio = painterResource(R.drawable.ic_headset),
                             other = painterResource(R.drawable.ic_subtitles),
-                            download = painterResource(R.drawable.ic_file_download),
-                            engravingLines = painterResource(R.drawable.yp_engraving_downloads_lines),
-                            engravingFruit = painterResource(R.drawable.yp_engraving_downloads_fruit)
+                            download = painterResource(R.drawable.ic_file_download)
                         ),
                         actions = DownloadsActions(
                             onBack = { requireActivity().onBackPressedDispatcher.onBackPressed() },

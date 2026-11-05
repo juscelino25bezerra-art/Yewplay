@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import io.github.yewplay.core.designsystem.YpEngraving
 import io.github.yewplay.core.designsystem.YpPillButton
 import io.github.yewplay.core.designsystem.YpScreenMargin
+import net.newpipe.app.yewplay.engraving.YpEngravings
 
 /** Texts of the welcome screen, from the app's strings. */
 data class WelcomeStrings(
@@ -39,7 +40,7 @@ data class WelcomeStrings(
 )
 
 /** Images of the welcome screen, from the app's drawables. */
-data class WelcomeImages(val logo: Painter, val engravingLines: Painter, val engravingFruit: Painter)
+data class WelcomeImages(val logo: Painter)
 
 /**
  * Welcome (proposal, p. 9): the big yew branch on top, the promise of the app in two lines,
@@ -61,9 +62,8 @@ fun WelcomeScreen(
         YpEngraving(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(720f / 662f),
-            lines = images.engravingLines,
-            fruit = images.engravingFruit,
+                .aspectRatio(YpEngravings.welcome.aspectRatio),
+            art = YpEngravings.welcome,
             contentScale = ContentScale.FillWidth
         )
         Column(modifier = Modifier.padding(horizontal = YpScreenMargin)) {

@@ -53,6 +53,7 @@ import io.github.yewplay.core.model.YpChannel
 import io.github.yewplay.core.model.YpError
 import io.github.yewplay.core.model.YpGroup
 import io.github.yewplay.core.model.YpStreamItem
+import net.newpipe.app.yewplay.engraving.YpEngravings
 
 /** A video of the feed. */
 data class FeedEntry(val key: String, val item: YpStreamItem)
@@ -104,9 +105,7 @@ data class FeedStrings(
 data class FeedIcons(
     val filter: Painter,
     val menu: Painter,
-    val itemMenu: Painter,
-    val engravingLines: Painter,
-    val engravingFruit: Painter
+    val itemMenu: Painter
 )
 
 /** What the screen asks the app to do. */
@@ -338,9 +337,8 @@ private fun NoSubscriptions(strings: FeedStrings, icons: FeedIcons, actions: Fee
                 .padding(top = 24.dp, bottom = 28.dp)
                 .fillMaxWidth(0.82f)
                 .align(Alignment.CenterHorizontally)
-                .aspectRatio(520f / 435f),
-            lines = icons.engravingLines,
-            fruit = icons.engravingFruit
+                .aspectRatio(YpEngravings.subscriptions.aspectRatio),
+            art = YpEngravings.subscriptions
         )
         Text(text = strings.noSubscriptionsTitle, style = MaterialTheme.typography.headlineSmall)
         Text(

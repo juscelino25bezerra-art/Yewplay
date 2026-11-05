@@ -160,9 +160,7 @@ class FeedFragment : BaseFragment() {
                         icons = FeedIcons(
                             filter = painterResource(R.drawable.ic_visibility_on),
                             menu = painterResource(R.drawable.ic_more_vert),
-                            itemMenu = painterResource(R.drawable.ic_more_vert),
-                            engravingLines = painterResource(R.drawable.yp_engraving_subs_lines),
-                            engravingFruit = painterResource(R.drawable.yp_engraving_subs_fruit)
+                            itemMenu = painterResource(R.drawable.ic_more_vert)
                         ),
                         actions = FeedActions(
                             header = SubscriptionsActions(
