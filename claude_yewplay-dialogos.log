@@ -1,7 +1,7 @@
 branch: claude/yewplay-dialogos
-sha: 085bafe3577e3600e77e35c8b611167d45ffac9b
+sha: ccad02acdd93cb86604426a5f4ff398e7af12861
 outcome: success
-run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/42032446542
+run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/42035226823
 
 == errors ==
 
@@ -22,13 +22,13 @@ w: [ksp] /home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/
 w: [ksp] /home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/database/feed/dao/FeedDAO.kt:181: The DAO function return type (kotlin.collections.List<java.time.OffsetDateTime?>) with the nullable type argument is meaningless because for now Room will never put a null value in a result.
 warning: The following options were not recognized by any processor: '[room.internal.schemaInput, room.internal.schemaOutput, kapt.kotlin.generated]'
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/App.kt:210:21 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'Thread.UncaughtExceptionHandler?'.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:317:24 'field isVideoOnly: Boolean' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:377:34 Condition is always 'true'.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:378:36 'constructor(p0: String!): Locale' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:437:34 'field isVideoOnly: Boolean' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:438:34 'field resolution: String!' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:493:96 'field isVideoOnly: Boolean' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:527:27 Unnecessary non-null assertion (!!) on a non-null receiver of type 'AudioTrackAdapter.AudioTracksWrapper'.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:324:24 'field isVideoOnly: Boolean' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:384:34 Condition is always 'true'.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:385:36 'constructor(p0: String!): Locale' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:444:34 'field isVideoOnly: Boolean' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:445:34 'field resolution: String!' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:499:96 'field isVideoOnly: Boolean' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:533:27 Unnecessary non-null assertion (!!) on a non-null receiver of type 'AudioTrackAdapter.AudioTracksWrapper'.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/error/ErrorActivity.kt:119:17 'fun onBackPressed(): Unit' is deprecated. This method has been deprecated in favor of using the
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/error/ErrorInfo.kt:184:30 'class ExoPlaybackException : PlaybackException' is deprecated. Deprecated in Java.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/error/ErrorInfo.kt:202:43 'class ExoPlaybackException : PlaybackException' is deprecated. Deprecated in Java.
@@ -61,10 +61,10 @@ w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/us/shandian/giga/ui/fragment/YpDownloadsFragment.kt:877:49 'static field ACTION_MEDIA_SCANNER_SCAN_FILE: String' is deprecated. Deprecated in Java.
 
 == tail ==
-
 > Task :app:stripDebugDebugSymbols
 Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libsqliteJni.so. Run with --info option to learn more.
 
+> Task :app:mergeExtDexDebug
 > Task :app:writeDebugAppMetadata
 > Task :app:writeDebugSigningConfigVersions
 > Task :app:validateSigningDebug
@@ -82,8 +82,9 @@ w: Koin compiler plugin: Kotlin 2.4.21 is newer than the newest verified version
 > Task :shared:bundleAndroidMainLocalLintAar
 > Task :shared:generateAndroidHostTestLintModel
 > Task :core:designsystem:compileAndroidMain
-> Task :core:designsystem:bundleAndroidMainClassesToCompileJar
 > Task :core:designsystem:processAndroidMainJavaRes
+> Task :core:designsystem:bundleAndroidMainClassesToCompileJar
+> Task :core:designsystem:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:downloads:compileAndroidMain
 > Task :feature:downloads:bundleAndroidMainClassesToCompileJar
 
@@ -92,31 +93,30 @@ w: file:///home/runner/work/Yewplay/Yewplay/feature/channel/src/commonMain/kotli
 w: file:///home/runner/work/Yewplay/Yewplay/feature/channel/src/commonMain/kotlin/io/github/yewplay/feature/channel/ChannelScreen.kt:431:38 Unnecessary safe call on a non-null receiver of type 'ChannelHeader'.
 
 > Task :feature:channel:bundleAndroidMainClassesToCompileJar
-> Task :feature:home:compileAndroidMain
-> Task :feature:home:bundleAndroidMainClassesToCompileJar
 > Task :feature:library:compileAndroidMain
 > Task :feature:library:bundleAndroidMainClassesToCompileJar
-> Task :feature:search:compileAndroidMain
-> Task :feature:search:bundleAndroidMainClassesToCompileJar
+> Task :feature:home:compileAndroidMain
+> Task :feature:home:bundleAndroidMainClassesToCompileJar
+> Task :feature:settings:compileAndroidMain
+> Task :feature:settings:bundleAndroidMainClassesToCompileJar
 > Task :feature:playlist:compileAndroidMain
 > Task :feature:playlist:bundleAndroidMainClassesToCompileJar
-> Task :feature:settings:compileAndroidMain
 > Task :feature:channel:processAndroidMainJavaRes
-> Task :feature:settings:bundleAndroidMainClassesToCompileJar
+> Task :feature:search:compileAndroidMain
 > Task :feature:downloads:processAndroidMainJavaRes
-> Task :feature:library:processAndroidMainJavaRes
+> Task :feature:search:bundleAndroidMainClassesToCompileJar
 > Task :feature:home:processAndroidMainJavaRes
+> Task :feature:library:processAndroidMainJavaRes
 > Task :feature:playlist:processAndroidMainJavaRes
 > Task :feature:search:processAndroidMainJavaRes
 > Task :feature:settings:processAndroidMainJavaRes
 > Task :feature:channel:bundleAndroidMainClassesToRuntimeJar
-> Task :core:designsystem:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:downloads:bundleAndroidMainClassesToRuntimeJar
-> Task :feature:home:bundleAndroidMainClassesToRuntimeJar
-> Task :feature:library:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:subscriptions:compileAndroidMain
 > Task :feature:subscriptions:bundleAndroidMainClassesToCompileJar
 > Task :feature:subscriptions:processAndroidMainJavaRes
+> Task :feature:home:bundleAndroidMainClassesToRuntimeJar
+> Task :feature:library:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:playlist:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:search:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:settings:bundleAndroidMainClassesToRuntimeJar
@@ -165,8 +165,8 @@ w: file:///home/runner/work/Yewplay/Yewplay/feature/channel/src/commonMain/kotli
 > Task :feature:search:createFullJarAndroidMain
 > Task :feature:settings:createFullJarAndroidMain
 > Task :feature:subscriptions:createFullJarAndroidMain
-> Task :shared:lintAnalyzeAndroidHostTest
 > Task :app:mergeLibDexDebug
+> Task :shared:lintAnalyzeAndroidHostTest
 > Task :app:kspDebugKotlin
 w: [ksp] /home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/database/feed/dao/FeedDAO.kt:178: The DAO function return type (kotlin.collections.List<java.time.OffsetDateTime?>) with the nullable type argument is meaningless because for now Room will never put a null value in a result.
 w: [ksp] /home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/database/feed/dao/FeedDAO.kt:181: The DAO function return type (kotlin.collections.List<java.time.OffsetDateTime?>) with the nullable type argument is meaningless because for now Room will never put a null value in a result.
@@ -178,13 +178,13 @@ warning: The following options were not recognized by any processor: '[room.inte
 
 > Task :app:compileDebugKotlin
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/App.kt:210:21 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'Thread.UncaughtExceptionHandler?'.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:317:24 'field isVideoOnly: Boolean' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:377:34 Condition is always 'true'.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:378:36 'constructor(p0: String!): Locale' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:437:34 'field isVideoOnly: Boolean' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:438:34 'field resolution: String!' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:493:96 'field isVideoOnly: Boolean' is deprecated. Deprecated in Java.
-w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:527:27 Unnecessary non-null assertion (!!) on a non-null receiver of type 'AudioTrackAdapter.AudioTracksWrapper'.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:324:24 'field isVideoOnly: Boolean' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:384:34 Condition is always 'true'.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:385:36 'constructor(p0: String!): Locale' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:444:34 'field isVideoOnly: Boolean' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:445:34 'field resolution: String!' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:499:96 'field isVideoOnly: Boolean' is deprecated. Deprecated in Java.
+w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:533:27 Unnecessary non-null assertion (!!) on a non-null receiver of type 'AudioTrackAdapter.AudioTracksWrapper'.
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/error/ErrorActivity.kt:119:17 'fun onBackPressed(): Unit' is deprecated. This method has been deprecated in favor of using the
       {@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.
       The OnBackPressedDispatcher controls how back button events are dispatched
@@ -227,8 +227,8 @@ Note: Recompile with -Xlint:unchecked for details.
 
 > Task :app:copyRoomSchemas NO-SOURCE
 > Task :app:processDebugJavaRes
-> Task :app:generateDebugLintReportModel
 > Task :app:bundleDebugClassesToCompileJar
+> Task :app:generateDebugLintReportModel
 > Task :app:generateDebugAndroidTestLintModel
 > Task :app:generateDebugUnitTestLintModel
 > Task :app:mergeDebugJavaResource
@@ -258,6 +258,6 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 
 For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD SUCCESSFUL in 6m 16s
+BUILD SUCCESSFUL in 6m 27s
 257 actionable tasks: 257 executed
 Configuration cache entry stored.
