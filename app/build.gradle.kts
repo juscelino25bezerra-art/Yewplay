@@ -232,6 +232,7 @@ dependencies {
     implementation(projects.feature.library)
     implementation(projects.feature.playlist)
     implementation(projects.feature.search)
+    implementation(projects.feature.settings)
     implementation(projects.feature.subscriptions)
     implementation(libs.jetbrains.compose.foundation)
     implementation(libs.jetbrains.compose.material3)
