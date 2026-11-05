@@ -1015,6 +1015,10 @@
     <string name="yp_subs_reorder_groups">Reorder groups</string>
     <string name="yp_import_open_page">Open the page</string>
     <string name="yp_notification_compact_slot">Show in the compact notification</string>
+    <string name="yp_comment_pinned">Pinned</string>
+    <string name="yp_comment_hearted">Hearted by the creator</string>
+    <string name="yp_autoplay_next">Autoplay</string>
+    <string name="yp_autoplay_next_summary">Plays the next video when this one ends</string>
     <string name="yp_local_playlist">Local playlist</string>
     <string name="yp_storage_used">%s used by the app</string>
     <string name="yp_storage_free">%s free</string>
