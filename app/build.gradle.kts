@@ -227,6 +227,7 @@ dependencies {
     implementation(projects.core.data)
     implementation(projects.core.designsystem)
     implementation(projects.feature.channel)
+    implementation(projects.feature.downloads)
     implementation(projects.feature.home)
     implementation(projects.feature.library)
     implementation(projects.feature.playlist)

@@ -2,12 +2,9 @@ package org.schabi.newpipe.download;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewTreeObserver;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -18,7 +15,7 @@ import org.schabi.newpipe.util.ThemeHelper;
 import org.schabi.newpipe.views.FocusOverlayView;
 
 import us.shandian.giga.service.DownloadManagerService;
-import us.shandian.giga.ui.fragment.MissionsFragment;
+import us.shandian.giga.ui.fragment.YpDownloadsFragment;
 
 public class DownloadActivity extends AppCompatActivity {
 
@@ -39,14 +36,8 @@ public class DownloadActivity extends AppCompatActivity {
                 ActivityDownloaderBinding.inflate(getLayoutInflater());
         setContentView(downloaderBinding.getRoot());
 
-        setSupportActionBar(downloaderBinding.toolbarLayout.toolbar);
-
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle(R.string.downloads_title);
-            actionBar.setDisplayShowTitleEnabled(true);
-        }
+        // YewPlay: the Compose screen draws its own top bar (back, title and menu)
+        downloaderBinding.toolbarLayout.getRoot().setVisibility(View.GONE);
 
         getWindow().getDecorView().getViewTreeObserver()
                 .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -63,32 +54,11 @@ public class DownloadActivity extends AppCompatActivity {
     }
 
     private void updateFragments() {
-        final MissionsFragment fragment = new MissionsFragment();
+        final YpDownloadsFragment fragment = new YpDownloadsFragment();
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame, fragment, MISSIONS_FRAGMENT_TAG)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        final MenuInflater inflater = getMenuInflater();
-
-        inflater.inflate(R.menu.download_menu, menu);
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 }

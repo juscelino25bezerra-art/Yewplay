@@ -34,6 +34,7 @@ include(":feature:library")
 include(":feature:subscriptions")
 include(":feature:search")
 include(":feature:channel")
+include(":feature:downloads")
 include(":feature:home")
 include(":feature:playlist")
 
