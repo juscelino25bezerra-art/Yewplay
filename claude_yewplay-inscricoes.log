@@ -1,7 +1,7 @@
 branch: claude/yewplay-inscricoes
-sha: 2e2b879065b31ed707b6c1d6387d73dab8b69b44
+sha: 76c55d3c1ee04cb87c517a227cd0755b8158580d
 outcome: success
-run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/41964937747
+run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/41966021752
 
 == errors ==
 
@@ -71,17 +71,17 @@ w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe
 
 > Task :app:processDebugManifest
 > Task :app:processDebugManifestForPackage
-> Task :app:l8DexDesugarLibDebug
 > Task :app:processDebugResources
 > Task :app:mergeDebugJniLibFolders
-> Task :app:mergeExtDexDebug
 > Task :app:mergeDebugNativeLibs
 
 > Task :app:stripDebugDebugSymbols
 Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libsqliteJni.so. Run with --info option to learn more.
 
+> Task :app:mergeExtDexDebug
 > Task :app:writeDebugAppMetadata
 > Task :app:writeDebugSigningConfigVersions
+> Task :app:l8DexDesugarLibDebug
 > Task :app:validateSigningDebug
 
 > Task :shared:compileAndroidMain
@@ -90,11 +90,11 @@ w: Koin compiler plugin: Kotlin 2.4.21 is newer than the newest verified version
 > Task :shared:processAndroidMainJavaRes
 > Task :shared:bundleAndroidMainClassesToRuntimeJar
 > Task :shared:bundleAndroidMainClassesToCompileJar
+> Task :shared:createFullJarAndroidMain
 > Task :shared:mergeAndroidMainJavaResource
 > Task :core:designsystem:extractAndroidMainAnnotations
 > Task :shared:syncAndroidMainLibJars
 > Task :shared:bundleAndroidMainLocalLintAar
-> Task :shared:createFullJarAndroidMain
 > Task :shared:generateAndroidHostTestLintModel
 > Task :core:designsystem:compileAndroidMain
 > Task :core:designsystem:bundleAndroidMainClassesToCompileJar
@@ -117,14 +117,14 @@ w: file:///home/runner/work/Yewplay/Yewplay/feature/channel/src/commonMain/kotli
 > Task :feature:playlist:processAndroidMainJavaRes
 > Task :feature:channel:bundleAndroidMainClassesToRuntimeJar
 > Task :core:designsystem:bundleAndroidMainClassesToRuntimeJar
-> Task :feature:home:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:search:compileAndroidMain
 > Task :feature:search:bundleAndroidMainClassesToCompileJar
 > Task :feature:search:processAndroidMainJavaRes
+> Task :feature:home:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:subscriptions:compileAndroidMain
-> Task :feature:library:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:subscriptions:bundleAndroidMainClassesToCompileJar
 > Task :feature:subscriptions:processAndroidMainJavaRes
+> Task :feature:library:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:playlist:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:search:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:subscriptions:bundleAndroidMainClassesToRuntimeJar
@@ -224,8 +224,8 @@ Note: Recompile with -Xlint:unchecked for details.
 > Task :app:processDebugJavaRes
 > Task :app:bundleDebugClassesToCompileJar
 > Task :app:generateDebugLintReportModel
-> Task :app:generateDebugUnitTestLintModel
 > Task :app:generateDebugAndroidTestLintModel
+> Task :app:generateDebugUnitTestLintModel
 > Task :app:mergeDebugJavaResource
 
 > Task :app:lintAnalyzeDebug
@@ -253,6 +253,6 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 
 For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD SUCCESSFUL in 5m 34s
+BUILD SUCCESSFUL in 5m 11s
 223 actionable tasks: 223 executed
 Configuration cache entry stored.
