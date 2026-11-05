@@ -53,6 +53,7 @@ import io.github.yewplay.core.designsystem.YpSkeletonList
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import org.schabi.newpipe.R
 import org.schabi.newpipe.error.ErrorInfo
 import org.schabi.newpipe.error.UserAction
@@ -93,6 +94,7 @@ class YpCommentsPager(
         error = null
         disposables.add(
             firstPage()
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { (list, page) ->
@@ -122,6 +124,7 @@ class YpCommentsPager(
         loading = true
         disposables.add(
             nextPage(page!!)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { result ->
