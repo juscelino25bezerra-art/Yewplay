@@ -1,20 +1,18 @@
 branch: claude/yewplay-dialogos
-sha: 40df9978dc5c688e6487398505a31293c2628f67
+sha: d442e057ac14aae944bd00c34cd6750549285c16
 outcome: failure
-run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/42022094407
+run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/42023228151
 
 == errors ==
 > Task :app:compileDebugKotlin FAILED
-e: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:762:45 Argument type mismatch: actual type is 'Context?', but 'Context' was expected.
-e: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:850:69 Argument type mismatch: actual type is 'String?', but 'String' was expected.
-e: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:889:72 Argument type mismatch: actual type is 'Uri?', but 'Uri' was expected.
-e: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/dialog/PlaylistDialog.kt:36:20 Assignment type mismatch: actual type is 'SavedState!', but 'Fragment.SavedState?' was expected.
-e: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/dialog/PlaylistDialog.kt:41:30 Argument type mismatch: actual type is 'Fragment.SavedState?', but 'SavedState!' was expected.
-e: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/local/dialog/PlaylistDialog.kt:63:37 None of the following candidates is applicable:
+e: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/player/helper/PlaybackParameterDialog.kt:68:13 Platform declaration clash: The following declarations have the same JVM signature (setUnhooked(Z)V):
+e: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/player/helper/PlaybackParameterDialog.kt:70:13 Platform declaration clash: The following declarations have the same JVM signature (setStep(D)V):
+e: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/player/helper/PlaybackParameterDialog.kt:232:13 Platform declaration clash: The following declarations have the same JVM signature (setUnhooked(Z)V):
+e: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/player/helper/PlaybackParameterDialog.kt:268:13 Platform declaration clash: The following declarations have the same JVM signature (setStep(D)V):
 * What went wrong:
 Execution failed for task ':app:compileDebugKotlin' (registered by plugin 'com.android.internal.application').
 org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':app:compileDebugKotlin' (registered by plugin 'com.android.internal.application').
-BUILD FAILED in 7m 16s
+BUILD FAILED in 8m 2s
 
 == warnings ==
 w: file:///home/runner/work/Yewplay/Yewplay/app/build.gradle.kts:150:30: 'fun provideDelegate(thisRef: Any?, property: KProperty<*>): ExistingDomainObjectDelegate<Configuration>' is deprecated. Use 'val element = create(name)' instead. See the Gradle 9.6 upgrading guide.
@@ -46,10 +44,8 @@ w: [ksp] /home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/
 warning: The following options were not recognized by any processor: '[room.internal.schemaInput, room.internal.schemaOutput, kapt.kotlin.generated]'
 
 == tail ==
-   > Kotlin compiler: ARGUMENT_TYPE_MISMATCH
-       Kotlin compiler error
-         Argument type mismatch: actual type is 'Context?', but 'Context' was expected.
-         Location: /home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:762
+             fun setUnhooked(value: Boolean): Unit defined in org.schabi.newpipe.player.helper.PlaybackParameterDialog
+         Location: /home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/player/helper/PlaybackParameterDialog.kt:68
 
 * Try:
 > Run with --info or --debug option to get more log output.
@@ -200,7 +196,9 @@ Caused by: org.gradle.workers.internal.DefaultWorkerExecutor$WorkExecutionExcept
 	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:68)
 	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.doExecute(DefaultTaskNodeExecutor.java:364)
 	... 25 more
-Caused by: org.jetbrains.kotlin.gradle.tasks.CompilationErrorException: Argument type mismatch: actual type is 'Context?', but 'Context' was expected.
+Caused by: org.jetbrains.kotlin.gradle.tasks.CompilationErrorException: Platform declaration clash: The following declarations have the same JVM signature (setUnhooked(Z)V):
+    fun `<set-unhooked>`(`<set-?>`: Boolean): Unit defined in org.schabi.newpipe.player.helper.PlaybackParameterDialog
+    fun setUnhooked(value: Boolean): Unit defined in org.schabi.newpipe.player.helper.PlaybackParameterDialog
 	at org.jetbrains.kotlin.gradle.plugin.diagnostics.DefaultCompilerDiagnosticsProblemsReporter.reportCompilerMessage(CompilerDiagnosticsProblemsReporter.kt:63)
 	at org.jetbrains.kotlin.compilerRunner.btapi.ProblemsApiCompilerMessageRenderer.replayTo(ProblemsApiCompilerMessageRenderer.kt:88)
 	at org.jetbrains.kotlin.compilerRunner.btapi.BuildToolsApiCompilationWork.execute(BuildToolsApiCompilationWork.kt:251)
@@ -243,6 +241,6 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 
 For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD FAILED in 7m 16s
+BUILD FAILED in 8m 2s
 241 actionable tasks: 241 executed
 Configuration cache entry stored.
