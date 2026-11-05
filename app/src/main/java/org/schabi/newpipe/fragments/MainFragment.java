@@ -44,7 +44,7 @@ import org.schabi.newpipe.error.UserAction;
 import org.schabi.newpipe.extractor.NewPipe;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
-import org.schabi.newpipe.local.playlist.LocalPlaylistFragment;
+import org.schabi.newpipe.local.playlist.YpLocalPlaylistFragment;
 import org.schabi.newpipe.settings.tabs.Tab;
 import org.schabi.newpipe.settings.tabs.TabsManager;
 import org.schabi.newpipe.util.Localization;
@@ -367,7 +367,7 @@ public class MainFragment extends BaseFragment implements TabLayout.OnTabSelecte
     public void commitPlaylistTabs() {
         pagerAdapter.getLocalPlaylistFragments()
                 .stream()
-                .forEach(LocalPlaylistFragment::saveImmediate);
+                .forEach(YpLocalPlaylistFragment::saveImmediate);
     }
 
     private void updateTabLayoutPosition() {
@@ -430,10 +430,10 @@ public class MainFragment extends BaseFragment implements TabLayout.OnTabSelecte
          * Keep reference to LocalPlaylistFragments, because their data can be modified by the user
          * during runtime and changes are not committed immediately. However, in some cases,
          * the changes need to be committed immediately by calling
-         * {@link LocalPlaylistFragment#saveImmediate()}.
-         * The fragments are removed when {@link LocalPlaylistFragment#onDestroy()} is called.
+         * {@link YpLocalPlaylistFragment#saveImmediate()}.
+         * The fragments are removed with the adapter.
          */
-        private final List<LocalPlaylistFragment> localPlaylistFragments = new ArrayList<>();
+        private final List<YpLocalPlaylistFragment> localPlaylistFragments = new ArrayList<>();
 
         private SelectedTabsPagerAdapter(final Context context,
                                          final FragmentManager fragmentManager,
@@ -460,14 +460,14 @@ public class MainFragment extends BaseFragment implements TabLayout.OnTabSelecte
                 ((BaseFragment) fragment).useAsFrontPage(true);
             }
 
-            if (fragment instanceof LocalPlaylistFragment) {
-                localPlaylistFragments.add((LocalPlaylistFragment) fragment);
+            if (fragment instanceof YpLocalPlaylistFragment) {
+                localPlaylistFragments.add((YpLocalPlaylistFragment) fragment);
             }
 
             return fragment;
         }
 
-        public List<LocalPlaylistFragment> getLocalPlaylistFragments() {
+        public List<YpLocalPlaylistFragment> getLocalPlaylistFragments() {
             return localPlaylistFragments;
         }
 

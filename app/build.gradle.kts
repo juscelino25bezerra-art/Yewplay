@@ -228,6 +228,7 @@ dependencies {
     implementation(projects.core.designsystem)
     implementation(projects.feature.channel)
     implementation(projects.feature.library)
+    implementation(projects.feature.playlist)
     implementation(projects.feature.search)
     implementation(projects.feature.subscriptions)
     implementation(libs.jetbrains.compose.foundation)
