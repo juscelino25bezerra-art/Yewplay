@@ -820,13 +820,14 @@ public class MainActivity extends AppCompatActivity {
     //////////////////////////////////////////////////////////////////////////*/
 
     /**
-     * YewPlay: screens with their own Compose top bar (Home, Search, Channel, Playlist) hide the
+     * YewPlay: screens with their own Compose top bar (Home, Feed, Search, Channel, ...) hide the
      * activity's toolbar and the space kept for it while they are shown.
      *
      * @param fragment the fragment now shown
      */
     private void updateToolbarForFragment(@Nullable final Fragment fragment) {
         final boolean ownTopBar = fragment instanceof MainFragment
+                || fragment instanceof FeedFragment
                 || fragment instanceof YpSearchFragment
                 || fragment instanceof YpChannelFragment
                 || fragment instanceof YpPlaylistFragment

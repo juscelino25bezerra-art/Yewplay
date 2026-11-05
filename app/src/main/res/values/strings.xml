@@ -962,6 +962,11 @@
     <string name="yp_shuffle">Shuffle</string>
     <string name="yp_edit">Edit</string>
     <string name="yp_home_featured">No. 1 · %1$s</string>
+    <plurals name="yp_feed_new">
+        <item quantity="one">%d new</item>
+        <item quantity="other">%d new</item>
+    </plurals>
+    <string name="yp_refresh">Refresh</string>
     <string name="yp_local_playlist">Local playlist</string>
     <string name="yp_storage_used">%s used by the app</string>
     <string name="yp_storage_free">%s free</string>
