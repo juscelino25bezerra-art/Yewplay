@@ -116,6 +116,6 @@ FICA DE FORA (MOTOR)
 RESUMO
 ======================================================================
 Concluído: telas principais + base/design system + diálogos + telas secundárias
-           + configurações
-Falta:     player (10 partes) e limpeza final
+           + configurações + abas do vídeo (descrição, comentários, relacionados)
+Falta:     player (7 de 10 partes) e limpeza final
 Ordem sugerida: Player > Estrutura e limpeza
