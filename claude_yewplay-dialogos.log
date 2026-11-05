@@ -1,14 +1,14 @@
 branch: claude/yewplay-dialogos
-sha: 6ca3ae2bbe3e1035ad6adcff92e54f30a08c4946
+sha: 75e08a6d131302d9791e11f357330f3ade201dc4
 outcome: failure
-run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/42020863910
+run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/42021460751
 
 == errors ==
 > Task :app:runKtlint FAILED
 * What went wrong:
 Execution failed for task ':app:runKtlint' (registered in build file 'app/build.gradle.kts').
 org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':app:runKtlint' (registered in build file 'app/build.gradle.kts').
-BUILD FAILED in 3m 25s
+BUILD FAILED in 3m 29s
 
 == warnings ==
 w: file:///home/runner/work/Yewplay/Yewplay/app/build.gradle.kts:150:30: 'fun provideDelegate(thisRef: Any?, property: KProperty<*>): ExistingDomainObjectDelegate<Configuration>' is deprecated. Use 'val element = create(name)' instead. See the Gradle 9.6 upgrading guide.
@@ -35,11 +35,41 @@ w: ⚠️ Unused Kotlin Source Sets
 w: Koin compiler plugin: Kotlin 2.4.21 is newer than the newest verified version (2.4.20) — proceeding with the 2.4.20 adapter. If compilation fails, check for a koin-compiler-plugin update. Verified versions: 2.3.20, 2.4.0, 2.4.10, 2.4.20.
 
 == tail ==
-> Task :app:runKtlint FAILED
+> Task :feature:library:generateAndroidMainEmptyResourceFiles
+> Task :feature:playlist:androidPreBuild UP-TO-DATE
+> Task :feature:playlist:preAndroidMainBuild UP-TO-DATE
+> Task :feature:playlist:generateAndroidMainEmptyResourceFiles
+> Task :feature:search:androidPreBuild UP-TO-DATE
+> Task :feature:search:preAndroidMainBuild UP-TO-DATE
+> Task :feature:search:generateAndroidMainEmptyResourceFiles
+> Task :feature:settings:androidPreBuild UP-TO-DATE
+> Task :feature:settings:preAndroidMainBuild UP-TO-DATE
+> Task :feature:settings:generateAndroidMainEmptyResourceFiles
+> Task :feature:subscriptions:androidPreBuild UP-TO-DATE
+> Task :feature:subscriptions:preAndroidMainBuild UP-TO-DATE
+> Task :feature:subscriptions:generateAndroidMainEmptyResourceFiles
+> Task :shared:generateAndroidMainEmptyResourceFiles
+> Task :shared:parseAndroidMainLocalResources
+> Task :shared:generateAndroidMainRFile
+> Task :shared:buildConfigGenerator
+> Task :shared:kmpPartiallyResolvedDependenciesChecker
+> Task :shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared:generateResourceAccessorsForAndroidMain NO-SOURCE
+> Task :shared:generateResourceAccessorsForCommonMain
+> Task :shared:generateActualResourceCollectorsForAndroidMain
+> Task :shared:generateComposeResClass
+> Task :shared:generateExpectResourceCollectorsForCommonMain
+
+> Task :app:runKtlint
+/home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:427:1: Add a blank line between all when-conditions in case at least one multiline when-condition is found in the statement (standard:blank-line-between-when-conditions)
+/home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:889:1: Add a blank line between all when-conditions in case at least one multiline when-condition is found in the statement (standard:blank-line-between-when-conditions)
+/home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe/download/DownloadDialog.kt:891:1: Add a blank line between all when-conditions in case at least one multiline when-condition is found in the statement (standard:blank-line-between-when-conditions)
+11:48:12.895 [main] WARN com.pinterest.ktlint.cli.internal.KtlintCommandLine -- Lint has found errors than can be autocorrected using 'ktlint --format'
 
 Summary error count (descending) by rule:
-  Not a valid Kotlin file: 1
+  standard:blank-line-between-when-conditions: 3
 
+> Task :app:runKtlint FAILED
 > Task :core:model:compileKotlin
 > Task :app:runCheckstyle
 
@@ -87,36 +117,6 @@ org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':app:run
 	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:475)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:392)
-	at org.gradle.execution.plan.DefaultPlanExecutor.process(DefaultPlanExecutor.java:118)
-	at org.gradle.execution.DefaultBuildWorkExecutor.executePlan(DefaultBuildWorkExecutor.java:143)
-	at org.gradle.execution.DefaultBuildWorkExecutor.displayOrExecutePlan(DefaultBuildWorkExecutor.java:128)
-	at org.gradle.execution.DefaultBuildWorkExecutor$1.call(DefaultBuildWorkExecutor.java:79)
-	at org.gradle.execution.DefaultBuildWorkExecutor$1.call(DefaultBuildWorkExecutor.java:75)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
-	at org.gradle.execution.DefaultBuildWorkExecutor.execute(DefaultBuildWorkExecutor.java:75)
-	at org.gradle.internal.build.DefaultBuildLifecycleController.lambda$executeTasks$0(DefaultBuildLifecycleController.java:323)
-	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:324)
-	at org.gradle.internal.model.StateTransitionController.lambda$tryTransition$0(StateTransitionController.java:235)
-	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:45)
-	at org.gradle.internal.model.StateTransitionController.tryTransition(StateTransitionController.java:235)
-	at org.gradle.internal.build.DefaultBuildLifecycleController.executeTasks(DefaultBuildLifecycleController.java:314)
-	at org.gradle.internal.build.DefaultBuildWorkGraphController$DefaultBuildWorkGraph.runWork(DefaultBuildWorkGraphController.java:207)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.lambda$runAndReleaseLocks$0(DefaultWorkerLeaseService.java:296)
-	at org.gradle.internal.work.ResourceLockStatistics$1.measure(ResourceLockStatistics.java:43)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.runAndReleaseLocks(DefaultWorkerLeaseService.java:294)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocksAcquired(DefaultWorkerLeaseService.java:290)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:282)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:132)
-	at org.gradle.composite.internal.DefaultBuildController.doRun(DefaultBuildController.java:182)
-	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.lambda$run$0(DefaultBuildController.java:199)
-	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
-	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.run(DefaultBuildController.java:199)
 	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:65)
 	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:47)
 Caused by: org.gradle.process.ProcessExecutionException: Process 'command '/usr/lib/jvm/temurin-21-jdk-amd64/bin/java'' finished with non-zero exit value 1
@@ -223,7 +223,7 @@ Caused by: org.gradle.process.ProcessExecutionException: Process 'command '/usr/
 	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:38)
 	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:68)
 	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.doExecute(DefaultTaskNodeExecutor.java:364)
-	... 55 more
+	... 25 more
 
 
 Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
@@ -232,6 +232,6 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 
 For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD FAILED in 3m 25s
+BUILD FAILED in 3m 29s
 33 actionable tasks: 33 executed
 Configuration cache entry stored.
