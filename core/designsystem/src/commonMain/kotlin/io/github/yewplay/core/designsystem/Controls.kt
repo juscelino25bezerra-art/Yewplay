@@ -59,7 +59,8 @@ fun YpSlider(
             .fillMaxWidth()
             .height(40.dp)
     ) {
-        val widthPx = with(LocalDensity.current) { maxWidth.toPx() }.coerceAtLeast(1f)
+        val trackWidth = maxWidth
+        val widthPx = with(LocalDensity.current) { trackWidth.toPx() }.coerceAtLeast(1f)
         val thumb = 20.dp
         fun valueAt(x: Float): Float {
             var f = (x / widthPx).coerceIn(0f, 1f)
@@ -97,7 +98,7 @@ fun YpSlider(
             )
             Box(
                 modifier = Modifier
-                    .offset(x = (maxWidth - thumb) * fraction)
+                    .offset(x = (trackWidth - thumb) * fraction)
                     .size(thumb)
                     .clip(CircleShape)
                     .background(colors.onSurface)
