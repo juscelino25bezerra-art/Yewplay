@@ -940,6 +940,9 @@
     <string name="yp_welcome_start">Começar</string>
     <string name="yp_welcome_import">Importar inscrições do NewPipe</string>
     <string name="yp_settings_search">Buscar nas configurações</string>
+    <string name="yp_feed_group_new">Novo grupo</string>
+    <string name="yp_feed_group_edit">Editar grupo</string>
+    <string name="yp_feed_group_icon">Escolha um ícone</string>
     <string name="yp_local_playlist">Playlist local</string>
     <string name="yp_storage_used">%s usados pelo app</string>
     <string name="yp_storage_free">%s livres</string>

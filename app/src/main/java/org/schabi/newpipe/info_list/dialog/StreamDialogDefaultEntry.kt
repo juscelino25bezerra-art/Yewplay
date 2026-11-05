@@ -33,7 +33,10 @@ enum class StreamDialogDefaultEntry(
         R.drawable.yp_ic_user_circle,
         { fragment, item ->
             SparseItemUtil.fetchUploaderUrlIfSparse(
-                fragment.requireContext(), item.serviceId, item.url, item.uploaderUrl
+                fragment.requireContext(),
+                item.serviceId,
+                item.url,
+                item.uploaderUrl
             ) { url -> NavigationHelper.openChannelFragment(fragment, item, url) }
         }
     ),
@@ -134,7 +137,9 @@ enum class StreamDialogDefaultEntry(
         R.drawable.yp_ic_download_simple,
         { fragment, item ->
             SparseItemUtil.fetchStreamInfoAndSaveToDatabase(
-                fragment.requireContext(), item.serviceId, item.url
+                fragment.requireContext(),
+                item.serviceId,
+                item.url
             ) { info ->
                 if (fragment.isAdded && !fragment.isStateSaved) {
                     DownloadDialog(fragment.requireContext(), info)

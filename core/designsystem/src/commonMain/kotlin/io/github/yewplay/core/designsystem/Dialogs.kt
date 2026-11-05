@@ -43,6 +43,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 private val SheetShape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
@@ -263,14 +264,15 @@ fun YpTextField(
     autoFocus: Boolean = false,
     singleLine: Boolean = true,
     keyboardType: KeyboardType = KeyboardType.Text,
-    onDone: (() -> Unit)? = null
+    onDone: (() -> Unit)? = null,
+    horizontalPadding: Dp = 24.dp
 ) {
     val focusRequester = remember { FocusRequester() }
     val colors = MaterialTheme.colorScheme
     TextField(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 24.dp)
+            .padding(horizontal = horizontalPadding)
             .focusRequester(focusRequester),
         value = value,
         onValueChange = onValueChange,

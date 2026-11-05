@@ -12,10 +12,10 @@ import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.processors.BehaviorProcessor
 import io.reactivex.rxjava3.schedulers.Schedulers
 import org.schabi.newpipe.database.feed.model.FeedGroupEntity
+import org.schabi.newpipe.database.subscription.SubscriptionEntity
 import org.schabi.newpipe.local.feed.FeedDatabaseManager
 import org.schabi.newpipe.local.subscription.FeedGroupIcon
 import org.schabi.newpipe.local.subscription.SubscriptionManager
-import org.schabi.newpipe.local.subscription.item.PickerSubscriptionItem
 
 class FeedGroupDialogViewModel(
     applicationContext: Context,
@@ -38,13 +38,13 @@ class FeedGroupDialogViewModel(
         .distinctUntilChanged()
         .switchMap { (query, showOnlyUngrouped) ->
             subscriptionManager.getSubscriptions(groupId, query, showOnlyUngrouped)
-        }.map { list -> list.map { PickerSubscriptionItem(it) } }
+        }
 
     private val mutableGroupLiveData = MutableLiveData<FeedGroupEntity>()
-    private val mutableSubscriptionsLiveData = MutableLiveData<Pair<List<PickerSubscriptionItem>, Set<Long>>>()
+    private val mutableSubscriptionsLiveData = MutableLiveData<Pair<List<SubscriptionEntity>, Set<Long>>>()
     private val mutableDialogEventLiveData = MutableLiveData<DialogEvent>()
     val groupLiveData: LiveData<FeedGroupEntity> = mutableGroupLiveData
-    val subscriptionsLiveData: LiveData<Pair<List<PickerSubscriptionItem>, Set<Long>>> = mutableSubscriptionsLiveData
+    val subscriptionsLiveData: LiveData<Pair<List<SubscriptionEntity>, Set<Long>>> = mutableSubscriptionsLiveData
     val dialogEventLiveData: LiveData<DialogEvent> = mutableDialogEventLiveData
 
     private var actionProcessingDisposable: Disposable? = null
@@ -57,7 +57,7 @@ class FeedGroupDialogViewModel(
         .combineLatest(
             subscriptionsFlowable,
             feedDatabaseManager.subscriptionIdsForGroup(groupId)
-        ) { t1: List<PickerSubscriptionItem>, t2: List<Long> -> t1 to t2.toSet() }
+        ) { t1: List<SubscriptionEntity>, t2: List<Long> -> t1 to t2.toSet() }
         .subscribeOn(Schedulers.io())
         .subscribe(mutableSubscriptionsLiveData::postValue)
 

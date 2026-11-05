@@ -1,122 +1,133 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 package org.schabi.newpipe.local.subscription.dialog
 
+import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.ItemTouchHelper.SimpleCallback
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.evernote.android.state.State
-import com.livefront.bridge.Bridge
-import com.xwray.groupie.GroupieAdapter
-import com.xwray.groupie.TouchCallback
-import java.util.Collections
+import io.github.yewplay.core.designsystem.YpDialogCard
 import org.schabi.newpipe.R
 import org.schabi.newpipe.database.feed.model.FeedGroupEntity
-import org.schabi.newpipe.databinding.DialogFeedGroupReorderBinding
-import org.schabi.newpipe.local.subscription.dialog.FeedGroupReorderDialogViewModel.DialogEvent.ProcessingEvent
-import org.schabi.newpipe.local.subscription.dialog.FeedGroupReorderDialogViewModel.DialogEvent.SuccessEvent
-import org.schabi.newpipe.local.subscription.item.FeedGroupReorderItem
-import org.schabi.newpipe.util.ThemeHelper
+import org.schabi.newpipe.local.subscription.dialog.FeedGroupReorderDialogViewModel.DialogEvent
+import org.schabi.newpipe.local.yewplay.YpDialogs
 
+/**
+ * YewPlay: the order of the channel groups, as a Compose dialog: each group with buttons to
+ * move it up or down, and "OK" to save.
+ */
 class FeedGroupReorderDialog : DialogFragment() {
-    private var _binding: DialogFeedGroupReorderBinding? = null
-    private val binding get() = _binding!!
-
     private lateinit var viewModel: FeedGroupReorderDialogViewModel
 
-    @State
-    @JvmField
-    var groupOrderedIdList = ArrayList<Long>()
-    private val groupAdapter = GroupieAdapter()
-    private val itemTouchHelper = ItemTouchHelper(getItemTouchCallback())
+    private var groups by mutableStateOf<List<FeedGroupEntity>>(emptyList())
+    private var orderedIds: List<Long> = emptyList()
+    private var processing by mutableStateOf(false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Bridge.restoreInstanceState(this, savedInstanceState)
+        orderedIds = savedInstanceState?.getLongArray(KEY_ORDER)?.toList() ?: emptyList()
+        viewModel = ViewModelProvider(this)[FeedGroupReorderDialogViewModel::class.java]
+        viewModel.groupsLiveData.observe(this) { list ->
+            if (orderedIds.isEmpty()) {
+                orderedIds = list.map { it.uid }
+            }
+            groups = list.sortedBy { orderedIds.indexOf(it.uid) }
+        }
+        viewModel.dialogEventLiveData.observe(this) { event ->
+            when (event) {
+                DialogEvent.ProcessingEvent -> {
+                    processing = true
+                    isCancelable = false
+                }
 
-        setStyle(STYLE_NO_TITLE, ThemeHelper.getMinWidthDialogTheme(requireContext()))
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.dialog_feed_group_reorder, container)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        _binding = DialogFeedGroupReorderBinding.bind(view)
-
-        viewModel = ViewModelProvider(this).get(FeedGroupReorderDialogViewModel::class.java)
-        viewModel.groupsLiveData.observe(viewLifecycleOwner, Observer(::handleGroups))
-        viewModel.dialogEventLiveData.observe(viewLifecycleOwner) {
-            when (it) {
-                ProcessingEvent -> disableInput()
-                SuccessEvent -> dismiss()
+                DialogEvent.SuccessEvent -> dismiss()
             }
         }
-
-        binding.feedGroupsList.layoutManager = LinearLayoutManager(requireContext())
-        binding.feedGroupsList.adapter = groupAdapter
-        itemTouchHelper.attachToRecyclerView(binding.feedGroupsList)
-
-        binding.confirmButton.setOnClickListener {
-            viewModel.updateOrder(groupOrderedIdList)
-        }
-    }
-
-    override fun onDestroyView() {
-        _binding = null
-        super.onDestroyView()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        Bridge.saveInstanceState(this, outState)
+        outState.putLongArray(KEY_ORDER, orderedIds.toLongArray())
     }
 
-    private fun handleGroups(list: List<FeedGroupEntity>) {
-        val groupList: List<FeedGroupEntity>
-
-        if (groupOrderedIdList.isEmpty()) {
-            groupList = list
-            groupOrderedIdList.addAll(groupList.map { it.uid })
-        } else {
-            groupList = list.sortedBy { groupOrderedIdList.indexOf(it.uid) }
+    private fun move(from: Int, to: Int) {
+        if (to !in groups.indices) {
+            return
         }
-
-        groupAdapter.update(groupList.map { FeedGroupReorderItem(it, itemTouchHelper) })
+        groups = groups.toMutableList().apply { add(to, removeAt(from)) }
+        orderedIds = groups.map { it.uid }
     }
 
-    private fun disableInput() {
-        _binding?.confirmButton?.isEnabled = false
-        isCancelable = false
-    }
-
-    private fun getItemTouchCallback(): SimpleCallback {
-        return object : TouchCallback() {
-
-            override fun onMove(
-                recyclerView: RecyclerView,
-                source: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                val sourceIndex = source.bindingAdapterPosition
-                val targetIndex = target.bindingAdapterPosition
-
-                groupAdapter.notifyItemMoved(sourceIndex, targetIndex)
-                Collections.swap(groupOrderedIdList, sourceIndex, targetIndex)
-
-                return true
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog = YpDialogs.card(requireContext()) { dismiss ->
+        YpDialogCard(
+            title = stringResource(R.string.feed_groups_header_title),
+            confirmLabel = stringResource(R.string.ok),
+            confirmEnabled = !processing,
+            onConfirm = { viewModel.updateOrder(orderedIds) },
+            dismissLabel = stringResource(R.string.cancel),
+            onDismiss = dismiss
+        ) {
+            LazyColumn(modifier = Modifier.heightIn(max = 420.dp)) {
+                itemsIndexed(groups, key = { _, group -> group.uid }) { index, group ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 24.dp, end = 12.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            modifier = Modifier.size(22.dp),
+                            painter = painterResource(group.icon.getDrawableRes()),
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Text(
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(horizontal = 14.dp),
+                            text = group.name,
+                            style = MaterialTheme.typography.bodyLarge,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                        IconButton(enabled = index > 0 && !processing, onClick = { move(index, index - 1) }) {
+                            Icon(painter = painterResource(R.drawable.ic_arrow_drop_up), contentDescription = null)
+                        }
+                        IconButton(
+                            enabled = index < groups.lastIndex && !processing,
+                            onClick = { move(index, index + 1) }
+                        ) {
+                            Icon(painter = painterResource(R.drawable.ic_arrow_drop_down), contentDescription = null)
+                        }
+                    }
+                }
             }
-
-            override fun isLongPressDragEnabled(): Boolean = false
-            override fun isItemViewSwipeEnabled(): Boolean = false
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {}
         }
+    }
+
+    private companion object {
+        const val KEY_ORDER = "order"
     }
 }

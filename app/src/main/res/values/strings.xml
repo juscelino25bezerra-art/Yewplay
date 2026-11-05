@@ -1000,6 +1000,9 @@
     <string name="yp_welcome_start">Get started</string>
     <string name="yp_welcome_import">Import subscriptions from NewPipe</string>
     <string name="yp_settings_search">Search settings</string>
+    <string name="yp_feed_group_new">New group</string>
+    <string name="yp_feed_group_edit">Edit group</string>
+    <string name="yp_feed_group_icon">Choose an icon</string>
     <string name="yp_local_playlist">Local playlist</string>
     <string name="yp_storage_used">%s used by the app</string>
     <string name="yp_storage_free">%s free</string>
