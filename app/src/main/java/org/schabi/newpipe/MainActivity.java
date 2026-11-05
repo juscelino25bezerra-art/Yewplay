@@ -872,6 +872,18 @@ public class MainActivity extends AppCompatActivity {
         });
         getSupportFragmentManager().addOnBackStackChangedListener(() -> syncBottomNavigation(
                 getSupportFragmentManager().findFragmentById(R.id.fragment_holder)));
+        // YewPlay: also sync when a screen of the holder is actually resumed; back gestures with
+        // preview (Android 14+) can finish a transition without the listener above
+        getSupportFragmentManager().registerFragmentLifecycleCallbacks(
+                new FragmentManager.FragmentLifecycleCallbacks() {
+                    @Override
+                    public void onFragmentResumed(@NonNull final FragmentManager fm,
+                                                  @NonNull final Fragment f) {
+                        if (f.getId() == R.id.fragment_holder) {
+                            syncBottomNavigation(f);
+                        }
+                    }
+                }, false);
 
         // hide the bar while the keyboard is open (e.g. while typing a search)
         mainBinding.getRoot().getViewTreeObserver().addOnGlobalLayoutListener(() -> {
