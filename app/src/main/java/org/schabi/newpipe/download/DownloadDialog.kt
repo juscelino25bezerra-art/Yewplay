@@ -214,9 +214,7 @@ class DownloadDialog() : DialogFragment() {
         selectedVideoIndex = ListHelper.getDefaultResolutionIndex(context, videoStreams)
     }
 
-    /*//////////////////////////////////////////////////////////////////////////
-    // Lifecycle
-    //////////////////////////////////////////////////////////////////////////*/
+    // ---- Lifecycle ----
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -294,9 +292,7 @@ class DownloadDialog() : DialogFragment() {
         }
     }
 
-    /*//////////////////////////////////////////////////////////////////////////
-    // Streams
-    //////////////////////////////////////////////////////////////////////////*/
+    // ---- Streams ----
 
     private val selectedKind: Kind get() = Kind.entries[selectedKindOrdinal.coerceAtLeast(0)]
 
@@ -482,9 +478,7 @@ class DownloadDialog() : DialogFragment() {
         }
     }
 
-    /*//////////////////////////////////////////////////////////////////////////
-    // UI
-    //////////////////////////////////////////////////////////////////////////*/
+    // ---- UI ----
 
     @Composable
     private fun DownloadContent(onCancel: () -> Unit) {
@@ -679,9 +673,7 @@ class DownloadDialog() : DialogFragment() {
         }
     }
 
-    /*//////////////////////////////////////////////////////////////////////////
-    // Messages
-    //////////////////////////////////////////////////////////////////////////*/
+    // ---- Messages ----
 
     private fun showFailedDialog(@StringRes message: Int) {
         val context = ctx ?: return
@@ -712,9 +704,7 @@ class DownloadDialog() : DialogFragment() {
         }.show()
     }
 
-    /*//////////////////////////////////////////////////////////////////////////
-    // Activity results
-    //////////////////////////////////////////////////////////////////////////*/
+    // ---- Activity results ----
 
     private fun requestDownloadSaveAsResult(result: ActivityResult) {
         val context = ctx ?: return
@@ -764,9 +754,7 @@ class DownloadDialog() : DialogFragment() {
         }
     }
 
-    /*//////////////////////////////////////////////////////////////////////////
-    // Download
-    //////////////////////////////////////////////////////////////////////////*/
+    // ---- Download ----
 
     private fun nameForFile(): String {
         val name = fileName.trim()
