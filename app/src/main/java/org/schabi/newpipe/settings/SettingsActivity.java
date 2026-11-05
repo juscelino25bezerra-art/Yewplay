@@ -29,6 +29,7 @@ import com.livefront.bridge.Bridge;
 import org.schabi.newpipe.MainActivity;
 import org.schabi.newpipe.R;
 import org.schabi.newpipe.databinding.SettingsLayoutBinding;
+import org.schabi.newpipe.settings.compose.YpPreferenceFragment;
 import org.schabi.newpipe.settings.preferencesearch.PreferenceParser;
 import org.schabi.newpipe.settings.preferencesearch.PreferenceSearchConfiguration;
 import org.schabi.newpipe.settings.preferencesearch.PreferenceSearchFragment;
@@ -435,7 +436,10 @@ public class SettingsActivity extends AppCompatActivity implements
         }
 
         // Run the highlighting
-        if (currentFragment instanceof PreferenceFragmentCompat) {
+        if (currentFragment instanceof YpPreferenceFragment) {
+            // YewPlay: the settings screens in Compose scroll to the entry and mark it
+            ((YpPreferenceFragment) currentFragment).highlight(result.getKey());
+        } else if (currentFragment instanceof PreferenceFragmentCompat) {
             PreferenceSearchResultHighlighter
                     .highlight(result, (PreferenceFragmentCompat) currentFragment);
         }
