@@ -1,6 +1,6 @@
 YEWPLAY - MIGRAÇÃO DA INTERFACE PARA KOTLIN + COMPOSE
 Checklist (somente interface; o motor do NewPipe fica como está)
-Atualizado em: 05/11/2026 - branch claude/yewplay-config-internas
+Atualizado em: 05/11/2026 - branch claude/yewplay-player-abas
 
 Legenda: [x] concluído   [ ] falta
 
@@ -79,10 +79,10 @@ Legenda: [x] concluído   [ ] falta
 6. PLAYER (por último)
 ======================================================================
 [ ] Detalhes do vídeo (VideoDetailFragment): título, canal, botões
-[ ] Aba Descrição
-[ ] Aba Comentários e respostas (CommentRepliesFragment)
+[x] Aba Descrição
+[x] Aba Comentários e respostas (CommentRepliesFragment)
 [ ] Fila de reprodução (PlayQueueActivity)
-[ ] Aba Relacionados
+[x] Aba Relacionados
 [ ] Controles em tela cheia (MainPlayerUi / VideoPlayerUi)
 [ ] Player em janela flutuante (PopupPlayerUi)
 [ ] Modo Ouvir / segundo plano (BackgroundPlayerUi)
