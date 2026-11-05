@@ -1,0 +1,219 @@
+branch: claude/yewplay-telas-secundarias
+sha: 7d42159df72e737516a37ad67b25a356ab5002b6
+outcome: cancelled
+run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/42042436931
+
+== errors ==
+
+== warnings ==
+w: ⚠️ Unused Kotlin Source Sets
+w: ⚠️ Unused Kotlin Source Sets
+w: ⚠️ Unused Kotlin Source Sets
+w: ⚠️ Unused Kotlin Source Sets
+w: ⚠️ Unused Kotlin Source Sets
+w: ⚠️ Unused Kotlin Source Sets
+w: ⚠️ Unused Kotlin Source Sets
+w: ⚠️ Unused Kotlin Source Sets
+w: ⚠️ Unused Kotlin Source Sets
+
+== tail ==
+> Task :feature:home:generateAndroidMainEmptyResourceFiles
+> Task :feature:library:androidPreBuild UP-TO-DATE
+> Task :feature:library:preAndroidMainBuild UP-TO-DATE
+> Task :feature:library:generateAndroidMainEmptyResourceFiles
+> Task :feature:playlist:androidPreBuild UP-TO-DATE
+> Task :feature:playlist:preAndroidMainBuild UP-TO-DATE
+> Task :feature:playlist:generateAndroidMainEmptyResourceFiles
+> Task :feature:search:androidPreBuild UP-TO-DATE
+> Task :feature:search:preAndroidMainBuild UP-TO-DATE
+> Task :feature:search:generateAndroidMainEmptyResourceFiles
+> Task :feature:settings:androidPreBuild UP-TO-DATE
+> Task :feature:settings:preAndroidMainBuild UP-TO-DATE
+> Task :feature:settings:generateAndroidMainEmptyResourceFiles
+> Task :feature:subscriptions:androidPreBuild UP-TO-DATE
+> Task :feature:subscriptions:preAndroidMainBuild UP-TO-DATE
+> Task :feature:subscriptions:generateAndroidMainEmptyResourceFiles
+> Task :shared:generateAndroidMainEmptyResourceFiles
+> Task :shared:parseAndroidMainLocalResources
+> Task :shared:generateAndroidMainRFile
+> Task :shared:buildConfigGenerator
+> Task :shared:kmpPartiallyResolvedDependenciesChecker
+> Task :shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared:generateResourceAccessorsForAndroidMain NO-SOURCE
+> Task :shared:generateResourceAccessorsForCommonMain
+> Task :shared:generateActualResourceCollectorsForAndroidMain
+> Task :shared:generateComposeResClass
+> Task :shared:generateExpectResourceCollectorsForCommonMain
+> Task :app:runKtlint
+> Task :core:designsystem:kmpPartiallyResolvedDependenciesChecker
+> Task :core:designsystem:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core:designsystem:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :core:designsystem:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :core:designsystem:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :core:designsystem:generateResourceAccessorsForAndroidMain SKIPPED
+> Task :core:designsystem:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :core:designsystem:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :core:designsystem:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :core:designsystem:generateResourceAccessorsForCommonMain SKIPPED
+> Task :core:designsystem:generateActualResourceCollectorsForAndroidMain SKIPPED
+> Task :core:designsystem:generateComposeResClass SKIPPED
+> Task :core:designsystem:generateExpectResourceCollectorsForCommonMain SKIPPED
+> Task :feature:channel:kmpPartiallyResolvedDependenciesChecker
+> Task :feature:channel:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :feature:channel:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature:channel:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature:channel:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :feature:channel:generateResourceAccessorsForAndroidMain SKIPPED
+> Task :feature:channel:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :feature:channel:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :feature:channel:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :feature:channel:generateResourceAccessorsForCommonMain SKIPPED
+> Task :feature:channel:generateActualResourceCollectorsForAndroidMain SKIPPED
+> Task :feature:channel:generateComposeResClass SKIPPED
+> Task :feature:channel:generateExpectResourceCollectorsForCommonMain SKIPPED
+> Task :feature:downloads:kmpPartiallyResolvedDependenciesChecker
+> Task :feature:downloads:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :feature:downloads:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature:downloads:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature:downloads:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :feature:downloads:generateResourceAccessorsForAndroidMain SKIPPED
+> Task :feature:downloads:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :feature:downloads:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :feature:downloads:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :feature:downloads:generateResourceAccessorsForCommonMain SKIPPED
+> Task :feature:downloads:generateActualResourceCollectorsForAndroidMain SKIPPED
+> Task :feature:downloads:generateComposeResClass SKIPPED
+> Task :feature:downloads:generateExpectResourceCollectorsForCommonMain SKIPPED
+> Task :feature:home:kmpPartiallyResolvedDependenciesChecker
+> Task :feature:home:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :feature:home:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature:home:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature:home:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :feature:home:generateResourceAccessorsForAndroidMain SKIPPED
+> Task :feature:home:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :feature:home:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :feature:home:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :feature:home:generateResourceAccessorsForCommonMain SKIPPED
+> Task :feature:home:generateActualResourceCollectorsForAndroidMain SKIPPED
+> Task :feature:home:generateComposeResClass SKIPPED
+> Task :feature:home:generateExpectResourceCollectorsForCommonMain SKIPPED
+> Task :feature:library:kmpPartiallyResolvedDependenciesChecker
+> Task :feature:library:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :feature:library:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature:library:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature:library:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :feature:library:generateResourceAccessorsForAndroidMain SKIPPED
+> Task :feature:library:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :feature:library:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :feature:library:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :feature:library:generateResourceAccessorsForCommonMain SKIPPED
+> Task :feature:library:generateActualResourceCollectorsForAndroidMain SKIPPED
+> Task :feature:library:generateComposeResClass SKIPPED
+> Task :feature:library:generateExpectResourceCollectorsForCommonMain SKIPPED
+> Task :feature:playlist:kmpPartiallyResolvedDependenciesChecker
+> Task :feature:playlist:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :feature:playlist:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature:playlist:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature:playlist:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :feature:playlist:generateResourceAccessorsForAndroidMain SKIPPED
+> Task :feature:playlist:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :feature:playlist:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :feature:playlist:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :feature:playlist:generateResourceAccessorsForCommonMain SKIPPED
+> Task :feature:playlist:generateActualResourceCollectorsForAndroidMain SKIPPED
+> Task :feature:playlist:generateComposeResClass SKIPPED
+> Task :feature:playlist:generateExpectResourceCollectorsForCommonMain SKIPPED
+> Task :feature:search:kmpPartiallyResolvedDependenciesChecker
+> Task :feature:search:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :feature:search:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature:search:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature:search:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :feature:search:generateResourceAccessorsForAndroidMain SKIPPED
+> Task :feature:search:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :feature:search:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :feature:search:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :feature:search:generateResourceAccessorsForCommonMain SKIPPED
+> Task :feature:search:generateActualResourceCollectorsForAndroidMain SKIPPED
+> Task :feature:search:generateComposeResClass SKIPPED
+> Task :feature:search:generateExpectResourceCollectorsForCommonMain SKIPPED
+> Task :feature:settings:kmpPartiallyResolvedDependenciesChecker
+> Task :feature:settings:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :feature:settings:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature:settings:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature:settings:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :feature:settings:generateResourceAccessorsForAndroidMain SKIPPED
+> Task :feature:settings:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :feature:settings:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :feature:settings:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :feature:settings:generateResourceAccessorsForCommonMain SKIPPED
+> Task :feature:settings:generateActualResourceCollectorsForAndroidMain SKIPPED
+> Task :feature:settings:generateComposeResClass SKIPPED
+> Task :feature:settings:generateExpectResourceCollectorsForCommonMain SKIPPED
+> Task :feature:subscriptions:kmpPartiallyResolvedDependenciesChecker
+> Task :feature:subscriptions:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :feature:subscriptions:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature:subscriptions:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature:subscriptions:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :feature:subscriptions:generateResourceAccessorsForAndroidMain SKIPPED
+> Task :feature:subscriptions:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :feature:subscriptions:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :feature:subscriptions:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :feature:subscriptions:generateResourceAccessorsForCommonMain SKIPPED
+> Task :feature:subscriptions:generateActualResourceCollectorsForAndroidMain SKIPPED
+> Task :feature:subscriptions:generateComposeResClass SKIPPED
+> Task :feature:subscriptions:generateExpectResourceCollectorsForCommonMain SKIPPED
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :shared:generateAndroidMainAssets UP-TO-DATE
+> Task :shared:mergeAndroidMainAssets
+> Task :shared:writeAndroidMainAarMetadata
+> Task :core:designsystem:writeAndroidMainAarMetadata
+> Task :feature:channel:writeAndroidMainAarMetadata
+> Task :feature:downloads:writeAndroidMainAarMetadata
+> Task :feature:home:writeAndroidMainAarMetadata
+> Task :feature:library:writeAndroidMainAarMetadata
+> Task :feature:playlist:writeAndroidMainAarMetadata
+> Task :feature:search:writeAndroidMainAarMetadata
+> Task :feature:settings:writeAndroidMainAarMetadata
+> Task :feature:subscriptions:writeAndroidMainAarMetadata
+> Task :shared:processAndroidMainManifest
+> Task :core:designsystem:processAndroidMainManifest
+> Task :feature:channel:processAndroidMainManifest
+> Task :feature:downloads:processAndroidMainManifest
+> Task :feature:home:processAndroidMainManifest
+> Task :feature:library:processAndroidMainManifest
+> Task :feature:playlist:processAndroidMainManifest
+> Task :feature:search:processAndroidMainManifest
+> Task :feature:settings:processAndroidMainManifest
+> Task :feature:subscriptions:processAndroidMainManifest
+> Task :shared:mapAndroidMainSourceSetPaths
+> Task :shared:compileAndroidMainLibraryResources
+> Task :shared:mergeAndroidMainJniLibFolders
+> Task :shared:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :shared:copyAndroidMainJniLibsProjectOnly
+> Task :core:designsystem:mergeAndroidMainJniLibFolders
+> Task :core:designsystem:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :core:designsystem:copyAndroidMainJniLibsProjectOnly
+> Task :feature:channel:mergeAndroidMainJniLibFolders
+> Task :feature:channel:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :feature:channel:copyAndroidMainJniLibsProjectOnly
+> Task :feature:downloads:mergeAndroidMainJniLibFolders
+> Task :feature:downloads:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :feature:downloads:copyAndroidMainJniLibsProjectOnly
+> Task :feature:home:mergeAndroidMainJniLibFolders
+> Task :feature:home:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :feature:home:copyAndroidMainJniLibsProjectOnly
+> Task :feature:library:mergeAndroidMainJniLibFolders
+> Task :feature:library:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :feature:library:copyAndroidMainJniLibsProjectOnly
+> Task :feature:playlist:mergeAndroidMainJniLibFolders
+> Task :feature:playlist:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :feature:playlist:copyAndroidMainJniLibsProjectOnly
+> Task :feature:search:mergeAndroidMainJniLibFolders
+> Task :feature:search:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :feature:search:copyAndroidMainJniLibsProjectOnly
+> Task :feature:settings:mergeAndroidMainJniLibFolders
+> Task :feature:settings:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :feature:settings:copyAndroidMainJniLibsProjectOnly
+> Task :feature:subscriptions:mergeAndroidMainJniLibFolders
+> Task :feature:subscriptions:mergeAndroidMainNativeLibs NO-SOURCE
+> Task :feature:subscriptions:copyAndroidMainJniLibsProjectOnly
