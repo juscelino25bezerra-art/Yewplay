@@ -5,37 +5,69 @@
 
 package org.schabi.newpipe.error
 
-import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.dp
 import androidx.core.content.IntentCompat
-import androidx.core.net.toUri
 import com.grack.nanojson.JsonWriter
+import io.github.yewplay.core.designsystem.YpDialogCard
+import io.github.yewplay.core.designsystem.YpPillButton
+import io.github.yewplay.core.designsystem.YpScreenMargin
+import io.github.yewplay.core.designsystem.YpTextField
+import io.github.yewplay.core.designsystem.YpTheme
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import org.schabi.newpipe.BuildConfig
 import org.schabi.newpipe.R
-import org.schabi.newpipe.databinding.ActivityErrorBinding
+import org.schabi.newpipe.local.yewplay.YpDialogs
+import org.schabi.newpipe.local.yewplay.YpThemePrefs
 import org.schabi.newpipe.util.Localization
 import org.schabi.newpipe.util.ThemeHelper
 import org.schabi.newpipe.util.external_communication.ShareUtils
-import org.schabi.newpipe.util.text.setTextWithLinks
 
 /**
  * This activity is used to show error details and allow reporting them in various ways.
  * Use [ErrorUtil.openActivity] to correctly open this activity.
+ *
+ * YewPlay: drawn in Compose; the reports go to the issues of YewPlay on GitHub (copy the
+ * report, then open the issue page), or are shared as JSON.
  */
 class ErrorActivity : AppCompatActivity() {
     private lateinit var errorInfo: ErrorInfo
     private lateinit var currentTimeStamp: String
-
-    private lateinit var binding: ActivityErrorBinding
 
     private val contentCountryString: String
         get() = Localization.getPreferredContentCountry(this).countryCode
@@ -57,12 +89,9 @@ class ErrorActivity : AppCompatActivity() {
             return "$name $osBase ${Build.VERSION.RELEASE} - ${Build.VERSION.SDK_INT}"
         }
 
-    private val errorEmailSubject: String
-        get() = "$ERROR_EMAIL_SUBJECT ${getString(R.string.app_name)} ${BuildConfig.VERSION_NAME}"
+    private var comment by mutableStateOf("")
 
-    // /////////////////////////////////////////////////////////////////////
-    // Activity lifecycle
-    // /////////////////////////////////////////////////////////////////////
+    // ---- Activity lifecycle ----
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,92 +99,175 @@ class ErrorActivity : AppCompatActivity() {
         ThemeHelper.setDayNightMode(this)
         ThemeHelper.setTheme(this)
 
-        binding = ActivityErrorBinding.inflate(layoutInflater)
-        setContentView(binding.getRoot())
-
-        setSupportActionBar(binding.toolbarLayout.toolbar)
-        supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-            setTitle(R.string.error_report_title)
-            setDisplayShowTitleEnabled(true)
-        }
-
         errorInfo = IntentCompat.getParcelableExtra(intent, ERROR_INFO, ErrorInfo::class.java)!!
-
-        // important add guru meditation
-        addGuruMeditation()
         // print current time, as zoned ISO8601 timestamp
         currentTimeStamp = ZonedDateTime.now().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+        comment = savedInstanceState?.getString(KEY_COMMENT).orEmpty()
 
-        // YewPlay: o e-mail de relatórios pertence à equipe do NewPipe, que pede que forks
-        // não enviem relatórios para ela. Os relatórios do YewPlay vão para o GitHub do fork.
-        binding.errorReportEmailButton.visibility = android.view.View.GONE
-
-        binding.errorReportCopyButton.setOnClickListener { _ ->
-            ShareUtils.copyToClipboard(this, buildMarkdown())
-        }
-
-        binding.errorReportGitHubButton.setOnClickListener { _ ->
-            openPrivacyPolicyDialog(this, "GITHUB")
-        }
-
-        // normal bugreport
-        buildInfo(errorInfo)
-        binding.errorMessageView.setTextWithLinks(errorInfo.getMessage(this))
-        binding.errorView.text = formErrorText(errorInfo.stackTraces)
+        val themeKey = YpThemePrefs.themeKey(this)
+        val nightThemeKey = YpThemePrefs.nightThemeKey(this)
+        setContentView(
+            ComposeView(this).apply {
+                setContent { YpTheme(themeKey, nightThemeKey) { ErrorScreen() } }
+            }
+        )
 
         // print stack trace once again for debugging:
         errorInfo.stackTraces.forEach { Log.e(TAG, it) }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.error_menu, menu)
-        return true
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(KEY_COMMENT, comment)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                onBackPressed()
-                true
-            }
+    // ---- UI ----
 
-            R.id.menu_item_share_error -> {
-                ShareUtils.shareText(
-                    applicationContext,
-                    getString(R.string.error_report_title),
-                    buildJson()
+    @Composable
+    private fun ErrorScreen() {
+        val colors = MaterialTheme.colorScheme
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(bottom = 24.dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
+                    .padding(horizontal = 4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                IconButton(onClick = { onBackPressedDispatcher.onBackPressed() }) {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_arrow_back),
+                        contentDescription = stringResource(androidx.appcompat.R.string.abc_action_bar_up_description)
+                    )
+                }
+                Spacer(Modifier.weight(1f))
+                IconButton(onClick = ::shareReport) {
+                    Icon(painter = painterResource(R.drawable.ic_share), contentDescription = stringResource(R.string.share))
+                }
+            }
+            Text(
+                modifier = Modifier.padding(horizontal = YpScreenMargin),
+                text = stringResource(R.string.error_report_title),
+                style = MaterialTheme.typography.headlineLarge
+            )
+            Text(
+                modifier = Modifier.padding(horizontal = YpScreenMargin, vertical = 12.dp),
+                // the guru meditation is an easter egg of NewPipe
+                text = stringResource(R.string.sorry_string) + "\n" + stringResource(R.string.guru_meditation),
+                style = MaterialTheme.typography.bodyMedium,
+                color = colors.onSurfaceVariant
+            )
+            Headline(stringResource(R.string.what_happened_headline))
+            Text(
+                modifier = Modifier.padding(horizontal = YpScreenMargin),
+                text = errorInfo.getMessage(this@ErrorActivity).toString(),
+                style = MaterialTheme.typography.bodyLarge
+            )
+            Headline(stringResource(R.string.what_device_headline))
+            val labels = stringResource(R.string.info_labels).split("\n")
+            infoValues().forEachIndexed { index, value ->
+                Row(modifier = Modifier.padding(horizontal = YpScreenMargin, vertical = 2.dp)) {
+                    Text(
+                        modifier = Modifier.weight(0.45f),
+                        text = labels.getOrElse(index) { "" },
+                        style = MaterialTheme.typography.bodySmall,
+                        color = colors.onSurfaceVariant
+                    )
+                    Text(modifier = Modifier.weight(0.55f), text = value, style = MaterialTheme.typography.bodySmall)
+                }
+            }
+            Headline(stringResource(R.string.error_details_headline))
+            Box(
+                modifier = Modifier
+                    .padding(horizontal = YpScreenMargin)
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(12.dp))
+                    .background(colors.surfaceContainer)
+                    .horizontalScroll(rememberScrollState())
+                    .padding(12.dp)
+            ) {
+                Text(
+                    text = formErrorText(errorInfo.stackTraces),
+                    style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily.Monospace)
                 )
-                true
             }
-
-            else -> false
+            Headline(stringResource(R.string.your_comment))
+            YpTextField(
+                value = comment,
+                onValueChange = { comment = it },
+                singleLine = false,
+                horizontalPadding = YpScreenMargin
+            )
+            Text(
+                modifier = Modifier.padding(horizontal = YpScreenMargin, vertical = 16.dp),
+                text = stringResource(R.string.error_report_open_github_notice),
+                style = MaterialTheme.typography.bodySmall,
+                color = colors.onSurfaceVariant
+            )
+            Row(
+                modifier = Modifier.padding(horizontal = YpScreenMargin),
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                YpPillButton(
+                    modifier = Modifier.weight(1f),
+                    label = stringResource(R.string.copy_for_github),
+                    primary = false,
+                    onClick = { ShareUtils.copyToClipboard(this@ErrorActivity, buildMarkdown()) }
+                )
+                YpPillButton(
+                    modifier = Modifier.weight(1f),
+                    label = stringResource(R.string.error_report_open_issue_button_text),
+                    primary = true,
+                    onClick = ::openPrivacyPolicyDialog
+                )
+            }
         }
     }
 
-    private fun openPrivacyPolicyDialog(context: Context, action: String) {
-        AlertDialog.Builder(context)
-            .setIcon(android.R.drawable.ic_dialog_alert)
-            .setTitle(R.string.privacy_policy_title)
-            .setMessage(R.string.start_accept_privacy_policy)
-            .setCancelable(false)
-            .setNeutralButton(R.string.read_privacy_policy) { _, _ ->
-                ShareUtils.openUrlInApp(context, context.getString(R.string.privacy_policy_url))
+    @Composable
+    private fun Headline(text: String) {
+        Text(
+            modifier = Modifier.padding(start = YpScreenMargin, end = YpScreenMargin, top = 20.dp, bottom = 6.dp),
+            text = text,
+            style = MaterialTheme.typography.titleMedium
+        )
+    }
+
+    private fun shareReport() {
+        ShareUtils.shareText(applicationContext, getString(R.string.error_report_title), buildJson())
+    }
+
+    /** Asks to accept the privacy policy before opening the issue page of YewPlay on GitHub. */
+    private fun openPrivacyPolicyDialog() {
+        YpDialogs.card(this) { dismiss ->
+            YpDialogCard(
+                title = stringResource(R.string.privacy_policy_title),
+                message = stringResource(R.string.start_accept_privacy_policy),
+                confirmLabel = stringResource(R.string.accept),
+                onConfirm = {
+                    dismiss()
+                    ShareUtils.openUrlInApp(this@ErrorActivity, ERROR_GITHUB_ISSUE_URL)
+                },
+                dismissLabel = stringResource(R.string.decline),
+                onDismiss = dismiss
+            ) {
+                Text(
+                    modifier = Modifier
+                        .padding(horizontal = 24.dp)
+                        .clickable {
+                            ShareUtils.openUrlInApp(this@ErrorActivity, getString(R.string.privacy_policy_url))
+                        },
+                    text = stringResource(R.string.read_privacy_policy),
+                    style = MaterialTheme.typography.labelLarge,
+                    textDecoration = TextDecoration.Underline
+                )
             }
-            .setPositiveButton(R.string.accept) { _, _ ->
-                if (action == "EMAIL") { // send on email
-                    val intent = Intent(Intent.ACTION_SENDTO)
-                        .setData("mailto:".toUri()) // only email apps should handle this
-                        .putExtra(Intent.EXTRA_EMAIL, arrayOf(ERROR_EMAIL_ADDRESS))
-                        .putExtra(Intent.EXTRA_SUBJECT, errorEmailSubject)
-                        .putExtra(Intent.EXTRA_TEXT, buildJson())
-                    ShareUtils.openIntentInApp(context, intent)
-                } else if (action == "GITHUB") { // open the NewPipe issue page on GitHub
-                    ShareUtils.openUrlInApp(this, ERROR_GITHUB_ISSUE_URL)
-                }
-            }
-            .setNegativeButton(R.string.decline, null)
-            .show()
+        }.apply { setCancelable(false) }.show()
     }
 
     private fun formErrorText(stacktrace: Array<String>): String {
@@ -163,22 +275,18 @@ class ErrorActivity : AppCompatActivity() {
         return stacktrace.joinToString(separator + "\n", separator + "\n", separator)
     }
 
-    private fun buildInfo(info: ErrorInfo) {
-        binding.errorInfoLabelsView.text = getString(R.string.info_labels)
-
-        val text = info.userAction.message + "\n" +
-            info.request + "\n" +
-            contentLanguageString + "\n" +
-            contentCountryString + "\n" +
-            appLanguage + "\n" +
-            info.getServiceName() + "\n" +
-            currentTimeStamp + "\n" +
-            packageName + "\n" +
-            BuildConfig.VERSION_NAME + "\n" +
-            osString
-
-        binding.errorInfosView.text = text
-    }
+    private fun infoValues(): List<String> = listOf(
+        errorInfo.userAction.message,
+        errorInfo.request,
+        contentLanguageString,
+        contentCountryString,
+        appLanguage,
+        errorInfo.getServiceName(),
+        currentTimeStamp,
+        packageName,
+        BuildConfig.VERSION_NAME,
+        osString
+    )
 
     private fun buildJson(): String {
         try {
@@ -195,7 +303,7 @@ class ErrorActivity : AppCompatActivity() {
                 .value("os", osString)
                 .value("time", currentTimeStamp)
                 .array("exceptions", errorInfo.stackTraces.toList())
-                .value("user_comment", binding.errorCommentBox.getText().toString())
+                .value("user_comment", comment)
                 .end()
                 .done()
         } catch (exception: Exception) {
@@ -208,7 +316,7 @@ class ErrorActivity : AppCompatActivity() {
     private fun buildMarkdown(): String {
         try {
             return buildString(1024) {
-                val userComment = binding.errorCommentBox.text.toString()
+                val userComment = comment
                 if (userComment.isNotEmpty()) {
                     appendLine(userComment)
                 }
@@ -260,13 +368,6 @@ class ErrorActivity : AppCompatActivity() {
         }
     }
 
-    private fun addGuruMeditation() {
-        // just an easter egg
-        var text = binding.errorSorryView.text.toString()
-        text += "\n" + getString(R.string.guru_meditation)
-        binding.errorSorryView.text = text
-    }
-
     companion object {
         // LOG TAGS
         private val TAG = ErrorActivity::class.java.toString()
@@ -274,8 +375,7 @@ class ErrorActivity : AppCompatActivity() {
         // BUNDLE TAGS
         const val ERROR_INFO = "error_info"
 
-        private const val ERROR_EMAIL_ADDRESS = "crashreport@newpipe.schabi.org"
-        private const val ERROR_EMAIL_SUBJECT = "Exception in "
+        private const val KEY_COMMENT = "comment"
 
         private const val ERROR_GITHUB_ISSUE_URL = "https://github.com/juscelino25bezerra-art/Yewplay/issues"
     }

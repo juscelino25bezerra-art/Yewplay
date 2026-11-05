@@ -1,6 +1,6 @@
 YEWPLAY - MIGRAÇÃO DA INTERFACE PARA KOTLIN + COMPOSE
 Checklist (somente interface; o motor do NewPipe fica como está)
-Atualizado em: 05/11/2026 - branch claude/yewplay-telas-secundarias
+Atualizado em: 05/11/2026 - branch claude/yewplay-telas-secundarias-2
 
 Legenda: [x] concluído   [ ] falta
 
@@ -49,18 +49,16 @@ Legenda: [x] concluído   [ ] falta
 ======================================================================
 [x] Gerenciar inscrições (SubscriptionFragment)
 [x] Importar inscrições (SubscriptionsImportFragment)
-[ ] Notificações por canal
+[x] Notificações por canal
 [x] Escolher abas da tela inicial (ChooseTabsFragment)
 [x] Seletor de canal (SelectChannelFragment)
 [x] Seletor de kiosk (SelectKioskFragment)
 [x] Seletor de playlist (SelectPlaylistFragment)
 [x] Seletor de grupo do feed (SelectFeedGroupFragment)
 [x] Instâncias PeerTube (PeertubeInstanceListFragment)
-[ ] Fila de reprodução (PlayQueueActivity)
-[ ] Respostas de comentários (CommentRepliesFragment)
-[ ] Tela de erro
-[ ] reCAPTCHA (ReCaptchaActivity)
-[ ] Busca dentro das Configurações (PreferenceSearchFragment)
+[x] Tela de erro
+[x] reCAPTCHA (ReCaptchaActivity)
+[x] Busca dentro das Configurações (PreferenceSearchFragment)
 
 ======================================================================
 5. CONFIGURAÇÕES - TELAS INTERNAS
@@ -81,7 +79,8 @@ Legenda: [x] concluído   [ ] falta
 ======================================================================
 [ ] Detalhes do vídeo (VideoDetailFragment): título, canal, botões
 [ ] Aba Descrição
-[ ] Aba Comentários
+[ ] Aba Comentários e respostas (CommentRepliesFragment)
+[ ] Fila de reprodução (PlayQueueActivity)
 [ ] Aba Relacionados
 [ ] Controles em tela cheia (MainPlayerUi / VideoPlayerUi)
 [ ] Player em janela flutuante (PopupPlayerUi)
@@ -113,8 +112,8 @@ FICA DE FORA (MOTOR)
 ======================================================================
 RESUMO
 ======================================================================
-Concluído: telas principais + base/design system + diálogos
-Falta:     6 telas secundárias, 10 telas de configuração,
-           player (9 partes) e limpeza final (5 itens)
-Ordem sugerida: Telas secundárias > Configurações internas
+Concluído: telas principais + base/design system + diálogos + telas secundárias
+Falta:     10 telas de configuração,
+           player (10 partes) e limpeza final (5 itens)
+Ordem sugerida: Configurações internas
                 > Player > Estrutura e limpeza
