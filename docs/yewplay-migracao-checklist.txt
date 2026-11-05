@@ -1,6 +1,6 @@
 YEWPLAY - MIGRAÇÃO DA INTERFACE PARA KOTLIN + COMPOSE
 Checklist (somente interface; o motor do NewPipe fica como está)
-Atualizado em: 05/11/2026 - branch claude/yewplay-dialogos
+Atualizado em: 05/11/2026 - branch claude/yewplay-telas-secundarias
 
 Legenda: [x] concluído   [ ] falta
 
@@ -47,15 +47,15 @@ Legenda: [x] concluído   [ ] falta
 ======================================================================
 4. TELAS SECUNDÁRIAS
 ======================================================================
-[ ] Gerenciar inscrições (SubscriptionFragment)
-[ ] Importar inscrições (SubscriptionsImportFragment)
+[x] Gerenciar inscrições (SubscriptionFragment)
+[x] Importar inscrições (SubscriptionsImportFragment)
 [ ] Notificações por canal
-[ ] Escolher abas da tela inicial (ChooseTabsFragment)
-[ ] Seletor de canal (SelectChannelFragment)
-[ ] Seletor de kiosk (SelectKioskFragment)
-[ ] Seletor de playlist (SelectPlaylistFragment)
-[ ] Seletor de grupo do feed (SelectFeedGroupFragment)
-[ ] Instâncias PeerTube (PeertubeInstanceListFragment)
+[x] Escolher abas da tela inicial (ChooseTabsFragment)
+[x] Seletor de canal (SelectChannelFragment)
+[x] Seletor de kiosk (SelectKioskFragment)
+[x] Seletor de playlist (SelectPlaylistFragment)
+[x] Seletor de grupo do feed (SelectFeedGroupFragment)
+[x] Instâncias PeerTube (PeertubeInstanceListFragment)
 [ ] Fila de reprodução (PlayQueueActivity)
 [ ] Respostas de comentários (CommentRepliesFragment)
 [ ] Tela de erro
@@ -114,7 +114,7 @@ FICA DE FORA (MOTOR)
 RESUMO
 ======================================================================
 Concluído: telas principais + base/design system + diálogos
-Falta:     14 telas secundárias, 10 telas de configuração,
+Falta:     6 telas secundárias, 10 telas de configuração,
            player (9 partes) e limpeza final (5 itens)
 Ordem sugerida: Telas secundárias > Configurações internas
                 > Player > Estrutura e limpeza
