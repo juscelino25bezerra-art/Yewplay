@@ -1,23 +1,11 @@
 branch: claude/yewplay-dialogos
-sha: 7d2e4f8d6832c45a913d47b88aa4d3028e2265a5
+sha: 41602fee679f5c9eb9dd0229d0f7fc2cf2352e0f
 outcome: success
-run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/42024520613
+run: https://github.com/juscelino25bezerra-art/Yewplay/actions/runs/42026122704
 
 == errors ==
 
 == warnings ==
-w: file:///home/runner/work/Yewplay/Yewplay/app/build.gradle.kts:150:30: 'fun provideDelegate(thisRef: Any?, property: KProperty<*>): ExistingDomainObjectDelegate<Configuration>' is deprecated. Use 'val element = create(name)' instead. See the Gradle 9.6 upgrading guide.
-w: file:///home/runner/work/Yewplay/Yewplay/app/build.gradle.kts:150:30: 'val <T : Any> NamedDomainObjectContainer<T>.creating: NamedDomainObjectContainerCreatingDelegateProvider<T>' is deprecated. Use 'val element = create(name)' instead. See the Gradle 9.6 upgrading guide.
-w: file:///home/runner/work/Yewplay/Yewplay/app/build.gradle.kts:150:30: 'fun <T> ExistingDomainObjectDelegate<out T>.getValue(receiver: Any?, property: KProperty<*>): T' is deprecated. Use the named() API instead. See the Gradle 9.6 upgrading guide.
-w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:18:35: 'fun <U : Task> RegisteringDomainObjectDelegateProviderWithTypeAndAction<out TaskContainer, U>.provideDelegate(receiver: Any?, property: KProperty<*>): ExistingDomainObjectDelegate<TaskProvider<U>>' is deprecated. Use 'val task = tasks.register<Type>(name) { }' instead. See the Gradle 9.6 upgrading guide.
-w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:18:35: 'fun <T : Any, C : PolymorphicDomainObjectContainer<T>, U : T> C.registering(type: KClass<U>, action: U.() -> Unit): RegisteringDomainObjectDelegateProviderWithTypeAndAction<out C, U>' is deprecated. Use 'val element = register<Type>(name) { }' instead. See the Gradle 9.6 upgrading guide.
-w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:18:35: 'fun <T> ExistingDomainObjectDelegate<out T>.getValue(receiver: Any?, property: KProperty<*>): T' is deprecated. Use the named() API instead. See the Gradle 9.6 upgrading guide.
-w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:132:34: 'fun provideDelegate(thisRef: Any?, property: KProperty<*>): ExistingDomainObjectDelegate<KotlinSourceSet>' is deprecated. Use 'val element = getByName(name)' instead. See the Gradle 9.6 upgrading guide.
-w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:132:34: 'fun <T : Any, U : NamedDomainObjectCollection<T>> U.getting(configuration: T.() -> Unit): NamedDomainObjectCollectionDelegateProvider<T>' is deprecated. Use 'val element = getByName(name) { }' instead. See the Gradle 9.6 upgrading guide.
-w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:132:34: 'fun <T> ExistingDomainObjectDelegate<out T>.getValue(receiver: Any?, property: KProperty<*>): T' is deprecated. Use the named() API instead. See the Gradle 9.6 upgrading guide.
-w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:142:24: 'fun provideDelegate(thisRef: Any?, property: KProperty<*>): ExistingDomainObjectDelegate<KotlinSourceSet>' is deprecated. Use 'val element = getByName(name)' instead. See the Gradle 9.6 upgrading guide.
-w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:142:24: 'fun <T : Any, U : NamedDomainObjectCollection<T>> U.getting(configuration: T.() -> Unit): NamedDomainObjectCollectionDelegateProvider<T>' is deprecated. Use 'val element = getByName(name) { }' instead. See the Gradle 9.6 upgrading guide.
-w: file:///home/runner/work/Yewplay/Yewplay/shared/build.gradle.kts:142:24: 'fun <T> ExistingDomainObjectDelegate<out T>.getValue(receiver: Any?, property: KProperty<*>): T' is deprecated. Use the named() API instead. See the Gradle 9.6 upgrading guide.
 w: ⚠️ Unused Kotlin Source Sets
 w: ⚠️ Unused Kotlin Source Sets
 w: ⚠️ Unused Kotlin Source Sets
@@ -73,7 +61,41 @@ w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/org/schabi/newpipe
 w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/us/shandian/giga/ui/fragment/YpDownloadsFragment.kt:877:49 'static field ACTION_MEDIA_SCANNER_SCAN_FILE: String' is deprecated. Deprecated in Java.
 
 == tail ==
+
+> Task :app:mergeExtDexDebug
+> Task :app:writeDebugAppMetadata
+> Task :app:writeDebugSigningConfigVersions
+> Task :app:validateSigningDebug
+
+> Task :shared:compileAndroidMain
+w: Koin compiler plugin: Kotlin 2.4.21 is newer than the newest verified version (2.4.20) — proceeding with the 2.4.20 adapter. If compilation fails, check for a koin-compiler-plugin update. Verified versions: 2.3.20, 2.4.0, 2.4.10, 2.4.20.
+
+> Task :app:l8DexDesugarLibDebug
+> Task :shared:processAndroidMainJavaRes
+> Task :shared:bundleAndroidMainClassesToRuntimeJar
+> Task :shared:bundleAndroidMainClassesToCompileJar
+> Task :shared:createFullJarAndroidMain
+> Task :shared:mergeAndroidMainJavaResource
+> Task :core:designsystem:extractAndroidMainAnnotations
+> Task :shared:syncAndroidMainLibJars
+> Task :shared:bundleAndroidMainLocalLintAar
+> Task :shared:generateAndroidHostTestLintModel
+> Task :core:designsystem:compileAndroidMain
+> Task :core:designsystem:processAndroidMainJavaRes
+> Task :core:designsystem:bundleAndroidMainClassesToCompileJar
+> Task :core:designsystem:bundleAndroidMainClassesToRuntimeJar
+> Task :feature:downloads:compileAndroidMain
+> Task :feature:downloads:bundleAndroidMainClassesToCompileJar
+
+> Task :feature:channel:compileAndroidMain
+w: file:///home/runner/work/Yewplay/Yewplay/feature/channel/src/commonMain/kotlin/io/github/yewplay/feature/channel/ChannelScreen.kt:403:42 Unnecessary safe call on a non-null receiver of type 'ChannelHeader'.
+w: file:///home/runner/work/Yewplay/Yewplay/feature/channel/src/commonMain/kotlin/io/github/yewplay/feature/channel/ChannelScreen.kt:431:38 Unnecessary safe call on a non-null receiver of type 'ChannelHeader'.
+
+> Task :feature:channel:bundleAndroidMainClassesToCompileJar
+> Task :feature:library:compileAndroidMain
 > Task :feature:library:bundleAndroidMainClassesToCompileJar
+> Task :feature:home:compileAndroidMain
+> Task :feature:home:bundleAndroidMainClassesToCompileJar
 > Task :feature:settings:compileAndroidMain
 > Task :feature:settings:bundleAndroidMainClassesToCompileJar
 > Task :feature:playlist:compileAndroidMain
@@ -85,35 +107,24 @@ w: file:///home/runner/work/Yewplay/Yewplay/app/src/main/java/us/shandian/giga/u
 > Task :feature:playlist:processAndroidMainJavaRes
 > Task :feature:settings:processAndroidMainJavaRes
 > Task :feature:channel:bundleAndroidMainClassesToRuntimeJar
-> Task :core:designsystem:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:search:compileAndroidMain
 > Task :feature:search:bundleAndroidMainClassesToCompileJar
 > Task :feature:search:processAndroidMainJavaRes
 > Task :feature:downloads:bundleAndroidMainClassesToRuntimeJar
-> Task :feature:subscriptions:compileAndroidMain
-> Task :feature:subscriptions:bundleAndroidMainClassesToCompileJar
-> Task :feature:subscriptions:processAndroidMainJavaRes
 > Task :feature:home:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:library:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:playlist:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:search:bundleAndroidMainClassesToRuntimeJar
+> Task :feature:subscriptions:compileAndroidMain
+> Task :feature:subscriptions:bundleAndroidMainClassesToCompileJar
+> Task :feature:subscriptions:processAndroidMainJavaRes
 > Task :feature:settings:bundleAndroidMainClassesToRuntimeJar
 > Task :feature:subscriptions:bundleAndroidMainClassesToRuntimeJar
-> Task :app:mergeDebugNativeLibs
-
-> Task :app:stripDebugDebugSymbols
-Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so, libsqliteJni.so. Run with --info option to learn more.
-
 > Task :core:designsystem:mergeAndroidMainJavaResource
 > Task :core:designsystem:syncAndroidMainLibJars
 > Task :core:designsystem:bundleAndroidMainLocalLintAar
-> Task :shared:syncAndroidMainLibJars
-> Task :shared:bundleAndroidMainLocalLintAar
-> Task :app:mergeLibDexDebug
-> Task :feature:channel:checkAndroidMainAarMetadata
 > Task :feature:channel:extractAndroidMainAnnotations
 > Task :feature:channel:mergeAndroidMainJavaResource
-> Task :feature:downloads:checkAndroidMainAarMetadata
 > Task :feature:channel:syncAndroidMainLibJars
 > Task :feature:channel:bundleAndroidMainLocalLintAar
 > Task :feature:downloads:extractAndroidMainAnnotations
@@ -121,62 +132,39 @@ Unable to strip the following libraries, packaging them as they are: libandroidx
 > Task :feature:downloads:syncAndroidMainLibJars
 > Task :feature:downloads:bundleAndroidMainLocalLintAar
 > Task :feature:home:extractAndroidMainAnnotations
-> Task :feature:home:checkAndroidMainAarMetadata
 > Task :feature:home:mergeAndroidMainJavaResource
-> Task :feature:library:checkAndroidMainAarMetadata
-> Task :feature:library:extractAndroidMainAnnotations
 > Task :feature:home:syncAndroidMainLibJars
 > Task :feature:home:bundleAndroidMainLocalLintAar
+> Task :feature:library:extractAndroidMainAnnotations
 > Task :feature:library:mergeAndroidMainJavaResource
-> Task :feature:playlist:checkAndroidMainAarMetadata
-> Task :feature:playlist:extractAndroidMainAnnotations
 > Task :feature:library:syncAndroidMainLibJars
 > Task :feature:library:bundleAndroidMainLocalLintAar
+> Task :feature:playlist:extractAndroidMainAnnotations
 > Task :feature:playlist:mergeAndroidMainJavaResource
-> Task :feature:search:checkAndroidMainAarMetadata
 > Task :feature:playlist:syncAndroidMainLibJars
 > Task :feature:playlist:bundleAndroidMainLocalLintAar
 > Task :feature:search:extractAndroidMainAnnotations
-> Task :feature:settings:checkAndroidMainAarMetadata
 > Task :feature:search:mergeAndroidMainJavaResource
+> Task :feature:search:syncAndroidMainLibJars
+> Task :feature:search:bundleAndroidMainLocalLintAar
 > Task :feature:settings:extractAndroidMainAnnotations
 > Task :feature:settings:mergeAndroidMainJavaResource
-> Task :feature:search:syncAndroidMainLibJars
 > Task :feature:settings:syncAndroidMainLibJars
-> Task :feature:search:bundleAndroidMainLocalLintAar
 > Task :feature:settings:bundleAndroidMainLocalLintAar
 > Task :feature:subscriptions:extractAndroidMainAnnotations
 > Task :feature:subscriptions:mergeAndroidMainJavaResource
-> Task :feature:subscriptions:checkAndroidMainAarMetadata
-> Task :app:preDebugAndroidTestBuild SKIPPED
-> Task :app:generateDebugAndroidTestResValues
 > Task :feature:subscriptions:syncAndroidMainLibJars
 > Task :feature:subscriptions:bundleAndroidMainLocalLintAar
-> Task :shared:prepareLintJarForPublish
-> Task :shared:createFullJarAndroidMain
-> Task :core:designsystem:prepareLintJarForPublish
 > Task :core:designsystem:createFullJarAndroidMain
-> Task :feature:channel:prepareLintJarForPublish
 > Task :feature:channel:createFullJarAndroidMain
-> Task :feature:downloads:prepareLintJarForPublish
 > Task :feature:downloads:createFullJarAndroidMain
 > Task :feature:home:createFullJarAndroidMain
-> Task :feature:home:prepareLintJarForPublish
 > Task :feature:library:createFullJarAndroidMain
 > Task :feature:playlist:createFullJarAndroidMain
-> Task :feature:library:prepareLintJarForPublish
-> Task :feature:playlist:prepareLintJarForPublish
 > Task :feature:search:createFullJarAndroidMain
-> Task :feature:search:prepareLintJarForPublish
-> Task :feature:settings:prepareLintJarForPublish
 > Task :feature:settings:createFullJarAndroidMain
 > Task :feature:subscriptions:createFullJarAndroidMain
-> Task :feature:subscriptions:prepareLintJarForPublish
-> Task :app:preDebugUnitTestBuild UP-TO-DATE
-> Task :shared:preAndroidHostTestBuild UP-TO-DATE
-> Task :app:extractProguardFiles
-> Task :shared:generateAndroidHostTestLintModel
-> Task :app:kspDebugKotlin
+> Task :app:mergeLibDexDebug
 > Task :shared:lintAnalyzeAndroidHostTest
 
 > Task :app:kspDebugKotlin
@@ -240,9 +228,9 @@ Note: Recompile with -Xlint:unchecked for details.
 > Task :app:copyRoomSchemas NO-SOURCE
 > Task :app:processDebugJavaRes
 > Task :app:bundleDebugClassesToCompileJar
-> Task :app:generateDebugAndroidTestLintModel
 > Task :app:generateDebugLintReportModel
 > Task :app:generateDebugUnitTestLintModel
+> Task :app:generateDebugAndroidTestLintModel
 > Task :app:mergeDebugJavaResource
 
 > Task :app:lintAnalyzeDebug
@@ -270,6 +258,6 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 
 For more on this, please refer to https://docs.gradle.org/9.8.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD SUCCESSFUL in 9m 57s
+BUILD SUCCESSFUL in 4m 1s
 257 actionable tasks: 257 executed
 Configuration cache entry stored.
