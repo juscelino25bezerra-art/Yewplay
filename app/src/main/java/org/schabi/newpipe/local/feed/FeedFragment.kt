@@ -1,63 +1,38 @@
 /*
- * Copyright 2019 Mauricio Colli <mauriciocolli@outlook.com>
- * FeedFragment.kt is part of NewPipe
- *
- * License: GPL-3.0+
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 package org.schabi.newpipe.local.feed
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
-import android.os.Parcelable
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.core.content.edit
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.os.bundleOf
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.evernote.android.state.State
-import com.xwray.groupie.Group
-import com.xwray.groupie.GroupieAdapter
-import com.xwray.groupie.Item
-import com.xwray.groupie.OnItemClickListener
-import com.xwray.groupie.OnItemLongClickListener
+import io.github.yewplay.core.designsystem.YpErrorLabels
 import io.github.yewplay.core.designsystem.YpTheme
 import io.github.yewplay.core.model.YpChannel
 import io.github.yewplay.core.model.YpGroup
+import io.github.yewplay.core.model.YpStreamItem
+import io.github.yewplay.feature.subscriptions.FeedActions
+import io.github.yewplay.feature.subscriptions.FeedEntry
+import io.github.yewplay.feature.subscriptions.FeedIcons
+import io.github.yewplay.feature.subscriptions.FeedMenuEntry
+import io.github.yewplay.feature.subscriptions.FeedScreen
+import io.github.yewplay.feature.subscriptions.FeedSection
+import io.github.yewplay.feature.subscriptions.FeedStrings
+import io.github.yewplay.feature.subscriptions.FeedUiState
 import io.github.yewplay.feature.subscriptions.SubscriptionsActions
-import io.github.yewplay.feature.subscriptions.SubscriptionsHeader
 import io.github.yewplay.feature.subscriptions.SubscriptionsStrings
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
@@ -66,438 +41,337 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.time.ZoneId
-import java.util.function.Consumer
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.reactive.asFlow
+import org.schabi.newpipe.BaseFragment
 import org.schabi.newpipe.NewPipeDatabase
 import org.schabi.newpipe.R
 import org.schabi.newpipe.database.feed.model.FeedGroupEntity
+import org.schabi.newpipe.database.stream.StreamWithState
 import org.schabi.newpipe.database.subscription.SubscriptionEntity
-import org.schabi.newpipe.databinding.FragmentFeedBinding
 import org.schabi.newpipe.error.ErrorInfo
 import org.schabi.newpipe.error.ErrorUtil
 import org.schabi.newpipe.error.UserAction
 import org.schabi.newpipe.extractor.exceptions.AccountTerminatedException
 import org.schabi.newpipe.extractor.exceptions.ContentNotAvailableException
-import org.schabi.newpipe.extractor.stream.StreamInfoItem
-import org.schabi.newpipe.extractor.utils.Utils.isNullOrEmpty
-import org.schabi.newpipe.fragments.BaseStateFragment
-import org.schabi.newpipe.info_list.ItemViewMode
+import org.schabi.newpipe.extractor.stream.StreamType
 import org.schabi.newpipe.info_list.dialog.InfoItemDialog
-import org.schabi.newpipe.ktx.animate
-import org.schabi.newpipe.ktx.animateHideRecyclerViewAllowingScrolling
-import org.schabi.newpipe.ktx.slideUp
-import org.schabi.newpipe.local.feed.item.StreamItem
-import org.schabi.newpipe.local.feed.item.YpDayHeaderItem
 import org.schabi.newpipe.local.feed.service.FeedLoadService
 import org.schabi.newpipe.local.subscription.SubscriptionManager
 import org.schabi.newpipe.local.subscription.dialog.FeedGroupDialog
+import org.schabi.newpipe.local.yewplay.YpItems
 import org.schabi.newpipe.local.yewplay.YpThemePrefs
-import org.schabi.newpipe.util.DeviceUtils
 import org.schabi.newpipe.util.Localization
 import org.schabi.newpipe.util.NavigationHelper
-import org.schabi.newpipe.util.ThemeHelper.getGridSpanCountStreams
-import org.schabi.newpipe.util.ThemeHelper.getItemViewMode
-import org.schabi.newpipe.util.ThemeHelper.resolveDrawable
-import org.schabi.newpipe.util.ThemeHelper.shouldUseGridLayout
+import org.schabi.newpipe.util.StreamTypeUtil
 
-class FeedFragment : BaseStateFragment<FeedState>() {
-    private var _feedBinding: FragmentFeedBinding? = null
-    private val feedBinding get() = _feedBinding!!
-
-    private val disposables = CompositeDisposable()
-
+/**
+ * YewPlay: "Subscriptions" (proposal, p. 14) in Compose: channel avatars with the ruby dot,
+ * groups as tabs and the feed by day. Loading and refreshing are NewPipe's FeedViewModel and
+ * FeedLoadService, as before.
+ */
+class FeedFragment : BaseFragment() {
     private lateinit var viewModel: FeedViewModel
+    private val disposables = CompositeDisposable()
+    private val uiState = MutableStateFlow(FeedUiState())
 
-    @State
-    @JvmField
-    var listState: Parcelable? = null
+    /** Channels with videos from the last 24 hours, for the ruby dot on the avatars. */
+    private val recentUploaders = MutableStateFlow<Set<String>>(emptySet())
 
     private var groupId = FeedGroupEntity.GROUP_ALL_ID
     private var groupName = ""
-    private var oldestSubscriptionUpdate: OffsetDateTime? = null
+    private var streams: Map<String, StreamWithState> = emptyMap()
+    private var lastError: ErrorInfo? = null
 
-    private lateinit var groupAdapter: GroupieAdapter
-
-    private var onSettingsChangeListener: SharedPreferences.OnSharedPreferenceChangeListener? = null
-    private var updateListViewModeOnResume = false
-    private var isRefreshing = false
-
-    private var lastNewItemsCount = 0
-
-    /** YewPlay: channels with videos from the last 24 hours, for the ruby dot on the avatars. */
-    private val recentUploaders = MutableStateFlow<Set<String>>(emptySet())
-
-    init {
-        setHasOptionsMenu(true)
-    }
+    /** The update whose item errors were already shown, so they are shown only once. */
+    private var handledUpdate: OffsetDateTime? = null
+    private var handledFirstLoad = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         groupId = arguments?.getLong(KEY_GROUP_ID, FeedGroupEntity.GROUP_ALL_ID)
             ?: FeedGroupEntity.GROUP_ALL_ID
-        groupName = arguments?.getString(KEY_GROUP_NAME) ?: ""
-
-        onSettingsChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
-            if (getString(R.string.list_view_mode_key).equals(key)) {
-                updateListViewModeOnResume = true
-            }
+        groupName = arguments?.getString(KEY_GROUP_NAME).orEmpty()
+        uiState.update {
+            it.copy(selectedGroupId = groupId.takeIf { id -> id != FeedGroupEntity.GROUP_ALL_ID })
         }
-        PreferenceManager.getDefaultSharedPreferences(activity)
-            .registerOnSharedPreferenceChangeListener(onSettingsChangeListener)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_feed, container, false)
-    }
-
-    override fun onViewCreated(rootView: View, savedInstanceState: Bundle?) {
-        // super.onViewCreated() calls initListeners() which require the binding to be initialized
-        _feedBinding = FragmentFeedBinding.bind(rootView)
-        setupSubscriptionsHeader()
-        super.onViewCreated(rootView, savedInstanceState)
-
         val factory = FeedViewModel.getFactory(requireContext(), groupId)
         viewModel = ViewModelProvider(this, factory)[FeedViewModel::class.java]
-        viewModel.stateLiveData.observe(viewLifecycleOwner) { it?.let(::handleResult) }
+        viewModel.stateLiveData.observe(this) { state -> state?.let(::handleState) }
+    }
 
-        groupAdapter = GroupieAdapter().apply {
-            setOnItemClickListener(listenerStreamItem)
-            setOnItemLongClickListener(listenerStreamItem)
-        }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val context = requireContext()
+        val themeKey = YpThemePrefs.themeKey(context)
+        val nightThemeKey = YpThemePrefs.nightThemeKey(context)
+        val subscriptions = SubscriptionManager(context).subscriptions().asFlow()
+        val groups = FeedDatabaseManager(context).groups().asFlow()
 
-        feedBinding.itemsList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                // Check if we scrolled to the top
-                if (newState == RecyclerView.SCROLL_STATE_IDLE &&
-                    !recyclerView.canScrollVertically(-1)
-                ) {
-                    if (tryGetNewItemsLoadedButton()?.isVisible == true) {
-                        hideNewItemsLoaded(true)
-                    }
+        return ComposeView(context).apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+            setContent {
+                val state by uiState.collectAsState()
+                val subscriptionList by subscriptions.collectAsState(initial = emptyList())
+                val groupList by groups.collectAsState(initial = emptyList())
+                val recent by recentUploaders.collectAsState()
+                YpTheme(themeKey, nightThemeKey) {
+                    FeedScreen(
+                        state = state.copy(
+                            channels = channels(subscriptionList, recent),
+                            groups = groupList.map { YpGroup(it.uid, it.name) }
+                        ),
+                        menu = listOf(
+                            FeedMenuEntry(stringResource(R.string.yp_subscriptions_channels)) {
+                                NavigationHelper.openSubscriptionFragment(parentFragmentManager)
+                            },
+                            FeedMenuEntry(stringResource(R.string.fast_mode), ::showFastModeHelp)
+                        ),
+                        strings = FeedStrings(
+                            title = stringResource(R.string.yp_nav_subscriptions),
+                            header = SubscriptionsStrings(
+                                all = stringResource(R.string.yp_feed_all),
+                                addGroup = stringResource(R.string.yp_feed_add_group)
+                            ),
+                            filter = stringResource(R.string.feed_show_hide_streams),
+                            empty = stringResource(R.string.no_videos),
+                            emptyDetail = stringResource(R.string.empty_list_subtitle),
+                            refresh = stringResource(R.string.yp_refresh),
+                            error = YpErrorLabels(
+                                retry = stringResource(R.string.retry),
+                                openInBrowser = stringResource(R.string.open_in_browser)
+                            )
+                        ),
+                        icons = FeedIcons(
+                            filter = painterResource(R.drawable.ic_visibility_on),
+                            menu = painterResource(R.drawable.ic_more_vert),
+                            itemMenu = painterResource(R.drawable.ic_more_vert)
+                        ),
+                        actions = FeedActions(
+                            header = SubscriptionsActions(
+                                openChannel = { channel ->
+                                    NavigationHelper.openChannelFragment(
+                                        fm,
+                                        channel.serviceId,
+                                        channel.url,
+                                        channel.name
+                                    )
+                                },
+                                selectGroup = ::selectGroup,
+                                addGroup = {
+                                    FeedGroupDialog.newInstance().show(parentFragmentManager, null)
+                                }
+                            ),
+                            onFilter = ::showStreamVisibilityDialog,
+                            onItemClick = ::openVideo,
+                            onItemMenu = ::showItemMenu,
+                            onRefresh = ::refresh,
+                            onErrorAction = {
+                                lastError?.let { ErrorUtil.openActivity(requireContext(), it) }
+                            }
+                        )
+                    )
                 }
             }
-        })
-
-        feedBinding.itemsList.adapter = groupAdapter
-        setupListViewMode()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        listState = feedBinding.itemsList.layoutManager?.onSaveInstanceState()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        updateRelativeTimeViews()
-
-        if (groupName.isNotEmpty()) {
-            activity?.supportActionBar?.subtitle = groupName
-        }
-
-        if (updateListViewModeOnResume) {
-            updateListViewModeOnResume = false
-
-            setupListViewMode()
-            if (viewModel.stateLiveData.value != null) {
-                handleResult(viewModel.stateLiveData.value!!)
-            }
-        }
-    }
-
-    override fun onStop() {
-        super.onStop()
-
-        // Clear the activities' action bar subtitle when leaving the fragment to prevent
-        // the feed group name from leaking into subsequent views. (#13366)
-        if (activity?.supportActionBar?.subtitle == groupName) {
-            activity?.supportActionBar?.subtitle = null
-        }
-    }
-
-    private fun setupListViewMode() {
-        // does everything needed to setup the layouts for grid or list modes
-        groupAdapter.spanCount = if (shouldUseGridLayout(context)) getGridSpanCountStreams(context) else 1
-        feedBinding.itemsList.layoutManager = GridLayoutManager(requireContext(), groupAdapter.spanCount).apply {
-            spanSizeLookup = groupAdapter.spanSizeLookup
-        }
-    }
-
-    override fun initListeners() {
-        super.initListeners()
-        feedBinding.refreshRootView.setOnClickListener { reloadContent() }
-        feedBinding.swipeRefreshLayout.setOnRefreshListener { reloadContent() }
-        feedBinding.newItemsLoadedButton.setOnClickListener {
-            hideNewItemsLoaded(true)
-            feedBinding.itemsList.scrollToPosition(0)
-        }
-    }
-
-    // /////////////////////////////////////////////////////////////////////////
-    // Menu
-    // /////////////////////////////////////////////////////////////////////////
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-
-        activity.supportActionBar?.setDisplayShowTitleEnabled(true)
-        // YewPlay: the full feed is the "Subscriptions" destination of the bottom bar
-        if (groupName.isEmpty()) {
-            activity.supportActionBar?.setTitle(R.string.yp_nav_subscriptions)
-        } else {
-            activity.supportActionBar?.setTitle(R.string.fragment_feed_title)
-        }
-        activity.supportActionBar?.subtitle = groupName
-
-        inflater.inflate(R.menu.menu_feed_fragment, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_item_feed_help) {
-            val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-
-            val usingDedicatedMethod = sharedPreferences
-                .getBoolean(getString(R.string.feed_use_dedicated_fetch_method_key), false)
-            val enableDisableButtonText = when {
-                usingDedicatedMethod -> R.string.feed_use_dedicated_fetch_method_disable_button
-                else -> R.string.feed_use_dedicated_fetch_method_enable_button
-            }
-
-            AlertDialog.Builder(requireContext())
-                .setMessage(R.string.feed_use_dedicated_fetch_method_help_text)
-                .setNeutralButton(enableDisableButtonText) { _, _ ->
-                    sharedPreferences.edit {
-                        putBoolean(getString(R.string.feed_use_dedicated_fetch_method_key), !usingDedicatedMethod)
-                    }
-                }
-                .setPositiveButton(resources.getString(R.string.ok), null)
-                .show()
-            return true
-        } else if (item.itemId == R.id.menu_item_feed_toggle_played_items) {
-            showStreamVisibilityDialog()
-        } else if (item.itemId == R.id.menu_item_yp_channels) {
-            NavigationHelper.openSubscriptionFragment(parentFragmentManager)
-            return true
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun showStreamVisibilityDialog() {
-        val dialogItems = arrayOf(
-            getString(R.string.feed_show_watched),
-            getString(R.string.feed_show_partially_watched),
-            getString(R.string.feed_show_upcoming)
-        )
-
-        val checkedDialogItems = booleanArrayOf(
-            viewModel.getShowPlayedItemsFromPreferences(),
-            viewModel.getShowPartiallyPlayedItemsFromPreferences(),
-            viewModel.getShowFutureItemsFromPreferences()
-        )
-
-        AlertDialog.Builder(requireContext())
-            .setTitle(R.string.feed_hide_streams_title)
-            .setMultiChoiceItems(dialogItems, checkedDialogItems) { _, which, isChecked ->
-                checkedDialogItems[which] = isChecked
-            }
-            .setPositiveButton(R.string.ok) { _, _ ->
-                viewModel.setSaveShowPlayedItems(checkedDialogItems[0])
-                viewModel.setSaveShowPartiallyPlayedItems(checkedDialogItems[1])
-                viewModel.setSaveShowFutureItems(checkedDialogItems[2])
-            }
-            .setNegativeButton(R.string.cancel, null)
-            .show()
-    }
-
-    override fun onDestroyOptionsMenu() {
-        super.onDestroyOptionsMenu()
-        if (
-            (groupName != "") &&
-            (activity?.supportActionBar?.subtitle == groupName)
-        ) {
-            activity?.supportActionBar?.subtitle = null
         }
     }
 
     override fun onDestroy() {
         disposables.dispose()
-        if (onSettingsChangeListener != null) {
-            PreferenceManager.getDefaultSharedPreferences(activity)
-                .unregisterOnSharedPreferenceChangeListener(onSettingsChangeListener)
-            onSettingsChangeListener = null
-        }
-
         super.onDestroy()
     }
 
-    override fun onDestroyView() {
-        // Ensure that all animations are canceled
-        tryGetNewItemsLoadedButton()?.clearAnimation()
-
-        feedBinding.itemsList.adapter = null
-        _feedBinding = null
-        super.onDestroyView()
-    }
-
-    // //////////////////////////////////////////////////////////////////////////
-    // Handling
-    // //////////////////////////////////////////////////////////////////////////
-
-    override fun showLoading() {
-        super.showLoading()
-        feedBinding.itemsList.animateHideRecyclerViewAllowingScrolling()
-        feedBinding.refreshRootView.animate(false, 0)
-        feedBinding.loadingProgressText.animate(true, 200)
-        feedBinding.swipeRefreshLayout.isRefreshing = true
-        isRefreshing = true
-    }
-
-    override fun hideLoading() {
-        super.hideLoading()
-        feedBinding.itemsList.animate(true, 0)
-        feedBinding.refreshRootView.animate(true, 200)
-        feedBinding.loadingProgressText.animate(false, 0)
-        feedBinding.swipeRefreshLayout.isRefreshing = false
-        isRefreshing = false
-    }
-
-    override fun showEmptyState() {
-        super.showEmptyState()
-        feedBinding.itemsList.animateHideRecyclerViewAllowingScrolling()
-        feedBinding.refreshRootView.animate(true, 200)
-        feedBinding.loadingProgressText.animate(false, 0)
-        feedBinding.swipeRefreshLayout.isRefreshing = false
-    }
-
-    override fun handleResult(result: FeedState) {
-        when (result) {
-            is FeedState.ProgressState -> handleProgressState(result)
-            is FeedState.LoadedState -> handleLoadedState(result)
-            is FeedState.ErrorState -> if (handleErrorState(result)) return
-        }
-
-        updateRefreshViewState()
-    }
-
-    override fun handleError() {
-        super.handleError()
-        feedBinding.itemsList.animateHideRecyclerViewAllowingScrolling()
-        feedBinding.refreshRootView.animate(false, 0)
-        feedBinding.loadingProgressText.animate(false, 0)
-        feedBinding.swipeRefreshLayout.isRefreshing = false
-        isRefreshing = false
-    }
-
-    private fun handleProgressState(progressState: FeedState.ProgressState) {
-        showLoading()
-
-        val isIndeterminate = progressState.currentProgress == -1 &&
-            progressState.maxProgress == -1
-
-        feedBinding.loadingProgressText.text = if (!isIndeterminate) {
-            "${progressState.currentProgress}/${progressState.maxProgress}"
-        } else if (progressState.progressMessage > 0) {
-            getString(progressState.progressMessage)
-        } else {
-            "∞/∞"
-        }
-
-        feedBinding.loadingProgressBar.isIndeterminate = isIndeterminate ||
-            (progressState.maxProgress > 0 && progressState.currentProgress == 0)
-        feedBinding.loadingProgressBar.progress = progressState.currentProgress
-
-        feedBinding.loadingProgressBar.max = progressState.maxProgress
-    }
-
-    private fun showInfoItemDialog(item: StreamInfoItem) {
-        val context = context
-        val activity: Activity? = getActivity()
-        if (context == null || context.resources == null || activity == null) return
-
-        InfoItemDialog.Builder(activity, context, this, item).create().show()
-    }
-
-    private val listenerStreamItem = object : OnItemClickListener, OnItemLongClickListener {
-        override fun onItemClick(item: Item<*>, view: View) {
-            if (item is StreamItem && !isRefreshing) {
-                val stream = item.streamWithState.stream
-                NavigationHelper.openVideoDetailFragment(
-                    requireContext(),
-                    fm,
-                    stream.serviceId,
-                    stream.url,
-                    stream.title,
-                    null,
-                    false
-                )
+    private fun channels(subscriptions: List<SubscriptionEntity>, recent: Set<String>): List<YpChannel> {
+        return subscriptions
+            .mapNotNull { subscription ->
+                subscription.url?.let { url ->
+                    YpChannel(
+                        serviceId = subscription.serviceId,
+                        url = url,
+                        name = subscription.name.orEmpty(),
+                        avatarUrl = subscription.avatarUrl,
+                        hasNewVideos = url in recent
+                    )
+                }
             }
-        }
-
-        override fun onItemLongClick(item: Item<*>, view: View): Boolean {
-            if (item is StreamItem && !isRefreshing) {
-                showInfoItemDialog(item.streamWithState.stream.toStreamInfoItem())
-                return true
-            }
-            return false
-        }
+            .sortedByDescending { it.hasNewVideos }
     }
 
-    /**
-     * YewPlay: avatars of the subscribed channels (ruby dot on the ones with new videos) and the
-     * channel groups as tabs, drawn by the Compose header in :feature:subscriptions.
-     */
-    private fun setupSubscriptionsHeader() {
-        val context = requireContext()
-        val subscriptions = SubscriptionManager(context).subscriptions().asFlow()
-        val groups = FeedDatabaseManager(context).groups().asFlow()
-        val themeKey = YpThemePrefs.themeKey(context)
-        val nightThemeKey = YpThemePrefs.nightThemeKey(context)
-        val strings = SubscriptionsStrings(
-            all = getString(R.string.yp_feed_all),
-            addGroup = getString(R.string.yp_feed_add_group)
-        )
-        val actions = SubscriptionsActions(
-            openChannel = { channel ->
-                NavigationHelper.openChannelFragment(fm, channel.serviceId, channel.url, channel.name)
-            },
-            selectGroup = { group -> selectFeedGroup(group) },
-            addGroup = { FeedGroupDialog.newInstance().show(parentFragmentManager, null) }
-        )
-        feedBinding.ypSubscriptionsHeader.setViewCompositionStrategy(
-            ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
-        )
-        feedBinding.ypSubscriptionsHeader.setContent {
-            val subscriptionList by subscriptions.collectAsState(initial = emptyList())
-            val groupList by groups.collectAsState(initial = emptyList())
-            val recent by recentUploaders.collectAsState()
-            YpTheme(themeKey, nightThemeKey) {
-                SubscriptionsHeader(
-                    channels = subscriptionList
-                        .mapNotNull { subscription ->
-                            subscription.url?.let { url ->
-                                YpChannel(
-                                    serviceId = subscription.serviceId,
-                                    url = url,
-                                    name = subscription.name.orEmpty(),
-                                    avatarUrl = subscription.avatarUrl,
-                                    hasNewVideos = url in recent
-                                )
-                            }
+    /* ---------------------------------------------------------------------------------------- */
+    /* States                                                                                    */
+    /* ---------------------------------------------------------------------------------------- */
+
+    private fun handleState(state: FeedState) {
+        when (state) {
+            is FeedState.ProgressState -> {
+                val indeterminate = state.currentProgress == -1 && state.maxProgress == -1
+                uiState.update {
+                    it.copy(
+                        isRefreshing = true,
+                        error = null,
+                        progressText = when {
+                            !indeterminate -> "${state.currentProgress}/${state.maxProgress}"
+                            state.progressMessage > 0 -> getString(state.progressMessage)
+                            else -> null
+                        },
+                        progress = if (!indeterminate && state.maxProgress > 0) {
+                            state.currentProgress.toFloat() / state.maxProgress
+                        } else {
+                            null
                         }
-                        .sortedByDescending { it.hasNewVideos },
-                    groups = groupList.map { YpGroup(it.uid, it.name) },
-                    selectedGroupId = groupId.takeIf { it != FeedGroupEntity.GROUP_ALL_ID },
-                    strings = strings,
-                    actions = actions
-                )
+                    )
+                }
+            }
+
+            is FeedState.LoadedState -> handleLoaded(state)
+
+            is FeedState.ErrorState -> {
+                val error = state.error
+                if (error == null) {
+                    uiState.update { it.copy(isRefreshing = false) }
+                } else {
+                    val info = ErrorInfo(error, UserAction.REQUESTED_FEED, "Loading feed")
+                    lastError = info
+                    uiState.update {
+                        it.copy(
+                            isLoading = false,
+                            isRefreshing = false,
+                            error = YpItems.errorUi(requireContext(), info)
+                        )
+                    }
+                }
             }
         }
     }
 
-    private fun selectFeedGroup(group: YpGroup?) {
+    private fun handleLoaded(state: FeedState.LoadedState) {
+        val list = state.items.map { it.streamWithState }
+        val dayAgo = OffsetDateTime.now().minusDays(1)
+        recentUploaders.value = list.mapNotNull { item ->
+            item.stream.uploaderUrl.takeIf { item.stream.uploadDate?.isAfter(dayAgo) == true }
+        }.toSet()
+
+        val keyed = list.mapIndexed { index, item -> "${item.stream.uid}:$index" to item }
+        streams = keyed.toMap()
+        val sections = sections(keyed, state.oldestUpdate)
+        uiState.update {
+            it.copy(
+                sections = sections,
+                isLoading = false,
+                isRefreshing = false,
+                progress = null,
+                progressText = null,
+                isEmpty = list.isEmpty(),
+                error = null,
+                notice = if (state.notLoadedCount > 0) {
+                    getString(R.string.feed_subscription_not_loaded_count, state.notLoadedCount)
+                } else {
+                    null
+                }
+            )
+        }
+
+        // show the errors of each update only once, as before
+        if (!handledFirstLoad || handledUpdate != state.oldestUpdate) {
+            handleItemsErrors(state.itemsErrors)
+        }
+        handledFirstLoad = true
+        handledUpdate = state.oldestUpdate
+    }
+
+    /** "Today", "Yesterday", "This week" and "Older"; items without a date stay where they are. */
+    private fun sections(
+        items: List<Pair<String, StreamWithState>>,
+        oldestUpdate: OffsetDateTime?
+    ): List<FeedSection> {
+        val today = LocalDate.now()
+        val groups = linkedMapOf<Int, MutableList<FeedEntry>>()
+        var last = R.string.yp_feed_today
+        for ((key, item) in items) {
+            val date = item.stream.uploadDate?.atZoneSameInstant(ZoneId.systemDefault())?.toLocalDate()
+            val title = when {
+                date == null -> last
+                !date.isBefore(today) -> R.string.yp_feed_today
+                date == today.minusDays(1) -> R.string.yp_feed_yesterday
+                date.isAfter(today.minusDays(7)) -> R.string.yp_feed_this_week
+                else -> R.string.yp_feed_older
+            }
+            last = title
+            groups.getOrPut(title) { mutableListOf() }.add(FeedEntry(key, toUi(item)))
+        }
+        val updated = getString(
+            R.string.feed_oldest_subscription_update,
+            oldestUpdate?.let { Localization.relativeTime(it) } ?: "—"
+        )
+        return groups.entries.mapIndexed { index, (title, entries) ->
+            val trailing = if (index == 0) {
+                if (title == R.string.yp_feed_today) {
+                    resources.getQuantityString(R.plurals.yp_feed_new, entries.size, entries.size) +
+                        ", " + updated.replaceFirstChar { it.lowercase() }
+                } else {
+                    updated
+                }
+            } else {
+                null
+            }
+            FeedSection(getString(title), trailing, entries)
+        }
+    }
+
+    private fun toUi(item: StreamWithState): YpStreamItem {
+        val stream = item.stream
+        val context = requireContext()
+        val live = StreamTypeUtil.isLiveStream(stream.streamType)
+        val viewCount = stream.viewCount
+        val views = when {
+            viewCount == null || viewCount < 0 -> ""
+            stream.streamType == StreamType.AUDIO_LIVE_STREAM -> Localization.listeningCount(context, viewCount)
+            stream.streamType == StreamType.LIVE_STREAM -> Localization.shortWatchingCount(context, viewCount)
+            else -> Localization.shortViewCount(context, viewCount)
+        }
+        val date = stream.uploadDate?.let { Localization.relativeTime(it) } ?: stream.textualUploadDate.orEmpty()
+        val progress = item.stateProgressMillis
+        return YpStreamItem(
+            serviceId = stream.serviceId,
+            url = stream.url,
+            title = stream.title,
+            uploaderName = stream.uploader,
+            thumbnailUrl = stream.thumbnailUrl,
+            durationText = when {
+                stream.duration > 0 -> Localization.getDurationString(stream.duration)
+                live -> getString(R.string.duration_live)
+                else -> null
+            },
+            isLive = live,
+            details = when {
+                date.isEmpty() -> views
+                views.isEmpty() -> date
+                else -> Localization.concatenateStrings(views, date)
+            },
+            progress = if (progress != null && stream.duration > 0) {
+                (progress / 1000f / stream.duration).coerceIn(0f, 1f)
+            } else {
+                0f
+            }
+        )
+    }
+
+    /* ---------------------------------------------------------------------------------------- */
+    /* Actions                                                                                   */
+    /* ---------------------------------------------------------------------------------------- */
+
+    private fun refresh() {
+        requireActivity().startService(
+            Intent(requireContext(), FeedLoadService::class.java)
+                .putExtra(FeedLoadService.EXTRA_GROUP_ID, groupId)
+        )
+    }
+
+    private fun selectGroup(group: YpGroup?) {
         val newGroupId = group?.id ?: FeedGroupEntity.GROUP_ALL_ID
         if (newGroupId == groupId) {
             return
@@ -506,101 +380,76 @@ class FeedFragment : BaseStateFragment<FeedState>() {
         NavigationHelper.openFeedFragment(parentFragmentManager, newGroupId, group?.name)
     }
 
-    /**
-     * YewPlay: groups the feed (newest first) under "Today", "Yesterday", "This week" and
-     * "Older" headers. Items without a date stay in the group of the item before them.
-     */
-    private fun groupItemsByDay(items: List<StreamItem>): List<Group> {
-        val today = LocalDate.now()
-        val result = ArrayList<Group>(items.size + 4)
-        var lastHeader = 0
-        for (item in items) {
-            val date = item.streamWithState.stream.uploadDate
-                ?.atZoneSameInstant(ZoneId.systemDefault())?.toLocalDate()
-            val header = when {
-                date == null -> if (lastHeader == 0) R.string.yp_feed_today else lastHeader
-                !date.isBefore(today) -> R.string.yp_feed_today
-                date == today.minusDays(1) -> R.string.yp_feed_yesterday
-                date.isAfter(today.minusDays(7)) -> R.string.yp_feed_this_week
-                else -> R.string.yp_feed_older
-            }
-            if (header != lastHeader) {
-                result.add(YpDayHeaderItem(header))
-                lastHeader = header
-            }
-            result.add(item)
-        }
-        return result
-    }
-
-    @SuppressLint("StringFormatMatches")
-    private fun handleLoadedState(loadedState: FeedState.LoadedState) {
-        val itemVersion = when (getItemViewMode(requireContext())) {
-            ItemViewMode.GRID -> StreamItem.ItemVersion.GRID
-            ItemViewMode.CARD -> StreamItem.ItemVersion.CARD
-            else -> StreamItem.ItemVersion.NORMAL
-        }
-        loadedState.items.forEach { it.itemVersion = itemVersion }
-
-        val dayAgo = OffsetDateTime.now().minusDays(1)
-        recentUploaders.value = loadedState.items.mapNotNull { item ->
-            val stream = item.streamWithState.stream
-            stream.uploaderUrl.takeIf { stream.uploadDate?.isAfter(dayAgo) == true }
-        }.toSet()
-
-        // This need to be saved in a variable as the update occurs async
-        val oldOldestSubscriptionUpdate = oldestSubscriptionUpdate
-
-        groupAdapter.updateAsync(groupItemsByDay(loadedState.items), false) {
-            oldOldestSubscriptionUpdate?.run {
-                highlightNewItemsAfter(oldOldestSubscriptionUpdate)
-            }
-        }
-
-        listState?.run {
-            feedBinding.itemsList.layoutManager?.onRestoreInstanceState(listState)
-            listState = null
-        }
-
-        val feedsNotLoaded = loadedState.notLoadedCount > 0
-        feedBinding.refreshSubtitleText.isVisible = feedsNotLoaded
-        if (feedsNotLoaded) {
-            feedBinding.refreshSubtitleText.text = getString(
-                R.string.feed_subscription_not_loaded_count,
-                loadedState.notLoadedCount
-            )
-        }
-
-        if (oldestSubscriptionUpdate != loadedState.oldestUpdate ||
-            (oldestSubscriptionUpdate == null && loadedState.oldestUpdate == null)
-        ) {
-            // ignore errors if they have already been handled for the current update
-            handleItemsErrors(loadedState.itemsErrors)
-        }
-        oldestSubscriptionUpdate = loadedState.oldestUpdate
-
-        if (loadedState.items.isEmpty()) {
-            showEmptyState()
-        } else {
-            hideLoading()
-        }
-    }
-
-    private fun handleErrorState(errorState: FeedState.ErrorState): Boolean {
-        return if (errorState.error == null) {
-            hideLoading()
+    private fun openVideo(entry: FeedEntry) {
+        val stream = streams[entry.key]?.stream ?: return
+        NavigationHelper.openVideoDetailFragment(
+            requireContext(),
+            fm,
+            stream.serviceId,
+            stream.url,
+            stream.title,
+            null,
             false
-        } else {
-            showError(ErrorInfo(errorState.error, UserAction.REQUESTED_FEED, "Loading feed"))
-            true
+        )
+    }
+
+    private fun showItemMenu(entry: FeedEntry) {
+        val stream = streams[entry.key]?.stream ?: return
+        try {
+            val item = stream.toStreamInfoItem()
+            InfoItemDialog.Builder(requireActivity(), requireContext(), this, item).create().show()
+        } catch (e: IllegalArgumentException) {
+            ErrorUtil.showUiErrorSnackbar(this, "Opening the item menu", e)
         }
     }
+
+    private fun showStreamVisibilityDialog() {
+        val labels = arrayOf(
+            getString(R.string.feed_show_watched),
+            getString(R.string.feed_show_partially_watched),
+            getString(R.string.feed_show_upcoming)
+        )
+        val checked = booleanArrayOf(
+            viewModel.getShowPlayedItemsFromPreferences(),
+            viewModel.getShowPartiallyPlayedItemsFromPreferences(),
+            viewModel.getShowFutureItemsFromPreferences()
+        )
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.feed_hide_streams_title)
+            .setMultiChoiceItems(labels, checked) { _, which, isChecked -> checked[which] = isChecked }
+            .setPositiveButton(R.string.ok) { _, _ ->
+                viewModel.setSaveShowPlayedItems(checked[0])
+                viewModel.setSaveShowPartiallyPlayedItems(checked[1])
+                viewModel.setSaveShowFutureItems(checked[2])
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
+    }
+
+    private fun showFastModeHelp() {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val key = getString(R.string.feed_use_dedicated_fetch_method_key)
+        val dedicated = prefs.getBoolean(key, false)
+        AlertDialog.Builder(requireContext())
+            .setMessage(R.string.feed_use_dedicated_fetch_method_help_text)
+            .setNeutralButton(
+                if (dedicated) {
+                    R.string.feed_use_dedicated_fetch_method_disable_button
+                } else {
+                    R.string.feed_use_dedicated_fetch_method_enable_button
+                }
+            ) { _, _ -> prefs.edit { putBoolean(key, !dedicated) } }
+            .setPositiveButton(R.string.ok, null)
+            .show()
+    }
+
+    /* ---------------------------------------------------------------------------------------- */
+    /* Errors of single channels, as before                                                      */
+    /* ---------------------------------------------------------------------------------------- */
 
     private fun handleItemsErrors(errors: List<Throwable>) {
         errors.forEachIndexed { i, t ->
-            if (t is FeedLoadService.RequestException &&
-                t.cause is ContentNotAvailableException
-            ) {
+            if (t is FeedLoadService.RequestException && t.cause is ContentNotAvailableException) {
                 disposables.add(
                     Single.fromCallable {
                         NewPipeDatabase.getInstance(requireContext()).subscriptionDAO()
@@ -609,207 +458,49 @@ class FeedFragment : BaseStateFragment<FeedState>() {
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
-                            { subscriptionEntity ->
-                                handleFeedNotAvailable(
-                                    subscriptionEntity,
-                                    t.cause,
-                                    errors.subList(i + 1, errors.size)
-                                )
-                            },
-                            { throwable -> Log.e(TAG, "Unable to process", throwable) }
+                            { entity -> showFeedNotAvailable(entity, t.cause, errors.subList(i + 1, errors.size)) },
+                            { }
                         )
                 )
-                // this will be called on the remaining errors by handleFeedNotAvailable()
-                return@handleItemsErrors
+                // the remaining errors are handled after this dialog
+                return
             }
         }
-
         if (errors.isNotEmpty()) {
-            // if no error was a ContentNotAvailableException, show a general error snackbar
             ErrorUtil.showSnackbar(this, ErrorInfo(errors, UserAction.REQUESTED_FEED, ""))
         }
     }
 
-    private fun handleFeedNotAvailable(
-        subscriptionEntity: SubscriptionEntity,
+    private fun showFeedNotAvailable(
+        subscription: SubscriptionEntity,
         cause: Throwable?,
-        nextItemsErrors: List<Throwable>
+        nextErrors: List<Throwable>
     ) {
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        val isFastFeedModeEnabled = sharedPreferences.getBoolean(
-            getString(R.string.feed_use_dedicated_fetch_method_key),
-            false
-        )
-
+        val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        val fastMode = prefs.getBoolean(getString(R.string.feed_use_dedicated_fetch_method_key), false)
         val builder = AlertDialog.Builder(requireContext())
             .setTitle(R.string.feed_load_error)
             .setPositiveButton(R.string.unsubscribe) { _, _ ->
                 SubscriptionManager(requireContext())
-                    .deleteSubscription(subscriptionEntity.serviceId, subscriptionEntity.url!!)
+                    .deleteSubscription(subscription.serviceId, subscription.url!!)
                     .subscribe()
-                handleItemsErrors(nextItemsErrors)
+                handleItemsErrors(nextErrors)
             }
             .setNegativeButton(R.string.cancel, null)
-
-        var message = getString(R.string.feed_load_error_account_info, subscriptionEntity.name)
+        var message = getString(R.string.feed_load_error_account_info, subscription.name)
         if (cause is AccountTerminatedException) {
             message += "\n" + getString(R.string.feed_load_error_terminated)
         } else if (cause is ContentNotAvailableException) {
-            if (isFastFeedModeEnabled) {
+            if (fastMode) {
                 message += "\n" + getString(R.string.feed_load_error_fast_unknown)
                 builder.setNeutralButton(R.string.feed_use_dedicated_fetch_method_disable_button) { _, _ ->
-                    sharedPreferences.edit {
-                        putBoolean(getString(R.string.feed_use_dedicated_fetch_method_key), false)
-                    }
+                    prefs.edit { putBoolean(getString(R.string.feed_use_dedicated_fetch_method_key), false) }
                 }
-            } else if (!isNullOrEmpty(cause.message)) {
+            } else if (!cause.message.isNullOrEmpty()) {
                 message += "\n" + cause.message
             }
         }
-        builder.setMessage(message)
-            .show()
-    }
-
-    private fun updateRelativeTimeViews() {
-        updateRefreshViewState()
-        groupAdapter.notifyItemRangeChanged(
-            0,
-            groupAdapter.itemCount,
-            StreamItem.UPDATE_RELATIVE_TIME
-        )
-    }
-
-    private fun updateRefreshViewState() {
-        feedBinding.refreshText.text = getString(
-            R.string.feed_oldest_subscription_update,
-            oldestSubscriptionUpdate?.let { Localization.relativeTime(it) } ?: "—"
-        )
-    }
-
-    /**
-     * Highlights all items that are after the specified time
-     */
-    private fun highlightNewItemsAfter(updateTime: OffsetDateTime) {
-        var highlightCount = 0
-
-        var doCheck = true
-
-        for (i in 0 until groupAdapter.itemCount) {
-            val item = groupAdapter.getItem(i) as? StreamItem ?: continue
-
-            // YewPlay: keep the app fonts (Instrument Sans); new items use the bold weight
-            var fontRes = R.font.instrument_sans_semibold
-            var backgroundSupplier = { ctx: Context ->
-                resolveDrawable(ctx, android.R.attr.selectableItemBackground)
-            }
-            if (doCheck) {
-                // If the uploadDate is null or true we should highlight the item
-                if (item.streamWithState.stream.uploadDate?.isAfter(updateTime) != false) {
-                    highlightCount++
-
-                    fontRes = R.font.instrument_sans_bold
-                    backgroundSupplier = { ctx: Context ->
-                        // Merge the drawables together. Otherwise we would lose the "select" effect
-                        LayerDrawable(
-                            arrayOf(
-                                resolveDrawable(ctx, R.attr.dashed_border),
-                                resolveDrawable(ctx, android.R.attr.selectableItemBackground)
-                            )
-                        )
-                    }
-                } else {
-                    // Decreases execution time due to the order of the items (newest always on top)
-                    // Once a item is is before the updateTime we can skip all following items
-                    doCheck = false
-                }
-            }
-
-            // The highlighter has to be always set
-            // When it's only set on items that are highlighted it will highlight all items
-            // due to the fact that itemRoot is getting recycled
-            item.execBindEnd = Consumer { viewBinding ->
-                val context = viewBinding.itemRoot.context
-                viewBinding.itemRoot.background = backgroundSupplier.invoke(context)
-                viewBinding.itemVideoTitleView.typeface = ResourcesCompat.getFont(context, fontRes)
-            }
-        }
-
-        // Force updates all items so that the highlighting is correct
-        // If this isn't done visible items that are already highlighted will stay in a highlighted
-        // state until the user scrolls them out of the visible area which causes a update/bind-call
-        // (day headers are interleaved with the items, so refresh the whole list)
-        groupAdapter.notifyItemRangeChanged(0, groupAdapter.itemCount)
-
-        if (highlightCount > 0) {
-            showNewItemsLoaded()
-        }
-
-        lastNewItemsCount = highlightCount
-    }
-
-    private fun showNewItemsLoaded() {
-        tryGetNewItemsLoadedButton()?.clearAnimation()
-        tryGetNewItemsLoadedButton()
-            ?.slideUp(
-                250L,
-                delay = 100,
-                execOnEnd = {
-                    // Disabled animations would result in immediately hiding the button
-                    // after it showed up
-                    // Context can be null in some cases, so we have to make sure it is not null in
-                    // order to avoid a NullPointerException
-                    context?.let {
-                        if (DeviceUtils.hasAnimationsAnimatorDurationEnabled(it)) {
-                            // Hide the new items button after 10s
-                            hideNewItemsLoaded(true, 10000)
-                        }
-                    }
-                }
-            )
-    }
-
-    private fun hideNewItemsLoaded(animate: Boolean, delay: Long = 0) {
-        tryGetNewItemsLoadedButton()?.clearAnimation()
-        if (animate) {
-            tryGetNewItemsLoadedButton()?.animate(
-                false,
-                200,
-                delay = delay,
-                execOnEnd = {
-                    // Make the layout invisible so that the onScroll toTop method
-                    // only does necessary work
-                    tryGetNewItemsLoadedButton()?.isVisible = false
-                }
-            )
-        } else {
-            tryGetNewItemsLoadedButton()?.isVisible = false
-        }
-    }
-
-    /**
-     * The view/button can be disposed/set to null under certain circumstances.
-     * E.g. when the animation is still in progress but the view got destroyed.
-     * This method is a helper for such states and can be used in affected code blocks.
-     */
-    private fun tryGetNewItemsLoadedButton(): Button? {
-        return _feedBinding?.newItemsLoadedButton
-    }
-
-    // /////////////////////////////////////////////////////////////////////////
-    // Load Service Handling
-    // /////////////////////////////////////////////////////////////////////////
-
-    override fun doInitialLoadLogic() {}
-
-    override fun reloadContent() {
-        hideNewItemsLoaded(false)
-
-        getActivity()?.startService(
-            Intent(requireContext(), FeedLoadService::class.java).apply {
-                putExtra(FeedLoadService.EXTRA_GROUP_ID, groupId)
-            }
-        )
-        listState = null
+        builder.setMessage(message).show()
     }
 
     companion object {
@@ -817,10 +508,14 @@ class FeedFragment : BaseStateFragment<FeedState>() {
         const val KEY_GROUP_NAME = "ARG_GROUP_NAME"
 
         @JvmStatic
-        fun newInstance(groupId: Long = FeedGroupEntity.GROUP_ALL_ID, groupName: String? = null): FeedFragment {
-            val feedFragment = FeedFragment()
-            feedFragment.arguments = bundleOf(KEY_GROUP_ID to groupId, KEY_GROUP_NAME to groupName)
-            return feedFragment
+        fun newInstance(
+            groupId: Long = FeedGroupEntity.GROUP_ALL_ID,
+            groupName: String? = null
+        ): FeedFragment = FeedFragment().apply {
+            arguments = Bundle().apply {
+                putLong(KEY_GROUP_ID, groupId)
+                putString(KEY_GROUP_NAME, groupName)
+            }
         }
     }
 }

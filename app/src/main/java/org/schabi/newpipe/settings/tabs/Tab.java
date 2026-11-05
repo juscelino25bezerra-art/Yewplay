@@ -20,8 +20,7 @@ import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.fragments.BlankFragment;
 import org.schabi.newpipe.fragments.list.channel.YpChannelFragment;
-import org.schabi.newpipe.fragments.list.kiosk.DefaultKioskFragment;
-import org.schabi.newpipe.fragments.list.kiosk.KioskFragment;
+import org.schabi.newpipe.fragments.list.kiosk.YpKioskFragment;
 import org.schabi.newpipe.fragments.list.playlist.YpPlaylistFragment;
 import org.schabi.newpipe.local.bookmark.BookmarkFragment;
 import org.schabi.newpipe.local.feed.FeedFragment;
@@ -353,8 +352,8 @@ public abstract class Tab {
         }
 
         @Override
-        public KioskFragment getFragment(final Context context) throws ExtractionException {
-            return KioskFragment.getInstance(kioskServiceId, kioskId);
+        public YpKioskFragment getFragment(final Context context) throws ExtractionException {
+            return YpKioskFragment.getInstance(kioskServiceId, kioskId);
         }
 
         @Override
@@ -503,8 +502,8 @@ public abstract class Tab {
         }
 
         @Override
-        public DefaultKioskFragment getFragment(final Context context) {
-            return new DefaultKioskFragment();
+        public YpKioskFragment getFragment(final Context context) {
+            return YpKioskFragment.getDefaultInstance();
         }
 
         private String getDefaultKioskId(final Context context) {

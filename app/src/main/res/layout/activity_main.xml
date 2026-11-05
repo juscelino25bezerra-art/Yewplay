@@ -42,7 +42,7 @@
             app:elevation="6dp"
             app:itemIconSize="22dp"
             app:itemIconTint="@color/yp_nav_item"
-            app:itemRippleColor="@color/light_ripple_color"
+            app:itemRippleColor="@android:color/transparent"
             app:itemTextAppearanceActive="@style/TextAppearance.YewPlay.NavLabel"
             app:itemTextAppearanceInactive="@style/TextAppearance.YewPlay.NavLabel"
             app:itemTextColor="@color/yp_nav_item"

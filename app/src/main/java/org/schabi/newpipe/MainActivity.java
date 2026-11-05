@@ -820,13 +820,15 @@ public class MainActivity extends AppCompatActivity {
     //////////////////////////////////////////////////////////////////////////*/
 
     /**
-     * YewPlay: screens drawn fully in Compose (Search, Channel) have their own top bar, so the
-     * activity's toolbar and the space kept for it are hidden while they are shown.
+     * YewPlay: screens with their own Compose top bar (Home, Feed, Search, Channel, ...) hide the
+     * activity's toolbar and the space kept for it while they are shown.
      *
      * @param fragment the fragment now shown
      */
     private void updateToolbarForFragment(@Nullable final Fragment fragment) {
-        final boolean ownTopBar = fragment instanceof YpSearchFragment
+        final boolean ownTopBar = fragment instanceof MainFragment
+                || fragment instanceof FeedFragment
+                || fragment instanceof YpSearchFragment
                 || fragment instanceof YpChannelFragment
                 || fragment instanceof YpPlaylistFragment
                 || fragment instanceof YpLocalPlaylistFragment;
@@ -870,6 +872,18 @@ public class MainActivity extends AppCompatActivity {
         });
         getSupportFragmentManager().addOnBackStackChangedListener(() -> syncBottomNavigation(
                 getSupportFragmentManager().findFragmentById(R.id.fragment_holder)));
+        // YewPlay: also sync when a screen of the holder is actually resumed; back gestures with
+        // preview (Android 14+) can finish a transition without the listener above
+        getSupportFragmentManager().registerFragmentLifecycleCallbacks(
+                new FragmentManager.FragmentLifecycleCallbacks() {
+                    @Override
+                    public void onFragmentResumed(@NonNull final FragmentManager fm,
+                                                  @NonNull final Fragment f) {
+                        if (f.getId() == R.id.fragment_holder) {
+                            syncBottomNavigation(f);
+                        }
+                    }
+                }, false);
 
         // hide the bar while the keyboard is open (e.g. while typing a search)
         mainBinding.getRoot().getViewTreeObserver().addOnGlobalLayoutListener(() -> {

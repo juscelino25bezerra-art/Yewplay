@@ -901,6 +901,12 @@
     <string name="yp_play">Reproduzir</string>
     <string name="yp_shuffle">Aleatório</string>
     <string name="yp_edit">Editar</string>
+    <string name="yp_home_featured">Nº 1 · %1$s</string>
+    <plurals name="yp_feed_new">
+        <item quantity="one">%d novo</item>
+        <item quantity="other">%d novos</item>
+    </plurals>
+    <string name="yp_refresh">Atualizar</string>
     <string name="yp_local_playlist">Playlist local</string>
     <string name="yp_storage_used">%s usados pelo app</string>
     <string name="yp_storage_free">%s livres</string>
