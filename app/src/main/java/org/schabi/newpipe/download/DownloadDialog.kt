@@ -285,8 +285,8 @@ class DownloadDialog() : DialogFragment() {
         val context = ctx ?: return super.onCreateDialog(savedInstanceState)
         return YpDialogs.sheet(context) { dismiss ->
             YpSheet {
-                // read so that the sheet redraws when the selection or the sizes change
-                refresh.let { DownloadContent(onCancel = dismiss) }
+                // passed in so that the content redraws when the selection or the sizes change
+                DownloadContent(version = refresh, onCancel = dismiss)
             }
         }
     }
@@ -481,7 +481,8 @@ class DownloadDialog() : DialogFragment() {
     // ---- UI ----
 
     @Composable
-    private fun DownloadContent(onCancel: () -> Unit) {
+    @Suppress("UNUSED_PARAMETER") // only there to redraw the content when it changes
+    private fun DownloadContent(version: Int, onCancel: () -> Unit) {
         val context = requireContext()
         val tracks = wrappedAudioTracks
         val selectedQuality = when (selectedKind) {
