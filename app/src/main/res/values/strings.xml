@@ -1013,6 +1013,7 @@
     <string name="yp_subs_channels">Channels</string>
     <string name="yp_more_options">More options</string>
     <string name="yp_subs_reorder_groups">Reorder groups</string>
+    <string name="yp_import_open_page">Open the page</string>
     <string name="yp_local_playlist">Local playlist</string>
     <string name="yp_storage_used">%s used by the app</string>
     <string name="yp_storage_free">%s free</string>
