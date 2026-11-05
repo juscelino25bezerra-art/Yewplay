@@ -967,6 +967,23 @@
         <item quantity="other">%d new</item>
     </plurals>
     <string name="yp_refresh">Refresh</string>
+    <string name="yp_downloads_downloading">Downloading</string>
+    <string name="yp_downloads_finished">Finished</string>
+    <string name="yp_downloads_pause_all">Pause all</string>
+    <string name="yp_downloads_resume_all">Resume all</string>
+    <string name="yp_downloads_tab_videos">Videos</string>
+    <string name="yp_downloads_tab_audios">Audio</string>
+    <string name="yp_downloads_progress">%1$s of %2$s</string>
+    <string name="yp_downloads_kind_video">Video</string>
+    <string name="yp_downloads_kind_audio">Audio</string>
+    <string name="yp_downloads_kind_subtitle">Subtitles</string>
+    <string name="yp_downloads_empty">No downloads yet</string>
+    <string name="yp_downloads_empty_detail">Videos and audio you download appear here, ready to play offline.</string>
+    <plurals name="yp_downloads_items">
+        <item quantity="one">%d item</item>
+        <item quantity="other">%d items</item>
+    </plurals>
+    <string name="yp_downloads_dequeue">Remove from queue</string>
     <string name="yp_local_playlist">Local playlist</string>
     <string name="yp_storage_used">%s used by the app</string>
     <string name="yp_storage_free">%s free</string>

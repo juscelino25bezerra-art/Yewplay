@@ -20,7 +20,6 @@ import us.shandian.giga.get.FinishedMission;
 import us.shandian.giga.get.Mission;
 import us.shandian.giga.service.DownloadManager;
 import us.shandian.giga.service.DownloadManager.MissionIterator;
-import us.shandian.giga.ui.adapter.MissionAdapter;
 
 public class Deleter {
     private static final String COMMIT = "commit";
@@ -37,16 +36,17 @@ public class Deleter {
     private boolean running = true;
 
     private final Context mContext;
-    private final MissionAdapter mAdapter;
+    /** Called when the visible list changed (an item was hidden or brought back). */
+    private final Runnable mOnChanged;
     private final DownloadManager mDownloadManager;
     private final MissionIterator mIterator;
     private final Handler mHandler;
     private final View mView;
 
-    public Deleter(View v, Context c, MissionAdapter a, DownloadManager d, MissionIterator i, Handler h) {
+    public Deleter(View v, Context c, Runnable onChanged, DownloadManager d, MissionIterator i, Handler h) {
         mView = v;
         mContext = c;
-        mAdapter = a;
+        mOnChanged = onChanged;
         mDownloadManager = d;
         mIterator = i;
         mHandler = h;
@@ -70,7 +70,7 @@ public class Deleter {
 
     private void forget() {
         mIterator.unHide(items.remove(0).getFirst());
-        mAdapter.applyChanges();
+        mOnChanged.run();
 
         show();
     }

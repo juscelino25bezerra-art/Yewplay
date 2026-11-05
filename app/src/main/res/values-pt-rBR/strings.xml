@@ -907,6 +907,23 @@
         <item quantity="other">%d novos</item>
     </plurals>
     <string name="yp_refresh">Atualizar</string>
+    <string name="yp_downloads_downloading">Baixando</string>
+    <string name="yp_downloads_finished">Concluídos</string>
+    <string name="yp_downloads_pause_all">Pausar tudo</string>
+    <string name="yp_downloads_resume_all">Retomar tudo</string>
+    <string name="yp_downloads_tab_videos">Vídeos</string>
+    <string name="yp_downloads_tab_audios">Áudios</string>
+    <string name="yp_downloads_progress">%1$s de %2$s</string>
+    <string name="yp_downloads_kind_video">Vídeo</string>
+    <string name="yp_downloads_kind_audio">Áudio</string>
+    <string name="yp_downloads_kind_subtitle">Legenda</string>
+    <string name="yp_downloads_empty">Nenhum download ainda</string>
+    <string name="yp_downloads_empty_detail">Os vídeos e áudios que você baixar aparecem aqui, prontos para ver sem internet.</string>
+    <plurals name="yp_downloads_items">
+        <item quantity="one">%d item</item>
+        <item quantity="other">%d itens</item>
+    </plurals>
+    <string name="yp_downloads_dequeue">Tirar da fila</string>
     <string name="yp_local_playlist">Playlist local</string>
     <string name="yp_storage_used">%s usados pelo app</string>
     <string name="yp_storage_free">%s livres</string>
